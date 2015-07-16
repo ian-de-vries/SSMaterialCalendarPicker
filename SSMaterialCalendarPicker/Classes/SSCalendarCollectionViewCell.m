@@ -12,7 +12,9 @@
 #define kDefaultRippleColor [UIColor colorWithWhite:1.0f alpha:0.45f]
 #define kDefaultSelectedColor [UIColor colorWithRed:223/255.0f green:116/255.0f blue:92/255.0f alpha:1.0f]
 
-@implementation SSCalendarCollectionViewCell
+@implementation SSCalendarCollectionViewCell {
+    int cellCount;
+}
 
 static NSArray *colors;
 static int count;
@@ -25,7 +27,7 @@ static int count;
             colors = @[[UIColor blueColor], [UIColor redColor], [UIColor greenColor],
                        [UIColor redColor], [UIColor greenColor], [UIColor blueColor],
                        [UIColor greenColor], [UIColor blueColor], [UIColor redColor]];
-        } self.backgroundColor = [colors objectAtIndex:count++];
+        } self.backgroundColor = [colors objectAtIndex:count++]; cellCount = count;
     } return self;
 }
 
@@ -42,9 +44,10 @@ static int count;
     CGRect buttonFrame = CGRectMake(x, y, size, size);
     
     self.button = [[SSRippleButton alloc] initWithFrame:buttonFrame];
-    [self.button setTitle:@"X" forState:UIControlStateNormal];
+    [self.button setTitle:[NSString stringWithFormat:@"%02d", cellCount] forState:UIControlStateNormal];
     [self.button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
     [self.button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.button.titleLabel setFont:[UIFont boldSystemFontOfSize:13.0f]];
     [self.button setDelegate:self];
     [self addSubview:self.button];
 }
