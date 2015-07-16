@@ -18,7 +18,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		EEC824CE1B5717F2003C90C1 /* SSMaterialCalendarPicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SSMaterialCalendarPicker.app; path = "/Users/iurichiba/Documents/Development/iOS Workspace/SSMaterialFramework/SSMaterialCalendarPicker/build/Debug-iphoneos/SSMaterialCalendarPicker.app"; sourceTree = "<absolute>"; };
 		EEE8162D1B585EE5005ACEA6 /* SSCalendarCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCalendarCollectionViewCell.h; sourceTree = "<group>"; };
 		EEE8162E1B585EE5005ACEA6 /* SSCalendarCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCalendarCollectionViewCell.m; sourceTree = "<group>"; };
 		EEE816311B585EE5005ACEA6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -30,6 +29,7 @@
 		EEE8163B1B585EE5005ACEA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EEE8163D1B585EE5005ACEA6 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		EEE8163E1B585EE5005ACEA6 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		EEE816471B585FA0005ACEA6 /* SSMaterialCalendarPicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SSMaterialCalendarPicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +47,7 @@
 			isa = PBXGroup;
 			children = (
 				EEE8162B1B585EE5005ACEA6 /* SSMaterialCalendarPicker */,
+				EEE816481B58603C005ACEA6 /* Product */,
 			);
 			sourceTree = "<group>";
 		};
@@ -116,6 +117,14 @@
 			path = "View Controllers";
 			sourceTree = "<group>";
 		};
+		EEE816481B58603C005ACEA6 /* Product */ = {
+			isa = PBXGroup;
+			children = (
+				EEE816471B585FA0005ACEA6 /* SSMaterialCalendarPicker.app */,
+			);
+			name = Product;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -133,7 +142,7 @@
 			);
 			name = SSMaterialCalendarPicker;
 			productName = SSMaterialDateRangeSelector;
-			productReference = EEC824CE1B5717F2003C90C1 /* SSMaterialCalendarPicker.app */;
+			productReference = EEE816471B585FA0005ACEA6 /* SSMaterialCalendarPicker.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -300,7 +309,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = SSMaterialDateRangeSelector/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/SSMaterialCalendarPicker/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = SSMaterialCalendarPicker;
 			};
@@ -310,7 +319,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = SSMaterialDateRangeSelector/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/SSMaterialCalendarPicker/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = SSMaterialCalendarPicker;
 			};
