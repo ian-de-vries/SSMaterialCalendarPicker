@@ -8,15 +8,36 @@
 
 #import <UIKit/UIKit.h>
 
+@class SSCalendarCollectionViewCell;
 @class SSRippleButton;
 
-@interface SSCalendarCollectionViewCell : UICollectionViewCell
+#pragma mark - Protocols
 
+@protocol SSCalendarCollectionViewCellDelegate <NSObject>
+
+- (void)cellClicked:(SSCalendarCollectionViewCell *)cell;
+
+@end
+
+@protocol SSRippleButtonDelegate <NSObject>
+
+- (void)buttonClicked;
+
+@end
+
+#pragma mark - Classes
+
+@interface SSCalendarCollectionViewCell : UICollectionViewCell <SSRippleButtonDelegate>
+
+@property (strong, nonatomic) id<SSCalendarCollectionViewCellDelegate> delegate;
 @property (strong, nonatomic) SSRippleButton *button;
 
 @end
 
 @interface SSRippleButton : UIButton
+
+#pragma mark - Delegate
+@property (strong, nonatomic) id<SSRippleButtonDelegate> delegate;
 
 #pragma mark - Ripple
 @property (strong, nonatomic) UIView *rippleBackgroundView;

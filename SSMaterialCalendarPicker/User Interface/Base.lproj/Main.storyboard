@@ -78,6 +78,9 @@
                             <constraint firstAttribute="centerY" secondItem="c5a-GB-WVo" secondAttribute="centerY" id="zFv-1F-dhV"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="calendarCollectionView" destination="c5a-GB-WVo" id="EeZ-R0-Hvl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>

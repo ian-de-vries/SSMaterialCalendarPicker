@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
+#import "SSCalendarCollectionViewCell.h"
+
+@interface ViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, SSCalendarCollectionViewCellDelegate>
+
+@property (strong, nonatomic) IBOutlet UICollectionView *calendarCollectionView;
 
 @end
 
