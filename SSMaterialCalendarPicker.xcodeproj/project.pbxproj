@@ -6,8 +6,30 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		EEE8163F1B585EE5005ACEA6 /* SSCalendarCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE8162E1B585EE5005ACEA6 /* SSCalendarCollectionViewCell.m */; };
+		EEE816401B585EE5005ACEA6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEE816311B585EE5005ACEA6 /* Images.xcassets */; };
+		EEE816411B585EE5005ACEA6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE816341B585EE5005ACEA6 /* AppDelegate.m */; };
+		EEE816421B585EE5005ACEA6 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEE816351B585EE5005ACEA6 /* Info.plist */; };
+		EEE816431B585EE5005ACEA6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE816361B585EE5005ACEA6 /* main.m */; };
+		EEE816441B585EE5005ACEA6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEE816381B585EE5005ACEA6 /* LaunchScreen.xib */; };
+		EEE816451B585EE5005ACEA6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEE8163A1B585EE5005ACEA6 /* Main.storyboard */; };
+		EEE816461B585EE5005ACEA6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE8163E1B585EE5005ACEA6 /* ViewController.m */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		EEC824CE1B5717F2003C90C1 /* SSMaterialCalendarPicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SSMaterialCalendarPicker.app; path = "/Users/iurichiba/Documents/Development/iOS Workspace/SSMaterialFramework/SSMaterialCalendarPicker/build/Debug-iphoneos/SSMaterialCalendarPicker.app"; sourceTree = "<absolute>"; };
+		EEE8162D1B585EE5005ACEA6 /* SSCalendarCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCalendarCollectionViewCell.h; sourceTree = "<group>"; };
+		EEE8162E1B585EE5005ACEA6 /* SSCalendarCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCalendarCollectionViewCell.m; sourceTree = "<group>"; };
+		EEE816311B585EE5005ACEA6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		EEE816331B585EE5005ACEA6 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		EEE816341B585EE5005ACEA6 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		EEE816351B585EE5005ACEA6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EEE816361B585EE5005ACEA6 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EEE816391B585EE5005ACEA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		EEE8163B1B585EE5005ACEA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EEE8163D1B585EE5005ACEA6 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		EEE8163E1B585EE5005ACEA6 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -24,15 +46,74 @@
 		EEC824C51B5717F2003C90C1 = {
 			isa = PBXGroup;
 			children = (
-				EEC824D01B5717F2003C90C1 /* SSMaterialDateRangeSelector */,
+				EEE8162B1B585EE5005ACEA6 /* SSMaterialCalendarPicker */,
 			);
 			sourceTree = "<group>";
 		};
-		EEC824D01B5717F2003C90C1 /* SSMaterialDateRangeSelector */ = {
+		EEE8162B1B585EE5005ACEA6 /* SSMaterialCalendarPicker */ = {
 			isa = PBXGroup;
 			children = (
+				EEE8162C1B585EE5005ACEA6 /* Classes */,
+				EEE8162F1B585EE5005ACEA6 /* Resources */,
+				EEE816321B585EE5005ACEA6 /* Supporting Files */,
+				EEE816371B585EE5005ACEA6 /* User Interface */,
+				EEE8163C1B585EE5005ACEA6 /* View Controllers */,
 			);
-			path = SSMaterialDateRangeSelector;
+			path = SSMaterialCalendarPicker;
+			sourceTree = "<group>";
+		};
+		EEE8162C1B585EE5005ACEA6 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				EEE8162D1B585EE5005ACEA6 /* SSCalendarCollectionViewCell.h */,
+				EEE8162E1B585EE5005ACEA6 /* SSCalendarCollectionViewCell.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		EEE8162F1B585EE5005ACEA6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EEE816301B585EE5005ACEA6 /* Images */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		EEE816301B585EE5005ACEA6 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				EEE816311B585EE5005ACEA6 /* Images.xcassets */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		EEE816321B585EE5005ACEA6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EEE816331B585EE5005ACEA6 /* AppDelegate.h */,
+				EEE816341B585EE5005ACEA6 /* AppDelegate.m */,
+				EEE816351B585EE5005ACEA6 /* Info.plist */,
+				EEE816361B585EE5005ACEA6 /* main.m */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EEE816371B585EE5005ACEA6 /* User Interface */ = {
+			isa = PBXGroup;
+			children = (
+				EEE816381B585EE5005ACEA6 /* LaunchScreen.xib */,
+				EEE8163A1B585EE5005ACEA6 /* Main.storyboard */,
+			);
+			path = "User Interface";
+			sourceTree = "<group>";
+		};
+		EEE8163C1B585EE5005ACEA6 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EEE8163D1B585EE5005ACEA6 /* ViewController.h */,
+				EEE8163E1B585EE5005ACEA6 /* ViewController.m */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -92,6 +173,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEE816421B585EE5005ACEA6 /* Info.plist in Resources */,
+				EEE816441B585EE5005ACEA6 /* LaunchScreen.xib in Resources */,
+				EEE816401B585EE5005ACEA6 /* Images.xcassets in Resources */,
+				EEE816451B585EE5005ACEA6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,10 +187,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEE816411B585EE5005ACEA6 /* AppDelegate.m in Sources */,
+				EEE816431B585EE5005ACEA6 /* main.m in Sources */,
+				EEE816461B585EE5005ACEA6 /* ViewController.m in Sources */,
+				EEE8163F1B585EE5005ACEA6 /* SSCalendarCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		EEE816381B585EE5005ACEA6 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EEE816391B585EE5005ACEA6 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		EEE8163A1B585EE5005ACEA6 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EEE8163B1B585EE5005ACEA6 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		EEC824EF1B5717F3003C90C1 /* Debug */ = {
