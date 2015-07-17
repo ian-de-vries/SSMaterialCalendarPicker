@@ -30,7 +30,8 @@
 @interface SSCalendarCollectionViewCell : UICollectionViewCell <SSRippleButtonDelegate>
 
 @property (strong, nonatomic) id<SSCalendarCollectionViewCellDelegate> delegate;
-@property (strong, nonatomic) SSRippleButton *button;
+@property (strong, nonatomic) NSDate *cellDate;
+@property (strong, nonatomic) SSRippleButton *innerButton;
 @property (strong, nonatomic) UIView *selectionIndicator;
 
 @end

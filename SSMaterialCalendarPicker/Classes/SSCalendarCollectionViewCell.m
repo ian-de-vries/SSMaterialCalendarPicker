@@ -12,24 +12,9 @@
 #define kDefaultRippleColor [UIColor colorWithWhite:1.0f alpha:0.45f]
 #define kDefaultSelectedColor [UIColor colorWithRed:223/255.0f green:116/255.0f blue:92/255.0f alpha:1.0f]
 
-@implementation SSCalendarCollectionViewCell {
-    int cellCount;
-}
-
-static NSArray *colors;
-static int count;
+@implementation SSCalendarCollectionViewCell
 
 #pragma mark - Initialization
-- (id)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        if (colors == nil) {
-            colors = @[[UIColor blueColor], [UIColor redColor], [UIColor greenColor],
-                       [UIColor redColor], [UIColor greenColor], [UIColor blueColor],
-                       [UIColor greenColor], [UIColor blueColor], [UIColor redColor]];
-        } self.backgroundColor = [colors objectAtIndex:count++]; cellCount = count;
-    } return self;
-}
 
 - (void)layoutSubviews {
     [super layoutSubviews];
@@ -44,17 +29,22 @@ static int count;
     CGFloat y = (CGRectGetWidth(self.frame) * 0.2f)/2;
     CGRect buttonFrame = CGRectMake(x, y, size, size);
     
-    self.button = [[SSRippleButton alloc] initWithFrame:buttonFrame];
-    [self.button setTitle:[NSString stringWithFormat:@"%02d", cellCount] forState:UIControlStateNormal];
-    [self.button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
-    [self.button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [self.button.titleLabel setFont:[UIFont boldSystemFontOfSize:13.0f]];
-    [self.button setDelegate:self];
-    [self addSubview:self.button];
+    if (self.cellDate == nil) self.cellDate = [NSDate date];
+    NSDateComponents *components = [[NSCalendar currentCalendar]
+                                    components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
+                                    fromDate:self.cellDate];
+    
+    self.innerButton = [[SSRippleButton alloc] initWithFrame:buttonFrame];
+    [self.innerButton setTitle:[NSString stringWithFormat:@"%02d", (int) components.day] forState:UIControlStateNormal];
+    [self.innerButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+    [self.innerButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.innerButton.titleLabel setFont:[UIFont boldSystemFontOfSize:13.0f]];
+    [self.innerButton setDelegate:self];
+    [self addSubview:self.innerButton];
 }
 
 - (void)setupSelectionIndicator {
-    self.selectionIndicator = [[UIView alloc] initWithFrame:self.button.frame];
+    self.selectionIndicator = [[UIView alloc] initWithFrame:self.innerButton.frame];
     self.selectionIndicator.backgroundColor = [UIColor orangeColor];
     self.selectionIndicator.layer.cornerRadius = CGRectGetWidth(self.selectionIndicator.frame)/2;
     
@@ -67,7 +57,7 @@ static int count;
 #pragma mark - Hit Extensor
 - (UIView *) hitTest:(CGPoint) point withEvent:(UIEvent *)event {
     if ([self pointInside:point withEvent:event]) {
-        return self.button;
+        return self.innerButton;
     } return nil;
 }
 

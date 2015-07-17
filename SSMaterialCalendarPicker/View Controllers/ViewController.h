@@ -13,6 +13,8 @@
 @interface ViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, SSCalendarCollectionViewCellDelegate>
 
 @property (strong, nonatomic) IBOutlet UICollectionView *calendarCollectionView;
+@property (strong, nonatomic) NSDate *startDate;
+@property (strong, nonatomic) NSDate *endDate;
 
 @end
 

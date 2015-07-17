@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "NSDate+SSDateAdditions.h"
 
 #define kCalendarCellIdentifier @"SSCalendarCollectionViewCell"
 
@@ -15,15 +16,16 @@
 #pragma mark - Initialization
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    [self.calendarCollectionView setAllowsMultipleSelection:YES];
 }
 
 #pragma mark - UICollectionView Delegate & DataSource
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     SSCalendarCollectionViewCell *calendarCell =
-    [collectionView dequeueReusableCellWithReuseIdentifier:kCalendarCellIdentifier
-                                              forIndexPath:indexPath];
-    calendarCell.delegate = self;
+    [collectionView dequeueReusableCellWithReuseIdentifier:kCalendarCellIdentifier forIndexPath:indexPath];
+    [calendarCell setCellDate:[NSDate daysFromNow:indexPath.row]];
+    [calendarCell setSelected:[calendarCell.cellDate isDateBetween:self.startDate and:self.endDate]];
+    [calendarCell setDelegate:self];
     return calendarCell;
 }
 
@@ -32,11 +34,28 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"%@", @"Selected!");
+    SSCalendarCollectionViewCell *calendarCell = (SSCalendarCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    if (self.startDate == nil) self.startDate = calendarCell.cellDate;
+    else if (self.endDate == nil) self.endDate = calendarCell.cellDate;
+    else if ([calendarCell.cellDate compare:self.startDate] == NSOrderedAscending) self.startDate = calendarCell.cellDate;
+    else if ([calendarCell.cellDate compare:self.endDate] == NSOrderedDescending) self.endDate = calendarCell.cellDate;
+    [self refreshVisible];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"%@", @"Deselected!");
+    SSCalendarCollectionViewCell *calendarCell = (SSCalendarCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    if ([calendarCell.cellDate compare:self.startDate] == NSOrderedSame) self.startDate = nil;
+    if ([calendarCell.cellDate compare:self.endDate] == NSOrderedSame) self.endDate = nil;
+    [self refreshVisible];
+}
+
+- (void)refreshVisible {
+    NSArray *visibleCells = [self.calendarCollectionView visibleCells];
+    for (SSCalendarCollectionViewCell *calendarCell in visibleCells) {
+        if ([calendarCell.cellDate isDateBetween:self.startDate and:self.endDate]) {
+            [calendarCell setSelected:YES];
+        }
+    }
 }
 
 #pragma mark - SSCalendarCollectionViewCell Delegate

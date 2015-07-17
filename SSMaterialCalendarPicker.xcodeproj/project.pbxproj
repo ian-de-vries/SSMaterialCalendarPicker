@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EE33E0A81B599D9300A7FE58 /* NSDate+SSDateAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = EE33E0A71B599D9300A7FE58 /* NSDate+SSDateAdditions.m */; };
 		EEE8163F1B585EE5005ACEA6 /* SSCalendarCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE8162E1B585EE5005ACEA6 /* SSCalendarCollectionViewCell.m */; };
 		EEE816401B585EE5005ACEA6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEE816311B585EE5005ACEA6 /* Images.xcassets */; };
 		EEE816411B585EE5005ACEA6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE816341B585EE5005ACEA6 /* AppDelegate.m */; };
@@ -18,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EE33E0A61B599D9300A7FE58 /* NSDate+SSDateAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+SSDateAdditions.h"; path = "Custom Categories/NSDate+SSDateAdditions.h"; sourceTree = "<group>"; };
+		EE33E0A71B599D9300A7FE58 /* NSDate+SSDateAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+SSDateAdditions.m"; path = "Custom Categories/NSDate+SSDateAdditions.m"; sourceTree = "<group>"; };
 		EEE8162D1B585EE5005ACEA6 /* SSCalendarCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCalendarCollectionViewCell.h; sourceTree = "<group>"; };
 		EEE8162E1B585EE5005ACEA6 /* SSCalendarCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCalendarCollectionViewCell.m; sourceTree = "<group>"; };
 		EEE816311B585EE5005ACEA6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -51,9 +54,19 @@
 			);
 			sourceTree = "<group>";
 		};
+		EEDCE7241B599A670082ABFC /* Custom Categories */ = {
+			isa = PBXGroup;
+			children = (
+				EE33E0A61B599D9300A7FE58 /* NSDate+SSDateAdditions.h */,
+				EE33E0A71B599D9300A7FE58 /* NSDate+SSDateAdditions.m */,
+			);
+			name = "Custom Categories";
+			sourceTree = "<group>";
+		};
 		EEE8162B1B585EE5005ACEA6 /* SSMaterialCalendarPicker */ = {
 			isa = PBXGroup;
 			children = (
+				EEDCE7241B599A670082ABFC /* Custom Categories */,
 				EEE8162C1B585EE5005ACEA6 /* Classes */,
 				EEE8162F1B585EE5005ACEA6 /* Resources */,
 				EEE816321B585EE5005ACEA6 /* Supporting Files */,
@@ -198,6 +211,7 @@
 			files = (
 				EEE816411B585EE5005ACEA6 /* AppDelegate.m in Sources */,
 				EEE816431B585EE5005ACEA6 /* main.m in Sources */,
+				EE33E0A81B599D9300A7FE58 /* NSDate+SSDateAdditions.m in Sources */,
 				EEE816461B585EE5005ACEA6 /* ViewController.m in Sources */,
 				EEE8163F1B585EE5005ACEA6 /* SSCalendarCollectionViewCell.m in Sources */,
 			);
