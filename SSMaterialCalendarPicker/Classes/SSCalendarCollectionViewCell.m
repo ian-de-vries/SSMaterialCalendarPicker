@@ -15,11 +15,16 @@
 @implementation SSCalendarCollectionViewCell
 
 #pragma mark - Initialization
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
+- (void)calendarCellSetup {
+    [self clearSubviews];
     [self setupRippleButton];
     [self setupSelectionIndicator];
+}
+
+- (void)clearSubviews {
+    for (UIView *subview in self.subviews) {
+        [subview removeFromSuperview];
+    }
 }
 
 #pragma mark Visual Elements Initialization

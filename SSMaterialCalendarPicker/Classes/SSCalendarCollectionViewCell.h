@@ -34,6 +34,8 @@
 @property (strong, nonatomic) SSRippleButton *innerButton;
 @property (strong, nonatomic) UIView *selectionIndicator;
 
+- (void)calendarCellSetup;
+
 @end
 
 @interface SSRippleButton : UIButton

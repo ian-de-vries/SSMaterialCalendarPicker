@@ -29,6 +29,7 @@
 
 - (BOOL)isDateBetween:(NSDate *)date1 and:(NSDate *)date2 {
     if (date1 == nil || date2 == nil) return NO;
+    NSLog(@"%@", ([self compare:date1] != NSOrderedAscending) && ([self compare:date2] != NSOrderedDescending)?@"YES":@"NO");
     return ([self compare:date1] != NSOrderedAscending) && ([self compare:date2] != NSOrderedDescending);
 }
 

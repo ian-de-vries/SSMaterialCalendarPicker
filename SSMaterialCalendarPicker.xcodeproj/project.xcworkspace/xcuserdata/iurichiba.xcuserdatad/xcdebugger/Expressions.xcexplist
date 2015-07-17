@@ -3,13 +3,19 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[SSRippleButton setupRippleBackgroundView]:SSCalendarCollectionViewCell.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[ViewController shouldSelect:]:ViewController.m">
+      </ContextState>
+      <ContextState
          contextName = "-[SSCalendarCollectionViewCell setupRippleButton]:SSCalendarCollectionViewCell.m">
       </ContextState>
       <ContextState
-         contextName = "-[SSRippleButton beginTrackingWithTouch:withEvent:]:SSCalendarCollectionViewCell.m">
+         contextName = "-[ViewController collectionView:cellForItemAtIndexPath:]:ViewController.m">
       </ContextState>
       <ContextState
-         contextName = "-[SSRippleButton setupRippleBackgroundView]:SSCalendarCollectionViewCell.m">
+         contextName = "-[SSRippleButton beginTrackingWithTouch:withEvent:]:SSCalendarCollectionViewCell.m">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

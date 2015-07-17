@@ -11,26 +11,37 @@
 
 #define kCalendarCellIdentifier @"SSCalendarCollectionViewCell"
 
-@implementation ViewController
+@implementation ViewController {
+    NSMutableArray *dates;
+}
 
 #pragma mark - Initialization
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self initializeDates];
     [self.calendarCollectionView setAllowsMultipleSelection:YES];
+}
+
+- (void)initializeDates {
+    dates = [[NSMutableArray alloc] init];
+    for (int i = 0; i < 30; i++) {
+        [dates addObject:[NSDate daysFromNow:i]];
+    }
 }
 
 #pragma mark - UICollectionView Delegate & DataSource
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     SSCalendarCollectionViewCell *calendarCell =
     [collectionView dequeueReusableCellWithReuseIdentifier:kCalendarCellIdentifier forIndexPath:indexPath];
-    [calendarCell setCellDate:[NSDate daysFromNow:indexPath.row]];
-    [calendarCell setSelected:[self shouldSelect:calendarCell]];
+    [calendarCell setCellDate:[dates objectAtIndex:indexPath.row]];
     [calendarCell setDelegate:self];
+    [calendarCell calendarCellSetup];
+    [calendarCell setSelected:[self shouldSelect:calendarCell]];
     return calendarCell;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 9;
+    return dates.count;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -56,7 +67,7 @@
 }
 
 - (BOOL)shouldSelect:(SSCalendarCollectionViewCell *)calendarCell {
-    if (self.startDate != nil && self.endDate)
+    if (self.startDate != nil && self.endDate != nil)
         return [calendarCell.cellDate isDateBetween:self.startDate and:self.endDate];
     else return ([calendarCell.cellDate isEqualToDate:self.startDate] || [calendarCell.cellDate isEqualToDate:self.endDate]);
 }
