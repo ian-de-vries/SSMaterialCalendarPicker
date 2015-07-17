@@ -24,7 +24,7 @@
     SSCalendarCollectionViewCell *calendarCell =
     [collectionView dequeueReusableCellWithReuseIdentifier:kCalendarCellIdentifier forIndexPath:indexPath];
     [calendarCell setCellDate:[NSDate daysFromNow:indexPath.row]];
-    [calendarCell setSelected:[calendarCell.cellDate isDateBetween:self.startDate and:self.endDate]];
+    [calendarCell setSelected:[self shouldSelect:calendarCell]];
     [calendarCell setDelegate:self];
     return calendarCell;
 }
@@ -51,11 +51,14 @@
 
 - (void)refreshVisible {
     NSArray *visibleCells = [self.calendarCollectionView visibleCells];
-    for (SSCalendarCollectionViewCell *calendarCell in visibleCells) {
-        if ([calendarCell.cellDate isDateBetween:self.startDate and:self.endDate]) {
-            [calendarCell setSelected:YES];
-        }
-    }
+    for (SSCalendarCollectionViewCell *calendarCell in visibleCells)
+        [calendarCell setSelected:[self shouldSelect:calendarCell]];
+}
+
+- (BOOL)shouldSelect:(SSCalendarCollectionViewCell *)calendarCell {
+    if (self.startDate != nil && self.endDate)
+        return [calendarCell.cellDate isDateBetween:self.startDate and:self.endDate];
+    else return ([calendarCell.cellDate isEqualToDate:self.startDate] || [calendarCell.cellDate isEqualToDate:self.endDate]);
 }
 
 #pragma mark - SSCalendarCollectionViewCell Delegate
