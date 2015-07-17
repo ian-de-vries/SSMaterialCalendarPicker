@@ -34,9 +34,10 @@ static int count;
 - (void)layoutSubviews {
     [super layoutSubviews];
     [self setupRippleButton];
+    [self setupSelectionIndicator];
 }
 
-#pragma mark Inner Button Initialization
+#pragma mark Visual Elements Initialization
 - (void)setupRippleButton {
     CGFloat size = CGRectGetWidth(self.frame) * 0.8f;
     CGFloat x = (CGRectGetWidth(self.frame) * 0.2f)/2;
@@ -52,6 +53,17 @@ static int count;
     [self addSubview:self.button];
 }
 
+- (void)setupSelectionIndicator {
+    self.selectionIndicator = [[UIView alloc] initWithFrame:self.button.frame];
+    self.selectionIndicator.backgroundColor = [UIColor orangeColor];
+    self.selectionIndicator.layer.cornerRadius = CGRectGetWidth(self.selectionIndicator.frame)/2;
+    
+    [self addSubview:self.selectionIndicator];
+    [self sendSubviewToBack:self.selectionIndicator];
+    
+    self.selectionIndicator.alpha = 0.0f;
+}
+
 #pragma mark - Hit Extensor
 - (UIView *) hitTest:(CGPoint) point withEvent:(UIEvent *)event {
     if ([self pointInside:point withEvent:event]) {
@@ -65,9 +77,18 @@ static int count;
         [self.delegate cellClicked:self];
 }
 
+- (void)setSelected:(BOOL)selected {
+    [super setSelected:selected];
+    [UIView animateWithDuration:0.3f animations:^{
+        self.selectionIndicator.alpha = selected?1.0f:0.0f;
+    }];
+}
+
 @end
 
-@implementation SSRippleButton
+@implementation SSRippleButton {
+    BOOL alternative;
+}
 
 #pragma mark - Initialization
 - (id)initWithFrame:(CGRect)frame {
@@ -81,6 +102,7 @@ static int count;
 }
 
 - (void)setupRipple {
+    alternative = YES;
     [self setupRippleView];
     [self setupRippleBackgroundView];
 }
@@ -88,7 +110,7 @@ static int count;
 #pragma mark Ripple View Initialization
 - (void)setupRippleView {
     if (self.rippleView == nil) {
-        CGFloat size = CGRectGetWidth(self.frame) * 0.8f;
+        CGFloat size = CGRectGetWidth(self.frame) * (alternative?3.0f:0.8f);
         CGFloat x = CGRectGetWidth(self.frame)/2 - size/2;
         CGFloat y = CGRectGetHeight(self.frame)/2 - size/2;
         CGFloat corner = size/2;
@@ -123,9 +145,9 @@ static int count;
         self.rippleBackgroundView.alpha = 1.0f;
     }];
     
-    self.rippleView.transform = CGAffineTransformMakeScale(0.5f, 0.5f);
+    self.rippleView.transform = CGAffineTransformMakeScale(alternative?0.1f:0.5f, alternative?0.1f:0.5f);
     
-    [UIView animateWithDuration:0.7f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+    [UIView animateWithDuration:alternative?1.0f:0.7f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         self.rippleView.transform = CGAffineTransformIdentity;
     } completion:nil];
     

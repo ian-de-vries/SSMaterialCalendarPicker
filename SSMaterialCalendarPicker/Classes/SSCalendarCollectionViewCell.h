@@ -31,6 +31,7 @@
 
 @property (strong, nonatomic) id<SSCalendarCollectionViewCellDelegate> delegate;
 @property (strong, nonatomic) SSRippleButton *button;
+@property (strong, nonatomic) UIView *selectionIndicator;
 
 @end
 
