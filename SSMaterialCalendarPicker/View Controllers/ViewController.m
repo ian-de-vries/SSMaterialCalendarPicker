@@ -20,6 +20,8 @@
     [super viewDidLoad];
     [self initializeDates];
     [self.calendarCollectionView setAllowsMultipleSelection:YES];
+    [self.calendarCollectionView setMultipleTouchEnabled:NO];
+    [self.view setMultipleTouchEnabled:NO];
 }
 
 - (void)initializeDates {
@@ -56,8 +58,20 @@
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
     SSCalendarCollectionViewCell *calendarCell = (SSCalendarCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     if ([calendarCell.cellDate compare:self.startDate] == NSOrderedSame) self.startDate = nil;
-    if ([calendarCell.cellDate compare:self.endDate] == NSOrderedSame) self.endDate = nil;
-    [self refreshVisible];
+    else if ([calendarCell.cellDate compare:self.endDate] == NSOrderedSame) self.endDate = nil;
+    else {
+        NSDate *replace = [self shouldReplace:calendarCell.cellDate];
+        if (replace == self.startDate) self.startDate = calendarCell.cellDate;
+        if (replace == self.endDate) self.endDate = calendarCell.cellDate;
+    } [self refreshVisible];
+}
+
+#pragma mark - Calendar Cells Control
+- (NSDate *)shouldReplace:(NSDate *)date {
+    NSTimeInterval start = fabs([date timeIntervalSinceDate:self.startDate]);
+    NSTimeInterval end = fabs([date timeIntervalSinceDate:self.endDate]);
+    if (start < end) return self.startDate;
+    else return self.endDate;
 }
 
 - (void)refreshVisible {
