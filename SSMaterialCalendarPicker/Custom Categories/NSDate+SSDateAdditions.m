@@ -10,12 +10,12 @@
 
 @implementation NSDate (SSDateAdditions)
 
-- (NSDate *)removeTime {
+- (NSDate *)defaultTime {
     if (self == nil) return nil;
     NSDateComponents* comps = [[NSCalendar currentCalendar] components:NSCalendarUnitYear|
                                NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour|
                                NSCalendarUnitMinute|NSCalendarUnitSecond fromDate:self];
-    [comps setHour:00];
+    [comps setHour:12];
     [comps setMinute:00];
     [comps setSecond:00];
     [comps setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];

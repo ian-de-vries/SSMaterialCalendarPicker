@@ -44,9 +44,9 @@
 - (void)initializeDates {
     dates = [[NSMutableArray alloc] init];
     for (int i = 0; i < 364; i++) {
-        [dates addObject:[NSDate daysFromNow:i].removeTime];
-    } self.startDate = self.startDate.removeTime;
-    self.endDate = self.endDate.removeTime;
+        [dates addObject:[NSDate daysFromNow:i].defaultTime];
+    } self.startDate = self.startDate.defaultTime;
+    self.endDate = self.endDate.defaultTime;
 }
 
 #pragma mark - UICollectionView Delegate & DataSource
