@@ -44,6 +44,22 @@
     return ([self compare:date1] != NSOrderedAscending) && ([self compare:date2] != NSOrderedDescending);
 }
 
++ (int)daysBetween:(NSDate *)date1 and:(NSDate *)date2 {
+    if (date1 != nil && date2 != nil) {
+        NSDate *fromDate;
+        NSDate *toDate;
+        
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        [calendar rangeOfUnit:NSCalendarUnitDay startDate:&fromDate
+                     interval:NULL forDate:date1];
+        [calendar rangeOfUnit:NSCalendarUnitDay startDate:&toDate
+                     interval:NULL forDate:date2];
+        NSDateComponents *difference = [calendar components:NSCalendarUnitDay
+                                                   fromDate:fromDate toDate:toDate options:0];
+        return (int)[difference day];
+    } else return 0;
+}
+
 + (int)daysFromLastSunday {
     int weekday = (int)[[NSCalendar currentCalendar] component:NSCalendarUnitWeekday fromDate:[NSDate date]];
     return --weekday;

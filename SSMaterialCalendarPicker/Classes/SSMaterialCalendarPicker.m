@@ -70,11 +70,15 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     SSCalendarCollectionViewCell *calendarCell = (SSCalendarCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     if (!calendarCell.isDisabled) {
+        NSDate *startBackup = self.startDate;
+        NSDate *endBackup = self.endDate;
+        
         if (self.startDate == nil) self.startDate = calendarCell.cellDate;
         else if (self.endDate == nil) self.endDate = calendarCell.cellDate;
         else if ([calendarCell.cellDate compare:self.startDate] == NSOrderedAscending) self.startDate = calendarCell.cellDate;
         else if ([calendarCell.cellDate compare:self.endDate] == NSOrderedDescending) self.endDate = calendarCell.cellDate;
         [self checkReverse];
+        [self checkDisabledRangeWithBackupStartDate:startBackup andEndDate:endBackup];
         [self refreshVisible];
     }
 }
@@ -113,6 +117,7 @@
 
 - (BOOL)shouldDisable:(SSCalendarCollectionViewCell *)calendarCell {
     if ([[NSDate date].defaultTime compare:calendarCell.cellDate] == NSOrderedDescending) return YES;
+    if ([self isDateDisabled:calendarCell.cellDate]) return YES;
     return NO;
 }
 
@@ -122,6 +127,23 @@
         NSDate *temp = self.startDate;
         self.startDate = self.endDate;
         self.endDate = temp;
+    }
+}
+
+- (BOOL)isDateDisabled:(NSDate *)date {
+    BOOL disabled = NO;
+    for (NSDate *disabledDate in self.disabledDates) {
+        if ([disabledDate.defaultTime compare:date.defaultTime] == NSOrderedSame) disabled = YES;
+    } return disabled;
+}
+
+- (void)checkDisabledRangeWithBackupStartDate:(NSDate *)startBackup andEndDate:(NSDate *)endBackup {
+    for (int i = 1; i < [NSDate daysBetween:self.startDate and:self.endDate]; i++) {
+        if ([self isDateDisabled:[self.startDate addDays:i]]) {
+            self.startDate = startBackup;
+            self.endDate = endBackup;
+            break;
+        }
     }
 }
 
