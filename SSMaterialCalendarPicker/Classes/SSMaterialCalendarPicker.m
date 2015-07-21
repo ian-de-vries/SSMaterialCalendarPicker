@@ -10,6 +10,7 @@
 #import "NSDate+SSDateAdditions.h"
 
 #define kCalendarCellIdentifier @"SSCalendarCollectionViewCell"
+#define kCalendarPickerIdentifier @"SSMaterialCalendarPicker"
 
 @implementation SSMaterialCalendarPicker {
     NSMutableArray *dates;
@@ -26,25 +27,24 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self = [[[NSBundle mainBundle]
-                 loadNibNamed:@"SSMaterialCalendarPicker"
-                 owner:self options:nil] objectAtIndex:0];
+        UINib *cellNib = [UINib nibWithNibName:kCalendarCellIdentifier bundle:nil];
+        self = [[[NSBundle mainBundle] loadNibNamed:kCalendarPickerIdentifier
+                                              owner:self options:nil] objectAtIndex:0];
         [self setFrame:frame];
         [self initializeDates];
         [self.calendarCollectionView setAllowsMultipleSelection:YES];
         [self.calendarCollectionView setMultipleTouchEnabled:NO];
-        [self.calendarCollectionView registerNib:[UINib nibWithNibName:kCalendarCellIdentifier bundle:nil]
-                      forCellWithReuseIdentifier:kCalendarCellIdentifier];
-        [self.headerCollectionView registerNib:[UINib nibWithNibName:kCalendarCellIdentifier bundle:nil]
-                    forCellWithReuseIdentifier:kCalendarCellIdentifier];
+        [self.calendarCollectionView registerNib:cellNib forCellWithReuseIdentifier:kCalendarCellIdentifier];
+        [self.headerCollectionView registerNib:cellNib forCellWithReuseIdentifier:kCalendarCellIdentifier];
         [self setMultipleTouchEnabled:NO];
     } return self;
 }
 
 - (void)initializeDates {
     if (self.disabledDates == nil) self.disabledDates = [[NSArray alloc] init];
+    int lastSunday = [NSDate daysFromLastSunday];
     dates = [[NSMutableArray alloc] init];
-    for (int i = 0; i < 364; i++) {
+    for (int i = -lastSunday; i < 364-lastSunday; i++) {
         [dates addObject:[NSDate daysFromNow:i].defaultTime];
     } self.startDate = self.startDate.defaultTime;
     self.endDate = self.endDate.defaultTime;

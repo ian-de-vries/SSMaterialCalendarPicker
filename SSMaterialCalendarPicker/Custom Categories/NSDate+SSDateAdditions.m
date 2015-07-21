@@ -14,7 +14,7 @@
     if (self == nil) return nil;
     NSDateComponents* comps = [[NSCalendar currentCalendar] components:NSCalendarUnitYear|
                                NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour|
-                               NSCalendarUnitMinute|NSCalendarUnitSecond fromDate:self];
+                               NSCalendarUnitMinute|NSCalendarUnitSecond|NSCalendarUnitWeekday fromDate:self];
     [comps setHour:12];
     [comps setMinute:00];
     [comps setSecond:00];
@@ -42,6 +42,11 @@
 - (BOOL)isDateBetween:(NSDate *)date1 and:(NSDate *)date2 {
     if (date1 == nil || date2 == nil) return NO;
     return ([self compare:date1] != NSOrderedAscending) && ([self compare:date2] != NSOrderedDescending);
+}
+
++ (int)daysFromLastSunday {
+    int weekday = (int)[[NSCalendar currentCalendar] component:NSCalendarUnitWeekday fromDate:[NSDate date]];
+    return --weekday;
 }
 
 @end

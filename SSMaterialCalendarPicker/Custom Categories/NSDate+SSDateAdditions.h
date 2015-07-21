@@ -15,6 +15,6 @@
 + (NSDate *)daysFromNow:(NSInteger)days;
 - (NSDate *)addDays:(NSInteger)days;
 - (BOOL)isDateBetween:(NSDate *)date1 and:(NSDate *)date2;
-
++ (int)daysFromLastSunday;
 
 @end
