@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8152.3" systemVersion="15A216g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8124.4"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="pJU-z3-znu" customClass="SSMaterialCalendarPicker">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="PIm-Mg-AAY">
+                    <rect key="frame" x="16" y="36" width="568" height="50"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="3iK-bD-Fup"/>
+                    </constraints>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="iWc-eJ-MET">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="pJU-z3-znu" id="fXK-qY-eAD"/>
+                        <outlet property="delegate" destination="pJU-z3-znu" id="t3E-Z0-TF3"/>
+                    </connections>
+                </collectionView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ne5-PN-Y6Y" userLabel="Header Separator">
+                    <rect key="frame" x="16" y="80" width="568" height="2"/>
+                    <animations/>
+                    <color key="backgroundColor" red="0.87450980392156863" green="0.45490196078431372" blue="0.36078431372549019" alpha="1" colorSpace="custom" customColorSpace="adobeRGB1998"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="2" id="0ha-Ky-8Ie"/>
+                    </constraints>
+                </view>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="7I6-d8-2Kj">
+                    <rect key="frame" x="16" y="86" width="568" height="245"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="245" id="q4f-vJ-Zr7"/>
+                    </constraints>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="NkG-9r-6lf">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="pJU-z3-znu" id="7sG-Jz-fx2"/>
+                        <outlet property="delegate" destination="pJU-z3-znu" id="ycq-sF-UhG"/>
+                    </connections>
+                </collectionView>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Ne5-PN-Y6Y" firstAttribute="trailing" secondItem="PIm-Mg-AAY" secondAttribute="trailing" id="66A-D9-PgR"/>
+                <constraint firstAttribute="trailing" secondItem="7I6-d8-2Kj" secondAttribute="trailing" constant="16" id="71K-ZX-RQc"/>
+                <constraint firstAttribute="trailing" secondItem="PIm-Mg-AAY" secondAttribute="trailing" constant="16" id="Kwc-lC-W81"/>
+                <constraint firstItem="7I6-d8-2Kj" firstAttribute="leading" secondItem="pJU-z3-znu" secondAttribute="leading" constant="16" id="MEZ-Os-MHA"/>
+                <constraint firstAttribute="bottom" secondItem="7I6-d8-2Kj" secondAttribute="bottom" id="Spu-S7-Ltc"/>
+                <constraint firstItem="Ne5-PN-Y6Y" firstAttribute="top" secondItem="PIm-Mg-AAY" secondAttribute="top" id="TT5-hm-Tmk"/>
+                <constraint firstItem="Ne5-PN-Y6Y" firstAttribute="leading" secondItem="PIm-Mg-AAY" secondAttribute="leading" id="j1M-tY-LCY"/>
+                <constraint firstItem="Ne5-PN-Y6Y" firstAttribute="bottom" secondItem="PIm-Mg-AAY" secondAttribute="bottom" constant="-4" id="o3j-gx-18g"/>
+                <constraint firstItem="PIm-Mg-AAY" firstAttribute="top" secondItem="pJU-z3-znu" secondAttribute="top" constant="36" id="rZH-oj-gXE"/>
+                <constraint firstItem="PIm-Mg-AAY" firstAttribute="leading" secondItem="pJU-z3-znu" secondAttribute="leading" constant="16" id="sfL-Z4-lL1"/>
+                <constraint firstItem="7I6-d8-2Kj" firstAttribute="top" secondItem="PIm-Mg-AAY" secondAttribute="bottom" id="uvZ-e9-VJu"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="TT5-hm-Tmk"/>
+                    <exclude reference="Spu-S7-Ltc"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="calendarCollectionView" destination="7I6-d8-2Kj" id="7xx-10-vH7"/>
+                <outlet property="headerCollectionView" destination="PIm-Mg-AAY" id="id3-Zo-isf"/>
+                <outlet property="headerCollectionViewHeight" destination="3iK-bD-Fup" id="IdF-ux-qjn"/>
+            </connections>
+            <point key="canvasLocation" x="-57" y="-332"/>
+        </view>
+    </objects>
+</document>

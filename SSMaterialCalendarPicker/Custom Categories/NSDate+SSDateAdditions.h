@@ -10,6 +10,7 @@
 
 @interface NSDate (SSDateAdditions)
 
+- (NSDate *)removeTime;
 + (NSDate *)tomorrow;
 + (NSDate *)daysFromNow:(NSInteger)days;
 - (NSDate *)addDays:(NSInteger)days;

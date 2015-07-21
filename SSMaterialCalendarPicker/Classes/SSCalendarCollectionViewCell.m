@@ -36,13 +36,17 @@
     
     if (self.cellDate == nil) self.cellDate = [NSDate date];
     NSDateComponents *components = [[NSCalendar currentCalendar]
-                                    components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
+                                    components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitWeekday
                                     fromDate:self.cellDate];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"pt_BR"]];
+    [formatter setDateFormat:@"EEEE"];
+    NSString *weekday = [formatter stringFromDate:self.cellDate];
     
     self.innerButton = [[SSRippleButton alloc] initWithFrame:buttonFrame];
     [self.innerButton setTitle:[NSString stringWithFormat:@"%02d", (int) components.day] forState:UIControlStateNormal];
+    if (self.headerMode) [self.innerButton setTitle:[weekday substringToIndex:1] forState:UIControlStateNormal];
     [self.innerButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
-    [self.innerButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.innerButton.titleLabel setFont:[UIFont boldSystemFontOfSize:13.0f]];
     [self.innerButton setDelegate:self];
     [self addSubview:self.innerButton];
@@ -61,9 +65,8 @@
 
 #pragma mark - Hit Extensor
 - (UIView *) hitTest:(CGPoint) point withEvent:(UIEvent *)event {
-    if ([self pointInside:point withEvent:event]) {
-        return self.innerButton;
-    } return nil;
+    if ([self pointInside:point withEvent:event]) return self.innerButton;
+    return [super hitTest:point withEvent:event];
 }
 
 #pragma mark - SSRippleButton Delegate

@@ -1,34 +1,52 @@
 //
-//  ViewController.m
-//  SSMaterialDateRangeSelector
+//  SSMaterialCalendarPicker.m
+//  SSMaterialCalendarPicker
 //
-//  Created by Iuri Chiba on 7/15/15.
-//  Copyright (c) 2015 Shoryuken Solutions. All rights reserved.
+//  Created by Iuri Chiba on 7/21/15.
+//  Copyright © 2015 Shoryuken Solutions. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "SSMaterialCalendarPicker.h"
 #import "NSDate+SSDateAdditions.h"
 
 #define kCalendarCellIdentifier @"SSCalendarCollectionViewCell"
 
-@implementation ViewController {
+@implementation SSMaterialCalendarPicker {
     NSMutableArray *dates;
 }
 
+#pragma mark - Show Calendar
++ (void)showCalendarOn:(UIView *)view {
+    SSMaterialCalendarPicker *picker = [[self alloc] initWithFrame:view.frame];
+    picker.headerCollectionViewHeight.constant = CGRectGetWidth(view.frame)/7;
+    [view addSubview:picker];
+}
+
 #pragma mark - Initialization
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self initializeDates];
-    [self.calendarCollectionView setAllowsMultipleSelection:YES];
-    [self.calendarCollectionView setMultipleTouchEnabled:NO];
-    [self.view setMultipleTouchEnabled:NO];
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        self = [[[NSBundle mainBundle]
+                 loadNibNamed:@"SSMaterialCalendarPicker"
+                 owner:self options:nil] objectAtIndex:0];
+        [self setFrame:frame];
+        [self initializeDates];
+        [self.calendarCollectionView setAllowsMultipleSelection:YES];
+        [self.calendarCollectionView setMultipleTouchEnabled:NO];
+        [self.calendarCollectionView registerNib:[UINib nibWithNibName:kCalendarCellIdentifier bundle:nil]
+                      forCellWithReuseIdentifier:kCalendarCellIdentifier];
+        [self.headerCollectionView registerNib:[UINib nibWithNibName:kCalendarCellIdentifier bundle:nil]
+                    forCellWithReuseIdentifier:kCalendarCellIdentifier];
+        [self setMultipleTouchEnabled:NO];
+    } return self;
 }
 
 - (void)initializeDates {
     dates = [[NSMutableArray alloc] init];
-    for (int i = 0; i < 60; i++) {
-        [dates addObject:[NSDate daysFromNow:i]];
-    }
+    for (int i = 0; i < 364; i++) {
+        [dates addObject:[NSDate daysFromNow:i].removeTime];
+    } self.startDate = self.startDate.removeTime;
+    self.endDate = self.endDate.removeTime;
 }
 
 #pragma mark - UICollectionView Delegate & DataSource
@@ -39,6 +57,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     SSCalendarCollectionViewCell *calendarCell =
     [collectionView dequeueReusableCellWithReuseIdentifier:kCalendarCellIdentifier forIndexPath:indexPath];
+    if (collectionView == self.headerCollectionView) [calendarCell setHeaderMode:YES];
     [calendarCell setCellDate:[dates objectAtIndex:indexPath.row]];
     [calendarCell setDelegate:self];
     [calendarCell calendarCellSetup];
@@ -101,6 +120,12 @@
         [calendarCell setSelected:[self shouldSelect:calendarCell]];
 }
 
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    if (self.calendarCollectionView.isDragging || self.calendarCollectionView.isDecelerating) {
+        return self.calendarCollectionView;
+    } return [super hitTest:point withEvent:event];
+}
+
 #pragma mark - SSCalendarCollectionViewCell Delegate
 - (void)cellClicked:(SSCalendarCollectionViewCell *)cell {
     NSIndexPath *indexPath = [self.calendarCollectionView indexPathForCell:cell];
@@ -113,5 +138,6 @@
         [self collectionView:self.calendarCollectionView didDeselectItemAtIndexPath:indexPath];
     }
 }
+
 
 @end

@@ -33,6 +33,7 @@
 @property (strong, nonatomic) NSDate *cellDate;
 @property (strong, nonatomic) SSRippleButton *innerButton;
 @property (strong, nonatomic) UIView *selectionIndicator;
+@property (nonatomic) BOOL headerMode;
 
 - (void)calendarCellSetup;
 

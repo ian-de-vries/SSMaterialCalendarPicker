@@ -10,6 +10,18 @@
 
 @implementation NSDate (SSDateAdditions)
 
+- (NSDate *)removeTime {
+    if (self == nil) return nil;
+    NSDateComponents* comps = [[NSCalendar currentCalendar] components:NSCalendarUnitYear|
+                               NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour|
+                               NSCalendarUnitMinute|NSCalendarUnitSecond fromDate:self];
+    [comps setHour:00];
+    [comps setMinute:00];
+    [comps setSecond:00];
+    [comps setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    return [[NSCalendar currentCalendar] dateFromComponents:comps];
+}
+
 + (NSDate *)tomorrow {
     return [self daysFromNow:1];
 }
