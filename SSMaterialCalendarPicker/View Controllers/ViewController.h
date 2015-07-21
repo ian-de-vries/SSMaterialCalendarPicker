@@ -10,7 +10,7 @@
 
 #import "SSCalendarCollectionViewCell.h"
 
-@interface ViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, SSCalendarCollectionViewCellDelegate>
+@interface ViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, SSCalendarCollectionViewCellDelegate>
 
 @property (strong, nonatomic) IBOutlet UICollectionView *calendarCollectionView;
 @property (strong, nonatomic) NSDate *startDate;

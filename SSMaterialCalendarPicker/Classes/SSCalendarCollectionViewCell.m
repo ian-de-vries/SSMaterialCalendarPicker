@@ -76,6 +76,8 @@
     [super setSelected:selected];
     [UIView animateWithDuration:0.3f animations:^{
         self.selectionIndicator.alpha = selected?1.0f:0.0f;
+        [self.innerButton setTitleColor:selected?[UIColor whiteColor]:[UIColor blackColor]
+                               forState:UIControlStateNormal];
     }];
 }
 

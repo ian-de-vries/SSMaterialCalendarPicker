@@ -26,12 +26,16 @@
 
 - (void)initializeDates {
     dates = [[NSMutableArray alloc] init];
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < 60; i++) {
         [dates addObject:[NSDate daysFromNow:i]];
     }
 }
 
 #pragma mark - UICollectionView Delegate & DataSource
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return dates.count;
+}
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     SSCalendarCollectionViewCell *calendarCell =
     [collectionView dequeueReusableCellWithReuseIdentifier:kCalendarCellIdentifier forIndexPath:indexPath];
@@ -42,28 +46,30 @@
     return calendarCell;
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return dates.count;
-}
-
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     SSCalendarCollectionViewCell *calendarCell = (SSCalendarCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     if (self.startDate == nil) self.startDate = calendarCell.cellDate;
     else if (self.endDate == nil) self.endDate = calendarCell.cellDate;
     else if ([calendarCell.cellDate compare:self.startDate] == NSOrderedAscending) self.startDate = calendarCell.cellDate;
     else if ([calendarCell.cellDate compare:self.endDate] == NSOrderedDescending) self.endDate = calendarCell.cellDate;
+    [self checkReverse];
     [self refreshVisible];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
     SSCalendarCollectionViewCell *calendarCell = (SSCalendarCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    if ([calendarCell.cellDate compare:self.startDate] == NSOrderedSame) self.startDate = nil;
-    else if ([calendarCell.cellDate compare:self.endDate] == NSOrderedSame) self.endDate = nil;
+    if (self.startDate != nil && [calendarCell.cellDate compare:self.startDate] == NSOrderedSame) self.startDate = nil;
+    else if (self.endDate != nil && [calendarCell.cellDate compare:self.endDate] == NSOrderedSame) self.endDate = nil;
     else {
         NSDate *replace = [self shouldReplace:calendarCell.cellDate];
         if (replace == self.startDate) self.startDate = calendarCell.cellDate;
         if (replace == self.endDate) self.endDate = calendarCell.cellDate;
     } [self refreshVisible];
+}
+
+- (CGSize)collectionView:(nonnull UICollectionView *)collectionView layout:(nonnull UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    CGFloat size = CGRectGetWidth(collectionView.frame)/7;
+    return CGSizeMake(size, size);
 }
 
 #pragma mark - Calendar Cells Control
@@ -74,16 +80,25 @@
     else return self.endDate;
 }
 
-- (void)refreshVisible {
-    NSArray *visibleCells = [self.calendarCollectionView visibleCells];
-    for (SSCalendarCollectionViewCell *calendarCell in visibleCells)
-        [calendarCell setSelected:[self shouldSelect:calendarCell]];
-}
-
 - (BOOL)shouldSelect:(SSCalendarCollectionViewCell *)calendarCell {
     if (self.startDate != nil && self.endDate != nil)
         return [calendarCell.cellDate isDateBetween:self.startDate and:self.endDate];
     else return ([calendarCell.cellDate isEqualToDate:self.startDate] || [calendarCell.cellDate isEqualToDate:self.endDate]);
+}
+
+- (void)checkReverse {
+    if (self.startDate != nil && self.endDate != nil
+        && [self.startDate compare:self.endDate] == NSOrderedDescending) {
+        NSDate *temp = self.startDate;
+        self.startDate = self.endDate;
+        self.endDate = temp;
+    }
+}
+
+- (void)refreshVisible {
+    NSArray *visibleCells = [self.calendarCollectionView visibleCells];
+    for (SSCalendarCollectionViewCell *calendarCell in visibleCells)
+        [calendarCell setSelected:[self shouldSelect:calendarCell]];
 }
 
 #pragma mark - SSCalendarCollectionViewCell Delegate
