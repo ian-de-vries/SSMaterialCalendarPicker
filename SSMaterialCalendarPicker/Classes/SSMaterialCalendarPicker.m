@@ -63,28 +63,33 @@
     [calendarCell setDelegate:self];
     [calendarCell calendarCellSetup];
     [calendarCell selectCalendarCell:[self shouldSelect:calendarCell]];
+    [calendarCell disableCalendarCell:[self shouldDisable:calendarCell]];
     return calendarCell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     SSCalendarCollectionViewCell *calendarCell = (SSCalendarCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    if (self.startDate == nil) self.startDate = calendarCell.cellDate;
-    else if (self.endDate == nil) self.endDate = calendarCell.cellDate;
-    else if ([calendarCell.cellDate compare:self.startDate] == NSOrderedAscending) self.startDate = calendarCell.cellDate;
-    else if ([calendarCell.cellDate compare:self.endDate] == NSOrderedDescending) self.endDate = calendarCell.cellDate;
-    [self checkReverse];
-    [self refreshVisible];
+    if (!calendarCell.isDisabled) {
+        if (self.startDate == nil) self.startDate = calendarCell.cellDate;
+        else if (self.endDate == nil) self.endDate = calendarCell.cellDate;
+        else if ([calendarCell.cellDate compare:self.startDate] == NSOrderedAscending) self.startDate = calendarCell.cellDate;
+        else if ([calendarCell.cellDate compare:self.endDate] == NSOrderedDescending) self.endDate = calendarCell.cellDate;
+        [self checkReverse];
+        [self refreshVisible];
+    }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
     SSCalendarCollectionViewCell *calendarCell = (SSCalendarCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    if (self.startDate != nil && [calendarCell.cellDate compare:self.startDate] == NSOrderedSame) self.startDate = nil;
-    else if (self.endDate != nil && [calendarCell.cellDate compare:self.endDate] == NSOrderedSame) self.endDate = nil;
-    else {
-        NSDate *replace = [self shouldReplace:calendarCell.cellDate];
-        if (replace == self.startDate) self.startDate = calendarCell.cellDate;
-        if (replace == self.endDate) self.endDate = calendarCell.cellDate;
-    } [self refreshVisible];
+    if (!calendarCell.isDisabled) {
+        if (self.startDate != nil && [calendarCell.cellDate compare:self.startDate] == NSOrderedSame) self.startDate = nil;
+        else if (self.endDate != nil && [calendarCell.cellDate compare:self.endDate] == NSOrderedSame) self.endDate = nil;
+        else {
+            NSDate *replace = [self shouldReplace:calendarCell.cellDate];
+            if (replace == self.startDate) self.startDate = calendarCell.cellDate;
+            if (replace == self.endDate) self.endDate = calendarCell.cellDate;
+        } [self refreshVisible];
+    }
 }
 
 - (CGSize)collectionView:(nonnull UICollectionView *)collectionView layout:(nonnull UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
@@ -106,6 +111,11 @@
     else return ([calendarCell.cellDate isEqualToDate:self.startDate] || [calendarCell.cellDate isEqualToDate:self.endDate]);
 }
 
+- (BOOL)shouldDisable:(SSCalendarCollectionViewCell *)calendarCell {
+    if ([[NSDate date].defaultTime compare:calendarCell.cellDate] == NSOrderedDescending) return YES;
+    return NO;
+}
+
 - (void)checkReverse {
     if (self.startDate != nil && self.endDate != nil
         && [self.startDate compare:self.endDate] == NSOrderedDescending) {
@@ -117,8 +127,10 @@
 
 - (void)refreshVisible {
     NSArray *visibleCells = [self.calendarCollectionView visibleCells];
-    for (SSCalendarCollectionViewCell *calendarCell in visibleCells)
+    for (SSCalendarCollectionViewCell *calendarCell in visibleCells) {
         [calendarCell selectCalendarCell:[self shouldSelect:calendarCell]];
+        [calendarCell disableCalendarCell:[self shouldDisable:calendarCell]];
+    }
 }
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {

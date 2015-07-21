@@ -9,6 +9,8 @@
 #import "SSCalendarCollectionViewCell.h"
 #import <QuartzCore/QuartzCore.h>
 
+#import "NSDate+SSDateAdditions.h"
+
 #define kDefaultRippleColor [UIColor colorWithWhite:1.0f alpha:0.45f]
 #define kDefaultSelectedColor [UIColor colorWithRed:223/255.0f green:116/255.0f blue:92/255.0f alpha:1.0f]
 
@@ -47,7 +49,9 @@
     [self.innerButton setTitle:[NSString stringWithFormat:@"%02d", (int) components.day] forState:UIControlStateNormal];
     if (self.headerMode) [self.innerButton setTitle:[weekday substringToIndex:1] forState:UIControlStateNormal];
     [self.innerButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
-    [self.innerButton.titleLabel setFont:[UIFont boldSystemFontOfSize:13.0f]];
+    [self.innerButton.titleLabel setFont:[UIFont systemFontOfSize:13.0f]];
+    if (self.headerMode || [self.cellDate.defaultTime compare:[NSDate date].defaultTime] == NSOrderedSame)
+        [self.innerButton.titleLabel setFont:[UIFont boldSystemFontOfSize:13.0f]];
     [self.innerButton setDelegate:self];
     [self addSubview:self.innerButton];
 }
@@ -75,7 +79,7 @@
     return [super hitTest:point withEvent:event];
 }
 
-#pragma mark - Selection Control
+#pragma mark - Status Control
 - (void)selectCalendarCell:(BOOL)selected {
     [self setSelected:selected];
     [UIView animateWithDuration:0.3f animations:^{
@@ -83,6 +87,17 @@
         [self.innerButton setTitleColor:selected?[UIColor whiteColor]:[UIColor blackColor]
                                forState:UIControlStateNormal];
     }];
+}
+
+- (void)disableCalendarCell:(BOOL)disabled {
+    if (!self.headerMode) {
+        [self setIsDisabled:disabled];
+        if (disabled) [self selectCalendarCell:NO];
+        [self setUserInteractionEnabled:NO];
+        [UIView animateWithDuration:0.2f animations:^{
+            [self setAlpha:disabled?0.2f:1.0f];
+        }];
+    }
 }
 
 @end
@@ -141,17 +156,12 @@
 #pragma mark - Animation/Action Tracking
 - (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
     self.rippleView.center = [touch locationInView:self];
-    
     [UIView animateWithDuration:0.1f animations:^{
         self.rippleBackgroundView.alpha = 1.0f;
-    }];
-    
-    self.rippleView.transform = CGAffineTransformMakeScale(alternative?0.1f:0.5f, alternative?0.1f:0.5f);
-    
+    }]; self.rippleView.transform = CGAffineTransformMakeScale(alternative?0.1f:0.5f, alternative?0.1f:0.5f);
     [UIView animateWithDuration:alternative?1.0f:0.7f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         self.rippleView.transform = CGAffineTransformIdentity;
     } completion:nil];
-    
     return [super beginTrackingWithTouch:touch withEvent:event];
 }
 
