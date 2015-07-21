@@ -42,6 +42,7 @@
 }
 
 - (void)initializeDates {
+    if (self.disabledDates == nil) self.disabledDates = [[NSArray alloc] init];
     dates = [[NSMutableArray alloc] init];
     for (int i = 0; i < 364; i++) {
         [dates addObject:[NSDate daysFromNow:i].defaultTime];
@@ -61,7 +62,7 @@
     [calendarCell setCellDate:[dates objectAtIndex:indexPath.row]];
     [calendarCell setDelegate:self];
     [calendarCell calendarCellSetup];
-    [calendarCell setSelected:[self shouldSelect:calendarCell]];
+    [calendarCell selectCalendarCell:[self shouldSelect:calendarCell]];
     return calendarCell;
 }
 
@@ -117,7 +118,7 @@
 - (void)refreshVisible {
     NSArray *visibleCells = [self.calendarCollectionView visibleCells];
     for (SSCalendarCollectionViewCell *calendarCell in visibleCells)
-        [calendarCell setSelected:[self shouldSelect:calendarCell]];
+        [calendarCell selectCalendarCell:[self shouldSelect:calendarCell]];
 }
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {

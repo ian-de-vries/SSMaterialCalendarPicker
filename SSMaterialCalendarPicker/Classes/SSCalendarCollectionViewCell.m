@@ -63,22 +63,23 @@
     self.selectionIndicator.alpha = 0.0f;
 }
 
-#pragma mark - Hit Extensor
-- (UIView *) hitTest:(CGPoint) point withEvent:(UIEvent *)event {
-    if ([self pointInside:point withEvent:event]) return self.innerButton;
-    return [super hitTest:point withEvent:event];
-}
-
 #pragma mark - SSRippleButton Delegate
 - (void)buttonClicked {
     if (self.delegate != nil)
         [self.delegate cellClicked:self];
 }
 
-- (void)setSelected:(BOOL)selected {
-    [super setSelected:selected];
+#pragma mark - Hit Extensor
+- (UIView *) hitTest:(CGPoint) point withEvent:(UIEvent *)event {
+    if ([self pointInside:point withEvent:event]) return self.innerButton;
+    return [super hitTest:point withEvent:event];
+}
+
+#pragma mark - Selection Control
+- (void)selectCalendarCell:(BOOL)selected {
+    [self setSelected:selected];
     [UIView animateWithDuration:0.3f animations:^{
-        self.selectionIndicator.alpha = selected?1.0f:0.0f;
+        [self.selectionIndicator setAlpha:selected?1.0f:0.0f];
         [self.innerButton setTitleColor:selected?[UIColor whiteColor]:[UIColor blackColor]
                                forState:UIControlStateNormal];
     }];

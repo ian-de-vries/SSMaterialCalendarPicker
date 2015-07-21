@@ -35,6 +35,7 @@
 @property (strong, nonatomic) UIView *selectionIndicator;
 @property (nonatomic) BOOL headerMode;
 
+- (void)selectCalendarCell:(BOOL)selected;
 - (void)calendarCellSetup;
 
 @end
