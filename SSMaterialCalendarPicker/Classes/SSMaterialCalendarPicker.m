@@ -140,6 +140,7 @@
 - (void)checkDisabledRangeWithBackupStartDate:(NSDate *)startBackup andEndDate:(NSDate *)endBackup {
     for (int i = 1; i < [NSDate daysBetween:self.startDate and:self.endDate]; i++) {
         if ([self isDateDisabled:[self.startDate addDays:i]]) {
+            [self showWarning:@"Existem datas bloqueadas nesse intervalo!"];
             self.startDate = startBackup;
             self.endDate = endBackup;
             break;
@@ -174,5 +175,20 @@
     }
 }
 
+#pragma mark - Warning Control
+- (void)showWarning:(NSString *)message {
+    _warningMessage.text = message;
+    [UIView animateWithDuration:0.3f animations:^{
+        _warningViewHeight.constant = 28.0f;
+        [self layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.3f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [UIView animateWithDuration:0.3f animations:^{
+                _warningViewHeight.constant = 0.0f;
+                [self layoutIfNeeded];
+            }];
+        });
+    }];
+}
 
 @end

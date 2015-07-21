@@ -13,7 +13,9 @@
 
 @property (weak, nonatomic) IBOutlet UICollectionView *headerCollectionView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerCollectionViewHeight;
-@property (strong, nonatomic) IBOutlet UICollectionView *calendarCollectionView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *warningViewHeight;
+@property (weak, nonatomic) IBOutlet UILabel *warningMessage;
+@property (weak, nonatomic) IBOutlet UICollectionView *calendarCollectionView;
 @property (strong, nonatomic) NSArray *disabledDates;
 @property (strong, nonatomic) NSDate *startDate;
 @property (strong, nonatomic) NSDate *endDate;

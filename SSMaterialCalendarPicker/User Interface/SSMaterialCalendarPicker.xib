@@ -55,25 +55,53 @@
                         <outlet property="delegate" destination="pJU-z3-znu" id="ycq-sF-UhG"/>
                     </connections>
                 </collectionView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zXt-9Z-pYt" userLabel="Warning View">
+                    <rect key="frame" x="16" y="82" width="568" height="0.0"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mensagem de aviso" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="eFD-Wi-Nu8">
+                            <rect key="frame" x="16" y="0.0" width="536" height="0.0"/>
+                            <animations/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <animations/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="eFD-Wi-Nu8" secondAttribute="trailing" constant="16" id="HRm-uN-o8d"/>
+                        <constraint firstAttribute="bottom" secondItem="eFD-Wi-Nu8" secondAttribute="bottom" id="IZR-d1-JpP"/>
+                        <constraint firstItem="eFD-Wi-Nu8" firstAttribute="leading" secondItem="zXt-9Z-pYt" secondAttribute="leading" constant="16" id="QFC-Ho-xRo"/>
+                        <constraint firstItem="eFD-Wi-Nu8" firstAttribute="top" secondItem="zXt-9Z-pYt" secondAttribute="top" id="gD7-pH-LiP"/>
+                        <constraint firstAttribute="height" id="gyF-g2-neQ"/>
+                    </constraints>
+                </view>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="Ne5-PN-Y6Y" firstAttribute="trailing" secondItem="PIm-Mg-AAY" secondAttribute="trailing" id="66A-D9-PgR"/>
                 <constraint firstAttribute="trailing" secondItem="7I6-d8-2Kj" secondAttribute="trailing" constant="16" id="71K-ZX-RQc"/>
+                <constraint firstItem="zXt-9Z-pYt" firstAttribute="top" secondItem="Ne5-PN-Y6Y" secondAttribute="top" id="KuT-L2-RNE"/>
                 <constraint firstAttribute="trailing" secondItem="PIm-Mg-AAY" secondAttribute="trailing" constant="16" id="Kwc-lC-W81"/>
                 <constraint firstItem="7I6-d8-2Kj" firstAttribute="leading" secondItem="pJU-z3-znu" secondAttribute="leading" constant="16" id="MEZ-Os-MHA"/>
                 <constraint firstAttribute="bottom" secondItem="7I6-d8-2Kj" secondAttribute="bottom" id="Spu-S7-Ltc"/>
                 <constraint firstItem="Ne5-PN-Y6Y" firstAttribute="top" secondItem="PIm-Mg-AAY" secondAttribute="top" id="TT5-hm-Tmk"/>
+                <constraint firstItem="zXt-9Z-pYt" firstAttribute="trailing" secondItem="Ne5-PN-Y6Y" secondAttribute="trailing" id="U6W-La-7W7"/>
+                <constraint firstItem="zXt-9Z-pYt" firstAttribute="bottom" secondItem="Ne5-PN-Y6Y" secondAttribute="bottom" id="bbW-DC-TW2"/>
+                <constraint firstItem="zXt-9Z-pYt" firstAttribute="top" secondItem="Ne5-PN-Y6Y" secondAttribute="bottom" id="gBT-cb-pNB"/>
                 <constraint firstItem="Ne5-PN-Y6Y" firstAttribute="leading" secondItem="PIm-Mg-AAY" secondAttribute="leading" id="j1M-tY-LCY"/>
                 <constraint firstItem="Ne5-PN-Y6Y" firstAttribute="bottom" secondItem="PIm-Mg-AAY" secondAttribute="bottom" constant="-4" id="o3j-gx-18g"/>
                 <constraint firstItem="PIm-Mg-AAY" firstAttribute="top" secondItem="pJU-z3-znu" secondAttribute="top" constant="36" id="rZH-oj-gXE"/>
                 <constraint firstItem="PIm-Mg-AAY" firstAttribute="leading" secondItem="pJU-z3-znu" secondAttribute="leading" constant="16" id="sfL-Z4-lL1"/>
                 <constraint firstItem="7I6-d8-2Kj" firstAttribute="top" secondItem="PIm-Mg-AAY" secondAttribute="bottom" id="uvZ-e9-VJu"/>
+                <constraint firstItem="zXt-9Z-pYt" firstAttribute="leading" secondItem="Ne5-PN-Y6Y" secondAttribute="leading" id="zZB-vo-SEu"/>
             </constraints>
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="TT5-hm-Tmk"/>
+                    <exclude reference="KuT-L2-RNE"/>
+                    <exclude reference="bbW-DC-TW2"/>
                     <exclude reference="Spu-S7-Ltc"/>
                 </mask>
             </variation>
@@ -81,6 +109,8 @@
                 <outlet property="calendarCollectionView" destination="7I6-d8-2Kj" id="7xx-10-vH7"/>
                 <outlet property="headerCollectionView" destination="PIm-Mg-AAY" id="id3-Zo-isf"/>
                 <outlet property="headerCollectionViewHeight" destination="3iK-bD-Fup" id="IdF-ux-qjn"/>
+                <outlet property="warningMessage" destination="eFD-Wi-Nu8" id="qG5-Zr-E23"/>
+                <outlet property="warningViewHeight" destination="gyF-g2-neQ" id="ijf-4p-KOH"/>
             </connections>
             <point key="canvasLocation" x="-57" y="-332"/>
         </view>
