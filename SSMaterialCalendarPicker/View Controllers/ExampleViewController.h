@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SSMaterialCalendarPicker.h"
 
-@interface ExampleViewController : UIViewController
+@interface ExampleViewController : UIViewController <SSMaterialCalendarPickerDelegate>
 
 - (IBAction)showCalendar:(id)sender;
 

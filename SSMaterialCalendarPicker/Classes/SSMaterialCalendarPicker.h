@@ -9,17 +9,24 @@
 #import <UIKit/UIKit.h>
 #import "SSCalendarCollectionViewCell.h"
 
+@protocol SSMaterialCalendarPickerDelegate;
+
 @interface SSMaterialCalendarPicker : UIView <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, SSCalendarCollectionViewCellDelegate>
 
-@property (weak, nonatomic) IBOutlet UICollectionView *headerCollectionView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerCollectionViewHeight;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *warningViewHeight;
-@property (weak, nonatomic) IBOutlet UILabel *warningMessage;
-@property (weak, nonatomic) IBOutlet UICollectionView *calendarCollectionView;
+@property (strong, nonatomic) id<SSMaterialCalendarPickerDelegate> delegate;
 @property (strong, nonatomic) NSArray *disabledDates;
 @property (strong, nonatomic) NSDate *startDate;
 @property (strong, nonatomic) NSDate *endDate;
 
-+ (void)showCalendarOn:(UIView *)view;
++ (void)showCalendarOn:(UIView *)view withDelegate:(id<SSMaterialCalendarPickerDelegate>)delegate;
++ (SSMaterialCalendarPicker *)initCalendarOn:(UIView *)view withDelegate:(id<SSMaterialCalendarPickerDelegate>)delegate;
+- (void)showAnimated;
+- (void)closeAnimated;
+
+@end
+
+@protocol SSMaterialCalendarPickerDelegate <NSObject>
+
+- (void)rangeSelectedWithStartDate:(NSDate *)startDate andEndDate:(NSDate *)endDate;
 
 @end

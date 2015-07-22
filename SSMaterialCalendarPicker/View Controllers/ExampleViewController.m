@@ -9,14 +9,25 @@
 #import "ExampleViewController.h"
 #import "SSMaterialCalendarPicker.h"
 
-@implementation ExampleViewController
+@implementation ExampleViewController {
+    SSMaterialCalendarPicker *datePicker;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self initDatePicker];
+}
+
+- (void)initDatePicker {
+    datePicker = [SSMaterialCalendarPicker initCalendarOn:self.view withDelegate:self];
 }
 
 - (IBAction)showCalendar:(id)sender {
-    [SSMaterialCalendarPicker showCalendarOn:self.view];
+    [datePicker showAnimated];
+}
+
+- (void)rangeSelectedWithStartDate:(NSDate *)startDate andEndDate:(NSDate *)endDate {
+    NSLog(@"startDate: %@\nendDate: %@", startDate, endDate);
 }
 
 @end

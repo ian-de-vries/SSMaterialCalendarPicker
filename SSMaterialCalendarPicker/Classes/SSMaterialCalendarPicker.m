@@ -12,15 +12,41 @@
 #define kCalendarCellIdentifier @"SSCalendarCollectionViewCell"
 #define kCalendarPickerIdentifier @"SSMaterialCalendarPicker"
 
+@interface SSMaterialCalendarPicker ()
+
+@property (weak, nonatomic) IBOutlet UIControl *backgroundView;
+@property (weak, nonatomic) IBOutlet UICollectionView *headerCollectionView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerCollectionViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *warningViewHeight;
+@property (weak, nonatomic) IBOutlet UILabel *warningMessage;
+@property (weak, nonatomic) IBOutlet UICollectionView *calendarCollectionView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pickerViewTopDistance;
+@property (weak, nonatomic) IBOutlet UIView *calendarContainer;
+
+@property (nonatomic) BOOL shouldRemove;
+
+@end
+
 @implementation SSMaterialCalendarPicker {
     NSMutableArray *dates;
 }
 
 #pragma mark - Show Calendar
-+ (void)showCalendarOn:(UIView *)view {
++ (void)showCalendarOn:(UIView *)view withDelegate:(id<SSMaterialCalendarPickerDelegate>)delegate {
     SSMaterialCalendarPicker *picker = [[self alloc] initWithFrame:view.frame];
-    picker.headerCollectionViewHeight.constant = CGRectGetWidth(view.frame)/7;
+    [picker.headerCollectionViewHeight setConstant:CGRectGetWidth(view.frame)/7];
+    [picker setDelegate:delegate];
     [view addSubview:picker];
+    [picker setShouldRemove:YES];
+    [picker showAnimated];
+}
+
++ (SSMaterialCalendarPicker *)initCalendarOn:(UIView *)view withDelegate:(id<SSMaterialCalendarPickerDelegate>)delegate {
+    SSMaterialCalendarPicker *picker = [[self alloc] initWithFrame:view.frame];
+    [picker.headerCollectionViewHeight setConstant:CGRectGetWidth(view.frame)/7];
+    [picker setDelegate:delegate];
+    [view addSubview:picker];
+    return picker;
 }
 
 #pragma mark - Initialization
@@ -32,12 +58,13 @@
                                               owner:self options:nil] objectAtIndex:0];
         [self setFrame:frame];
         [self initializeDates];
-        //        [self addCalendarMask];
+        [self addCalendarMask];
         [self.calendarCollectionView setAllowsMultipleSelection:YES];
         [self.calendarCollectionView setMultipleTouchEnabled:NO];
         [self.calendarCollectionView registerNib:cellNib forCellWithReuseIdentifier:kCalendarCellIdentifier];
         [self.headerCollectionView registerNib:cellNib forCellWithReuseIdentifier:kCalendarCellIdentifier];
         [self setMultipleTouchEnabled:NO];
+        [self.backgroundView addTarget:self action:@selector(closeAnimated) forControlEvents:UIControlEventTouchUpInside];
     } return self;
 }
 
@@ -52,19 +79,55 @@
 }
 
 - (void)addCalendarMask {
-    CAGradientLayer *gradient = [CAGradientLayer layer];
-    
-    gradient.frame = self.calendarCollectionView.bounds;
-    gradient.colors = @[(id)[UIColor blackColor].CGColor, (id)[UIColor clearColor].CGColor];
-    // Here, percentage would be the percentage of the collection view
-    // you wish to blur from the top. This depends on the relative sizes
-    // of your collection view and the header.
-    gradient.locations = @[@0.0, @2.0f];
-    
-    self.calendarCollectionView.layer.mask = gradient;
+    if (self.calendarContainer.layer.mask == nil) {
+        CAGradientLayer *gradient = [CAGradientLayer layer];
+        gradient.frame = self.calendarContainer.bounds;
+        gradient.colors = @[(id)[UIColor blackColor].CGColor, (id)[UIColor clearColor].CGColor];
+        gradient.locations = @[@0.9f, @1.0f];
+        self.calendarContainer.layer.mask = gradient;
+    }
+}
+
+- (void)removeCalendarMask {
+    if (self.calendarContainer.layer.mask != nil)
+        self.calendarContainer.layer.mask = nil;
+}
+
+#pragma mark - Open/Close Calendar
+- (void)showAnimated {
+    self.hidden = NO;
+    [UIView animateWithDuration:0.9f animations:^{
+        self.backgroundView.alpha = 1.0f;
+        self.pickerViewTopDistance.constant = 0.0f;
+        [self layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        [self refreshVisible];
+    }];
+}
+
+- (void)closeAnimated {
+    [UIView animateWithDuration:0.6f animations:^{
+        self.backgroundView.alpha = 0.0f;
+        self.pickerViewTopDistance.constant = -300.0f;
+        [self layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        self.hidden = YES;
+        if (self.shouldRemove)
+            [self removeFromSuperview];
+    }];
 }
 
 #pragma mark - UICollectionView Delegate & DataSource
+- (void)scrollViewDidScroll:(nonnull UIScrollView *)scrollView {
+    float scrollViewHeight = scrollView.frame.size.height;
+    float scrollContentSizeHeight = scrollView.contentSize.height;
+    float scrollOffset = scrollView.contentOffset.y;
+    
+    if (scrollOffset + scrollViewHeight == scrollContentSizeHeight) {
+        [self removeCalendarMask];
+    } else [self addCalendarMask];
+}
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return dates.count;
 }
