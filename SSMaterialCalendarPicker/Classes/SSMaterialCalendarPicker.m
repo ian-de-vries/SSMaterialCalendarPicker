@@ -12,16 +12,25 @@
 #define kCalendarCellIdentifier @"SSCalendarCollectionViewCell"
 #define kCalendarPickerIdentifier @"SSMaterialCalendarPicker"
 
+#define kCalendarHeaderHeight 96.0f
+#define kPickerViewHeight 300.0f
+
+#define kAlphaShow 1.0f
+#define kAlphaHide 0.0f
+
 @interface SSMaterialCalendarPicker ()
 
 @property (weak, nonatomic) IBOutlet UIControl *backgroundView;
+@property (weak, nonatomic) IBOutlet UIView *calendarContainer;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pickerViewTopDistance;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *calendarHeaderTopDistance;
+
 @property (weak, nonatomic) IBOutlet UICollectionView *headerCollectionView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerCollectionViewHeight;
+@property (weak, nonatomic) IBOutlet UICollectionView *calendarCollectionView;
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *warningViewHeight;
 @property (weak, nonatomic) IBOutlet UILabel *warningMessage;
-@property (weak, nonatomic) IBOutlet UICollectionView *calendarCollectionView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pickerViewTopDistance;
-@property (weak, nonatomic) IBOutlet UIView *calendarContainer;
 
 @property (nonatomic) BOOL shouldRemove;
 
@@ -97,8 +106,9 @@
 - (void)showAnimated {
     self.hidden = NO;
     [UIView animateWithDuration:0.9f animations:^{
-        self.backgroundView.alpha = 1.0f;
-        self.pickerViewTopDistance.constant = 0.0f;
+        self.backgroundView.alpha = kAlphaShow;
+        self.pickerViewTopDistance.constant = kCalendarHeaderHeight;
+        self.calendarHeaderTopDistance.constant = 0.0f;
         [self layoutIfNeeded];
     } completion:^(BOOL finished) {
         [self refreshVisible];
@@ -107,8 +117,9 @@
 
 - (void)closeAnimated {
     [UIView animateWithDuration:0.6f animations:^{
-        self.backgroundView.alpha = 0.0f;
-        self.pickerViewTopDistance.constant = -300.0f;
+        self.backgroundView.alpha = kAlphaHide;
+        self.pickerViewTopDistance.constant = -kPickerViewHeight-16;
+        self.calendarHeaderTopDistance.constant = -kCalendarHeaderHeight-16;
         [self layoutIfNeeded];
     } completion:^(BOOL finished) {
         self.hidden = YES;

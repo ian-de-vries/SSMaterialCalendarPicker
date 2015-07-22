@@ -14,13 +14,13 @@
                 <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pNc-Tv-x8A" userLabel="Background View" customClass="UIControl">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <animations/>
-                    <color key="backgroundColor" white="0.66666666669999997" alpha="0.29999999999999999" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.025554032996296883" green="0.015394211746752262" blue="0.0013704809825867414" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gJy-VB-qxI" userLabel="Picker View">
-                    <rect key="frame" x="0.0" y="-300" width="600" height="300"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gJy-VB-qxI" userLabel="Picker View" customClass="SSMaterialStepView">
+                    <rect key="frame" x="0.0" y="-316" width="600" height="300"/>
                     <subviews>
                         <collectionView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="PIm-Mg-AAY">
-                            <rect key="frame" x="16" y="36" width="568" height="50"/>
+                            <rect key="frame" x="16" y="16" width="568" height="50"/>
                             <animations/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
@@ -38,18 +38,18 @@
                             </connections>
                         </collectionView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ne5-PN-Y6Y" userLabel="Header Separator">
-                            <rect key="frame" x="16" y="86" width="568" height="2"/>
+                            <rect key="frame" x="16" y="66" width="568" height="2"/>
                             <animations/>
-                            <color key="backgroundColor" red="0.96078431372549022" green="0.48627450980392156" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="adobeRGB1998"/>
+                            <color key="backgroundColor" red="1" green="0.39996033906936646" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="2" id="0ha-Ky-8Ie"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="77g-zN-96n" userLabel="Calendar Container">
-                            <rect key="frame" x="16" y="92" width="568" height="200"/>
+                            <rect key="frame" x="16" y="72" width="568" height="220"/>
                             <subviews>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="7I6-d8-2Kj">
-                                    <rect key="frame" x="0.0" y="0.0" width="568" height="192"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="568" height="212"/>
                                     <animations/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
@@ -78,12 +78,12 @@
                                 <constraint firstAttribute="bottom" secondItem="7I6-d8-2Kj" secondAttribute="bottom" constant="8" id="1sq-14-V1s"/>
                                 <constraint firstAttribute="trailing" secondItem="7I6-d8-2Kj" secondAttribute="trailing" id="Bo9-IH-E0r"/>
                                 <constraint firstItem="7I6-d8-2Kj" firstAttribute="top" secondItem="77g-zN-96n" secondAttribute="top" id="DEl-DU-WY7"/>
-                                <constraint firstAttribute="height" constant="200" id="EU6-4u-B71"/>
+                                <constraint firstAttribute="height" constant="220" id="EU6-4u-B71"/>
                                 <constraint firstItem="7I6-d8-2Kj" firstAttribute="leading" secondItem="77g-zN-96n" secondAttribute="leading" id="tIO-gI-l6f"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zXt-9Z-pYt" userLabel="Warning View">
-                            <rect key="frame" x="16" y="88" width="568" height="0.0"/>
+                            <rect key="frame" x="16" y="68" width="568" height="0.0"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mensagem de aviso" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="eFD-Wi-Nu8">
                                     <rect key="frame" x="16" y="0.0" width="536" height="0.0"/>
@@ -112,7 +112,7 @@
                         <constraint firstAttribute="trailing" secondItem="zXt-9Z-pYt" secondAttribute="trailing" constant="16" id="Fwe-dl-4gk"/>
                         <constraint firstItem="Ne5-PN-Y6Y" firstAttribute="leading" secondItem="gJy-VB-qxI" secondAttribute="leading" constant="16" id="Ldq-6F-evM"/>
                         <constraint firstAttribute="trailing" secondItem="Ne5-PN-Y6Y" secondAttribute="trailing" constant="16" id="Okp-uY-v05"/>
-                        <constraint firstItem="PIm-Mg-AAY" firstAttribute="top" secondItem="gJy-VB-qxI" secondAttribute="top" constant="36" id="OzX-ai-TQv"/>
+                        <constraint firstItem="PIm-Mg-AAY" firstAttribute="top" secondItem="gJy-VB-qxI" secondAttribute="top" constant="16" id="OzX-ai-TQv"/>
                         <constraint firstAttribute="trailing" secondItem="77g-zN-96n" secondAttribute="trailing" constant="16" id="SN3-he-qvm"/>
                         <constraint firstItem="77g-zN-96n" firstAttribute="leading" secondItem="gJy-VB-qxI" secondAttribute="leading" constant="16" id="ZCc-Hq-emQ"/>
                         <constraint firstItem="PIm-Mg-AAY" firstAttribute="leading" secondItem="gJy-VB-qxI" secondAttribute="leading" constant="16" id="d7E-dK-LzO"/>
@@ -128,22 +128,55 @@
                         </mask>
                     </variation>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lsM-Pc-xQm" userLabel="Calendar Header" customClass="SSMaterialStepView">
+                    <rect key="frame" x="0.0" y="-112" width="600" height="96"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="suf-Nq-L2F" userLabel="Status Bar Header">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="20"/>
+                            <animations/>
+                            <color key="backgroundColor" red="1" green="0.39996033906936646" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="vbe-mu-5yA"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <animations/>
+                    <color key="backgroundColor" red="1" green="0.52434456348419189" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="suf-Nq-L2F" firstAttribute="top" secondItem="lsM-Pc-xQm" secondAttribute="top" id="NhE-UX-QVk"/>
+                        <constraint firstItem="suf-Nq-L2F" firstAttribute="leading" secondItem="lsM-Pc-xQm" secondAttribute="leading" id="Pe4-Qs-bkg"/>
+                        <constraint firstAttribute="trailing" secondItem="suf-Nq-L2F" secondAttribute="trailing" id="u20-fZ-Ee8"/>
+                        <constraint firstAttribute="height" constant="96" id="zRV-sS-ZiZ"/>
+                    </constraints>
+                </view>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="pNc-Tv-x8A" firstAttribute="leading" secondItem="pJU-z3-znu" secondAttribute="leading" id="D15-8R-r5G"/>
                 <constraint firstItem="gJy-VB-qxI" firstAttribute="leading" secondItem="pJU-z3-znu" secondAttribute="leading" id="HNS-Cb-SVf"/>
+                <constraint firstAttribute="trailing" secondItem="lsM-Pc-xQm" secondAttribute="trailing" id="HTr-F5-A7D"/>
+                <constraint firstItem="lsM-Pc-xQm" firstAttribute="top" secondItem="pJU-z3-znu" secondAttribute="top" constant="-112" id="L67-Ye-PCF"/>
+                <constraint firstItem="lsM-Pc-xQm" firstAttribute="top" secondItem="pJU-z3-znu" secondAttribute="top" constant="-800" id="MmH-be-f04"/>
+                <constraint firstItem="gJy-VB-qxI" firstAttribute="top" secondItem="lsM-Pc-xQm" secondAttribute="bottom" id="VIA-PP-ue0"/>
                 <constraint firstItem="pNc-Tv-x8A" firstAttribute="top" secondItem="pJU-z3-znu" secondAttribute="top" id="XAb-Wp-nrH"/>
                 <constraint firstAttribute="bottom" secondItem="pNc-Tv-x8A" secondAttribute="bottom" id="bxr-v8-J47"/>
-                <constraint firstItem="gJy-VB-qxI" firstAttribute="top" secondItem="pJU-z3-znu" secondAttribute="top" constant="-300" id="pgY-LW-ctT"/>
+                <constraint firstItem="lsM-Pc-xQm" firstAttribute="leading" secondItem="pJU-z3-znu" secondAttribute="leading" id="ebg-S3-kOd"/>
+                <constraint firstItem="gJy-VB-qxI" firstAttribute="top" secondItem="pJU-z3-znu" secondAttribute="top" constant="-316" id="pgY-LW-ctT"/>
                 <constraint firstAttribute="trailing" secondItem="pNc-Tv-x8A" secondAttribute="trailing" id="trt-Ph-CMR"/>
                 <constraint firstAttribute="trailing" secondItem="gJy-VB-qxI" secondAttribute="trailing" id="vjC-s2-8Zy"/>
             </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="MmH-be-f04"/>
+                    <exclude reference="VIA-PP-ue0"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="backgroundView" destination="pNc-Tv-x8A" id="X7g-Hx-aXv"/>
                 <outlet property="calendarCollectionView" destination="7I6-d8-2Kj" id="7xx-10-vH7"/>
                 <outlet property="calendarContainer" destination="77g-zN-96n" id="6Zc-dr-g7j"/>
+                <outlet property="calendarHeaderTopDistance" destination="L67-Ye-PCF" id="8uj-5q-NHd"/>
                 <outlet property="headerCollectionView" destination="PIm-Mg-AAY" id="id3-Zo-isf"/>
                 <outlet property="headerCollectionViewHeight" destination="3iK-bD-Fup" id="IdF-ux-qjn"/>
                 <outlet property="pickerViewTopDistance" destination="pgY-LW-ctT" id="zTP-J9-Z4X"/>

@@ -12,6 +12,7 @@
 		EE4B8B6F1B5ED50B005ACB3C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE4B8B6D1B5ED50B005ACB3C /* Main.storyboard */; };
 		EE4B8B711B5ED575005ACB3C /* SSMaterialCalendarPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE4B8B701B5ED575005ACB3C /* SSMaterialCalendarPicker.xib */; };
 		EE4B8B731B5EDF41005ACB3C /* SSCalendarCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE4B8B721B5EDF41005ACB3C /* SSCalendarCollectionViewCell.xib */; };
+		EE89DD6B1B602F1300E29E3A /* SSMaterialStepView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE89DD6A1B602F1300E29E3A /* SSMaterialStepView.m */; };
 		EEE8163F1B585EE5005ACEA6 /* SSCalendarCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE8162E1B585EE5005ACEA6 /* SSCalendarCollectionViewCell.m */; };
 		EEE816401B585EE5005ACEA6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEE816311B585EE5005ACEA6 /* Images.xcassets */; };
 		EEE816411B585EE5005ACEA6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE816341B585EE5005ACEA6 /* AppDelegate.m */; };
@@ -29,6 +30,8 @@
 		EE4B8B6E1B5ED50B005ACB3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EE4B8B701B5ED575005ACB3C /* SSMaterialCalendarPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SSMaterialCalendarPicker.xib; path = "../User Interface/SSMaterialCalendarPicker.xib"; sourceTree = "<group>"; };
 		EE4B8B721B5EDF41005ACB3C /* SSCalendarCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSCalendarCollectionViewCell.xib; sourceTree = "<group>"; };
+		EE89DD691B602F1300E29E3A /* SSMaterialStepView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSMaterialStepView.h; path = "Custom Views/SSMaterialStepView.h"; sourceTree = "<group>"; };
+		EE89DD6A1B602F1300E29E3A /* SSMaterialStepView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSMaterialStepView.m; path = "Custom Views/SSMaterialStepView.m"; sourceTree = "<group>"; };
 		EEE8162D1B585EE5005ACEA6 /* SSCalendarCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCalendarCollectionViewCell.h; sourceTree = "<group>"; };
 		EEE8162E1B585EE5005ACEA6 /* SSCalendarCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCalendarCollectionViewCell.m; sourceTree = "<group>"; };
 		EEE816311B585EE5005ACEA6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -53,6 +56,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EE89DD681B602EF100E29E3A /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				EE89DD691B602F1300E29E3A /* SSMaterialStepView.h */,
+				EE89DD6A1B602F1300E29E3A /* SSMaterialStepView.m */,
+			);
+			name = "Custom Views";
+			sourceTree = "<group>";
+		};
 		EEC824C51B5717F2003C90C1 = {
 			isa = PBXGroup;
 			children = (
@@ -73,6 +85,7 @@
 		EEE8162B1B585EE5005ACEA6 /* SSMaterialCalendarPicker */ = {
 			isa = PBXGroup;
 			children = (
+				EE89DD681B602EF100E29E3A /* Custom Views */,
 				EEDCE7241B599A670082ABFC /* Custom Categories */,
 				EEE8162C1B585EE5005ACEA6 /* Classes */,
 				EEE8162F1B585EE5005ACEA6 /* Resources */,
@@ -228,6 +241,7 @@
 				EEE816461B585EE5005ACEA6 /* ExampleViewController.m in Sources */,
 				EE4B8B691B5ED299005ACB3C /* SSMaterialCalendarPicker.m in Sources */,
 				EEE8163F1B585EE5005ACEA6 /* SSCalendarCollectionViewCell.m in Sources */,
+				EE89DD6B1B602F1300E29E3A /* SSMaterialStepView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
