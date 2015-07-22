@@ -46,9 +46,17 @@
     [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"pt_BR"]];
     [formatter setDateFormat:@"EEEE"];
     NSString *weekday = [formatter stringFromDate:self.cellDate].capitalizedString;
+    [formatter setDateFormat:@"MMMM"];
+    NSString *month = [formatter stringFromDate:self.cellDate].capitalizedString;
     
     self.innerButton = [[SSRippleButton alloc] initWithFrame:buttonFrame];
+    [self.innerButton.titleLabel setNumberOfLines:2];
+    [self.innerButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
     [self.innerButton setTitle:[NSString stringWithFormat:@"%02d", (int) components.day] forState:UIControlStateNormal];
+    if (components.day == 1) {
+        NSString *title = [NSString stringWithFormat:@"%02d\n%@", (int) components.day, [month substringToIndex:3]];
+        [self.innerButton setTitle:title forState:UIControlStateNormal];
+    }
     if (self.headerMode) [self.innerButton setTitle:[weekday substringToIndex:3] forState:UIControlStateNormal];
     [self.innerButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
     [self.innerButton.titleLabel setFont:[UIFont systemFontOfSize:13.0f]];
@@ -153,7 +161,7 @@
 - (void)setupRippleBackgroundView {
     if (self.rippleBackgroundView == nil) {
         CGFloat size = CGRectGetWidth(self.frame);
-        
+
         self.rippleBackgroundView = [[UIView alloc] init];
         self.rippleBackgroundView.backgroundColor = kDefaultRippleColor;
         self.rippleBackgroundView.frame = CGRectMake(0.0f, 0.0f, size, size);

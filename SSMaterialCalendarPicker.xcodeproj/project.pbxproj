@@ -16,7 +16,6 @@
 		EEE8163F1B585EE5005ACEA6 /* SSCalendarCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE8162E1B585EE5005ACEA6 /* SSCalendarCollectionViewCell.m */; };
 		EEE816401B585EE5005ACEA6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEE816311B585EE5005ACEA6 /* Images.xcassets */; };
 		EEE816411B585EE5005ACEA6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE816341B585EE5005ACEA6 /* AppDelegate.m */; };
-		EEE816421B585EE5005ACEA6 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEE816351B585EE5005ACEA6 /* Info.plist */; };
 		EEE816431B585EE5005ACEA6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE816361B585EE5005ACEA6 /* main.m */; };
 		EEE816441B585EE5005ACEA6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEE816381B585EE5005ACEA6 /* LaunchScreen.xib */; };
 		EEE816461B585EE5005ACEA6 /* ExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE8163E1B585EE5005ACEA6 /* ExampleViewController.m */; };
@@ -188,7 +187,7 @@
 		EEC824C61B5717F2003C90C1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = "Shoryuken Solutions";
 				TargetAttributes = {
 					EEC824CD1B5717F2003C90C1 = {
@@ -219,7 +218,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EEE816421B585EE5005ACEA6 /* Info.plist in Resources */,
 				EE4B8B6F1B5ED50B005ACB3C /* Main.storyboard in Resources */,
 				EE4B8B711B5ED575005ACB3C /* SSMaterialCalendarPicker.xib in Resources */,
 				EEE816441B585EE5005ACEA6 /* LaunchScreen.xib in Resources */,
