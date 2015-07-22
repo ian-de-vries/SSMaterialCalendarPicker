@@ -43,11 +43,11 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"pt_BR"]];
     [formatter setDateFormat:@"EEEE"];
-    NSString *weekday = [formatter stringFromDate:self.cellDate];
+    NSString *weekday = [formatter stringFromDate:self.cellDate].capitalizedString;
     
     self.innerButton = [[SSRippleButton alloc] initWithFrame:buttonFrame];
     [self.innerButton setTitle:[NSString stringWithFormat:@"%02d", (int) components.day] forState:UIControlStateNormal];
-    if (self.headerMode) [self.innerButton setTitle:[weekday substringToIndex:1] forState:UIControlStateNormal];
+    if (self.headerMode) [self.innerButton setTitle:[weekday substringToIndex:3] forState:UIControlStateNormal];
     [self.innerButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
     [self.innerButton.titleLabel setFont:[UIFont systemFontOfSize:13.0f]];
     if (self.headerMode || [self.cellDate.defaultTime compare:[NSDate date].defaultTime] == NSOrderedSame)

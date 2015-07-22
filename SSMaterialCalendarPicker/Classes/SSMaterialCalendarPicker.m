@@ -32,6 +32,7 @@
                                               owner:self options:nil] objectAtIndex:0];
         [self setFrame:frame];
         [self initializeDates];
+        //        [self addCalendarMask];
         [self.calendarCollectionView setAllowsMultipleSelection:YES];
         [self.calendarCollectionView setMultipleTouchEnabled:NO];
         [self.calendarCollectionView registerNib:cellNib forCellWithReuseIdentifier:kCalendarCellIdentifier];
@@ -48,6 +49,19 @@
         [dates addObject:[NSDate daysFromNow:i].defaultTime];
     } self.startDate = self.startDate.defaultTime;
     self.endDate = self.endDate.defaultTime;
+}
+
+- (void)addCalendarMask {
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    
+    gradient.frame = self.calendarCollectionView.bounds;
+    gradient.colors = @[(id)[UIColor blackColor].CGColor, (id)[UIColor clearColor].CGColor];
+    // Here, percentage would be the percentage of the collection view
+    // you wish to blur from the top. This depends on the relative sizes
+    // of your collection view and the header.
+    gradient.locations = @[@0.0, @2.0f];
+    
+    self.calendarCollectionView.layer.mask = gradient;
 }
 
 #pragma mark - UICollectionView Delegate & DataSource
