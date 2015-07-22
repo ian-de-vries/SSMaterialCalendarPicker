@@ -105,7 +105,7 @@
 #pragma mark - Open/Close Calendar
 - (void)showAnimated {
     self.hidden = NO;
-    [UIView animateWithDuration:0.9f animations:^{
+    [UIView animateWithDuration:0.6f animations:^{
         self.backgroundView.alpha = kAlphaShow;
         self.pickerViewTopDistance.constant = kCalendarHeaderHeight;
         self.calendarHeaderTopDistance.constant = 0.0f;

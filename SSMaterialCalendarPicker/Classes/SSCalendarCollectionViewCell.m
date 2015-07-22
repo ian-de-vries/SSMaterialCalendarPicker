@@ -108,6 +108,16 @@
 }
 
 #pragma mark - Initialization
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self setupRipple];
+        [self setBackgroundColor:[UIColor clearColor]];
+        [self.layer setCornerRadius:CGRectGetWidth(self.frame)/2];
+        [self setClipsToBounds:YES];
+    } return self;
+}
+
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
@@ -157,6 +167,8 @@
 #pragma mark - Animation/Action Tracking
 - (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
     self.rippleView.center = [touch locationInView:self];
+    if (self.shouldChangeColorOnClick)
+        [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [UIView animateWithDuration:0.1f animations:^{
         self.rippleBackgroundView.alpha = 1.0f;
     }]; self.rippleView.transform = CGAffineTransformMakeScale(alternative?0.1f:0.5f, alternative?0.1f:0.5f);
@@ -181,6 +193,8 @@
 }
 
 - (void)animateToNormal {
+    if (self.shouldChangeColorOnClick)
+        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [UIView animateWithDuration:0.1f animations:^{
         self.rippleBackgroundView.alpha = 1.0f;
     } completion:^(BOOL finished) {

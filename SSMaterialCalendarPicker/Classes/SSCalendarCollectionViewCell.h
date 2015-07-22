@@ -44,6 +44,8 @@
 
 @interface SSRippleButton : UIButton
 
+@property (nonatomic) IBInspectable BOOL shouldChangeColorOnClick;
+
 #pragma mark - Delegate
 @property (strong, nonatomic) id<SSRippleButtonDelegate> delegate;
 
