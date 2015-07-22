@@ -128,6 +128,17 @@
     }];
 }
 
+#pragma mark - Date Selected
+- (IBAction)okClicked {
+    if (self.startDate != nil && self.endDate != nil)
+        [self.delegate rangeSelectedWithStartDate:self.startDate andEndDate:self.endDate];
+    else if (self.startDate != nil && self.endDate == nil)
+         [self.delegate rangeSelectedWithStartDate:self.startDate andEndDate:self.startDate];
+    else if (self.startDate == nil && self.endDate != nil)
+        [self.delegate rangeSelectedWithStartDate:self.endDate andEndDate:self.endDate];
+    [self closeAnimated];
+}
+
 #pragma mark - UICollectionView Delegate & DataSource
 - (void)scrollViewDidScroll:(nonnull UIScrollView *)scrollView {
     float scrollViewHeight = scrollView.frame.size.height;

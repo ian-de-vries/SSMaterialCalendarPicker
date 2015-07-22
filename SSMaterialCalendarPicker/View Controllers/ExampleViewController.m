@@ -27,7 +27,11 @@
 }
 
 - (void)rangeSelectedWithStartDate:(NSDate *)startDate andEndDate:(NSDate *)endDate {
-    NSLog(@"startDate: %@\nendDate: %@", startDate, endDate);
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"pt_BR"]];
+    [formatter setDateFormat:@"EEEE, dd 'de' MMMM 'de' YYYY"];
+    [self.startDateLabel setText:[NSString stringWithFormat:@"Entrada: %@", [formatter stringFromDate:startDate]]];
+    [self.endDateLabel setText:[NSString stringWithFormat:@"Saída: %@", [formatter stringFromDate:endDate]]];
 }
 
 @end

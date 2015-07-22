@@ -11,6 +11,9 @@
 
 @interface ExampleViewController : UIViewController <SSMaterialCalendarPickerDelegate>
 
+@property (weak, nonatomic) IBOutlet UILabel *startDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *endDateLabel;
+
 - (IBAction)showCalendar:(id)sender;
 
 @end

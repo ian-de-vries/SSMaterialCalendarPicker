@@ -160,6 +160,9 @@
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="shouldChangeColorOnClick" value="YES"/>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="okClicked" destination="pJU-z3-znu" eventType="touchUpInside" id="k2q-RN-nH6"/>
+                            </connections>
                         </button>
                     </subviews>
                     <animations/>
