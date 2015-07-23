@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *pickerViewTopDistance;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *calendarHeaderTopDistance;
 
+@property (weak, nonatomic) IBOutlet UILabel *monthLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView *headerCollectionView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerCollectionViewHeight;
 @property (weak, nonatomic) IBOutlet UICollectionView *calendarCollectionView;
@@ -85,6 +86,7 @@
         [dates addObject:[NSDate daysFromNow:i].defaultTime];
     } self.startDate = self.startDate.defaultTime;
     self.endDate = self.endDate.defaultTime;
+    [self setMonthFromDate:[NSDate date]];
 }
 
 - (void)addCalendarMask {
@@ -133,7 +135,7 @@
     if (self.startDate != nil && self.endDate != nil)
         [self.delegate rangeSelectedWithStartDate:self.startDate andEndDate:self.endDate];
     else if (self.startDate != nil && self.endDate == nil)
-         [self.delegate rangeSelectedWithStartDate:self.startDate andEndDate:self.startDate];
+        [self.delegate rangeSelectedWithStartDate:self.startDate andEndDate:self.startDate];
     else if (self.startDate == nil && self.endDate != nil)
         [self.delegate rangeSelectedWithStartDate:self.endDate andEndDate:self.endDate];
     [self closeAnimated];
@@ -148,6 +150,8 @@
     if (scrollOffset + scrollViewHeight == scrollContentSizeHeight) {
         [self removeCalendarMask];
     } else [self addCalendarMask];
+    
+    [self checkVisibleMonth];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -198,6 +202,45 @@
 - (CGSize)collectionView:(nonnull UICollectionView *)collectionView layout:(nonnull UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     CGFloat size = CGRectGetWidth(collectionView.frame)/7;
     return CGSizeMake(size, size);
+}
+
+#pragma mark - Month Control
+- (void)setMonthFromDate:(NSDate *)date {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MMMM, YYYY"];
+    [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"pt_BR"]];
+    [self.monthLabel setText:[formatter stringFromDate:date].capitalizedString];
+}
+
+- (void)checkVisibleMonth {
+    NSArray *indexPaths = [self.calendarCollectionView.indexPathsForVisibleItems
+                           sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+                               NSInteger r1 = [obj1 row];
+                               NSInteger r2 = [obj2 row];
+                               if (r1 > r2) return (NSComparisonResult) NSOrderedDescending;
+                               if (r1 < r2) return (NSComparisonResult) NSOrderedAscending;
+                               return (NSComparisonResult) NSOrderedSame;
+                           }];
+    BOOL monthChanged = NO;
+    for (NSIndexPath *indexPath in [indexPaths subarrayWithRange:NSMakeRange(0, 7)]) {
+        SSCalendarCollectionViewCell *cell = (SSCalendarCollectionViewCell *)[self.calendarCollectionView cellForItemAtIndexPath:indexPath];
+        NSInteger day = [[NSCalendar currentCalendar] component:NSCalendarUnitDay fromDate:cell.cellDate];
+        if (day == 1) {
+            [self setMonthFromDate:cell.cellDate];
+            monthChanged = YES; break;
+        }
+    } if (!monthChanged) {
+        SSCalendarCollectionViewCell *cell = (SSCalendarCollectionViewCell *)[self.calendarCollectionView cellForItemAtIndexPath:indexPaths.firstObject];
+        [self setMonthFromDate:cell.cellDate];
+    }
+}
+
+- (IBAction)previousMonthButtonTapped:(id)sender {
+    
+}
+
+- (IBAction)nextMonthButtonTapped:(id)sender {
+    
 }
 
 #pragma mark - Calendar Cells Control

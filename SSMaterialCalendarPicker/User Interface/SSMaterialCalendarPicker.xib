@@ -33,6 +33,9 @@
                                     <state key="normal" title="↑">
                                         <color key="titleColor" red="1" green="0.3306756616" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <connections>
+                                        <action selector="previousMonthButtonTapped:" destination="pJU-z3-znu" eventType="touchUpInside" id="JoT-1N-ZDz"/>
+                                    </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mês do Calendário" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tow-iu-fzX">
                                     <rect key="frame" x="48" y="0.0" width="472" height="40"/>
@@ -42,7 +45,7 @@
                                         <constraint firstAttribute="height" constant="20" id="A1N-k8-Ffy"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                     <variation key="default">
                                         <mask key="constraints">
@@ -61,6 +64,9 @@
                                     <state key="normal" title="↓">
                                         <color key="titleColor" red="1" green="0.3306756616" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <connections>
+                                        <action selector="nextMonthButtonTapped:" destination="pJU-z3-znu" eventType="touchUpInside" id="JnZ-jy-qKg"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <animations/>
@@ -287,6 +293,7 @@
                 <outlet property="calendarHeaderTopDistance" destination="L67-Ye-PCF" id="8uj-5q-NHd"/>
                 <outlet property="headerCollectionView" destination="PIm-Mg-AAY" id="id3-Zo-isf"/>
                 <outlet property="headerCollectionViewHeight" destination="3iK-bD-Fup" id="IdF-ux-qjn"/>
+                <outlet property="monthLabel" destination="tow-iu-fzX" id="Mgg-nr-Rcc"/>
                 <outlet property="pickerViewTopDistance" destination="pgY-LW-ctT" id="zTP-J9-Z4X"/>
                 <outlet property="warningMessage" destination="eFD-Wi-Nu8" id="qG5-Zr-E23"/>
                 <outlet property="warningViewHeight" destination="gyF-g2-neQ" id="ijf-4p-KOH"/>
