@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8152.3" systemVersion="15A216g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="eo7-la-lvS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8152.3" systemVersion="15A216g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dZA-gm-0Ya">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8124.4"/>
     </dependencies>
     <scenes>
-        <!--Example View Controller-->
+        <!--Navigation Controller-->
+        <scene sceneID="v7j-lG-XMC">
+            <objects>
+                <navigationController id="dZA-gm-0Ya" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ASR-bf-iwt">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="eo7-la-lvS" kind="relationship" relationship="rootViewController" id="Vvx-W0-ykc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UXo-8K-HzZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-894" y="873"/>
+        </scene>
+        <!--Exemplo-->
         <scene sceneID="4hC-Lt-AHD">
             <objects>
-                <viewController id="eo7-la-lvS" customClass="ExampleViewController" sceneMemberID="viewController">
+                <viewController title="Exemplo" id="eo7-la-lvS" customClass="ExampleViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="j5L-Rl-8Ua"/>
                         <viewControllerLayoutGuide type="bottom" id="0j3-hn-whh"/>
@@ -88,6 +105,7 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" title="Exemplo" id="tKt-zb-puF"/>
                     <connections>
                         <outlet property="endDateLabel" destination="et5-sx-Q7S" id="wux-4g-4Qo"/>
                         <outlet property="startDateLabel" destination="HTY-LD-a0o" id="Bgh-DO-U5V"/>
@@ -95,7 +113,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x4h-YA-SNd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="334" y="538"/>
+            <point key="canvasLocation" x="-214" y="873"/>
         </scene>
     </scenes>
 </document>

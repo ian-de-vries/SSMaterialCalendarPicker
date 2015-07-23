@@ -240,6 +240,9 @@
             if (cell == nil) return;
             NSInteger day = [[NSCalendar currentCalendar] component:NSCalendarUnitDay fromDate:cell.cellDate];
             if (day == 1) {
+              [self setMonthFromDate:cell.cellDate];
+                monthChanged = YES;
+            } if (cell.cellDate == [NSDate date].firstDayOfTheMonth.defaultTime) {
                 [self setMonthFromDate:cell.cellDate];
                 monthChanged = YES; break;
             }
