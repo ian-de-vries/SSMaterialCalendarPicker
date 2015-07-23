@@ -214,7 +214,7 @@
                                 <constraint firstAttribute="height" constant="20" id="vbe-mu-5yA"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selecione o Período" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="MZs-fU-9vy">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select an Interval" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="MZs-fU-9vy">
                             <rect key="frame" x="16" y="36" width="476" height="44"/>
                             <animations/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
@@ -297,6 +297,7 @@
                 <outlet property="calendarCollectionView" destination="7I6-d8-2Kj" id="7xx-10-vH7"/>
                 <outlet property="calendarContainer" destination="77g-zN-96n" id="6Zc-dr-g7j"/>
                 <outlet property="calendarHeaderTopDistance" destination="L67-Ye-PCF" id="8uj-5q-NHd"/>
+                <outlet property="calendarTitleLabel" destination="MZs-fU-9vy" id="285-09-Fya"/>
                 <outlet property="headerCollectionView" destination="PIm-Mg-AAY" id="id3-Zo-isf"/>
                 <outlet property="headerCollectionViewHeight" destination="3iK-bD-Fup" id="IdF-ux-qjn"/>
                 <outlet property="monthLabel" destination="tow-iu-fzX" id="Mgg-nr-Rcc"/>

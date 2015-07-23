@@ -15,7 +15,8 @@
 #define kDefaultSelectedColor [UIColor colorWithRed:255/255.0f green:87/255.0f blue:34/255.0f alpha:1.0f]
 //#define kDefaultSelectedColor [UIColor colorWithRed:255/255.0f green:152/255.0f blue:0/255.0f alpha:1.0f]
 
-
+#pragma mark -
+#pragma mark -
 @implementation SSCalendarCollectionViewCell
 
 #pragma mark - Initialization
@@ -26,9 +27,8 @@
 }
 
 - (void)clearSubviews {
-    for (UIView *subview in self.subviews) {
+    for (UIView *subview in self.subviews)
         [subview removeFromSuperview];
-    }
 }
 
 #pragma mark Visual Elements Initialization
@@ -40,14 +40,13 @@
     
     if (self.cellDate == nil) self.cellDate = [NSDate date];
     NSDateComponents *components = [[NSCalendar currentCalendar]
-                                    components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitWeekday
+                                    components:NSCalendarUnitDay | NSCalendarUnitMonth |
+                                    NSCalendarUnitYear | NSCalendarUnitWeekday
                                     fromDate:self.cellDate];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"pt_BR"]];
-    [formatter setDateFormat:@"EEEE"];
-    NSString *weekday = [formatter stringFromDate:self.cellDate].capitalizedString;
-    [formatter setDateFormat:@"MMMM"];
-    NSString *month = [formatter stringFromDate:self.cellDate].capitalizedString;
+    if (self.forceLocale != nil) [formatter setLocale:self.forceLocale];
+    [formatter setDateFormat:@"EEEE"]; NSString *weekday = [formatter stringFromDate:self.cellDate].capitalizedString;
+    [formatter setDateFormat:@"MMMM"]; NSString *month = [formatter stringFromDate:self.cellDate].capitalizedString;
     
     self.innerButton = [[SSRippleButton alloc] initWithFrame:buttonFrame];
     [self.innerButton.titleLabel setNumberOfLines:2];
@@ -68,7 +67,7 @@
 
 - (void)setupSelectionIndicator {
     self.selectionIndicator = [[UIView alloc] initWithFrame:self.innerButton.frame];
-    self.selectionIndicator.backgroundColor = kDefaultSelectedColor;
+    self.selectionIndicator.backgroundColor = self.primaryColor == nil? kDefaultSelectedColor:self.primaryColor;
     self.selectionIndicator.layer.cornerRadius = CGRectGetWidth(self.selectionIndicator.frame)/2;
     self.selectionIndicator.alpha = 0.0f;
     

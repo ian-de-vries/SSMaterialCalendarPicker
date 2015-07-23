@@ -12,7 +12,6 @@
 @class SSRippleButton;
 
 #pragma mark - Protocols
-
 @protocol SSCalendarCollectionViewCellDelegate <NSObject>
 
 - (void)cellClicked:(SSCalendarCollectionViewCell *)cell;
@@ -26,18 +25,27 @@
 @end
 
 #pragma mark - Classes
-
+#pragma mark - Calendar Cell
 @interface SSCalendarCollectionViewCell : UICollectionViewCell <SSRippleButtonDelegate>
 
+#pragma mark Customization:
+@property (strong, nonatomic) NSLocale *forceLocale;
+@property (strong, nonatomic) UIColor *primaryColor;
+@property (strong, nonatomic) UIColor *secondaryColor;
+
+#pragma mark Interaction Properties:
 @property (strong, nonatomic) id<SSCalendarCollectionViewCellDelegate> delegate;
 @property (strong, nonatomic) NSDate *cellDate;
 
+#pragma mark Visual Cues:
 @property (strong, nonatomic) SSRippleButton *innerButton;
 @property (strong, nonatomic) UIView *selectionIndicator;
 
+#pragma mark Modes:
 @property (nonatomic) BOOL isDisabled;
 @property (nonatomic) BOOL headerMode;
 
+#pragma mark Interaction & Effects
 - (void)selectCalendarCell:(BOOL)selected;
 - (void)disableCalendarCell:(BOOL)disabled;
 - (void)calendarCellSetup;
@@ -45,14 +53,15 @@
 
 @end
 
+#pragma mark - Ripple Button
 @interface SSRippleButton : UIButton
 
 @property (nonatomic) IBInspectable BOOL shouldChangeColorOnClick;
 
-#pragma mark - Delegate
+#pragma mark Interaction Properties:
 @property (strong, nonatomic) id<SSRippleButtonDelegate> delegate;
 
-#pragma mark - Ripple
+#pragma mark Ripple Effect:
 @property (strong, nonatomic) UIView *rippleBackgroundView;
 @property (strong, nonatomic) UIView *rippleView;
 

@@ -20,24 +20,32 @@
 
 @interface SSMaterialCalendarPicker ()
 
+#pragma mark - Private Outlets
+#pragma mark Needed for Animations
 @property (weak, nonatomic) IBOutlet UIControl *backgroundView;
 @property (weak, nonatomic) IBOutlet UIView *calendarContainer;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *pickerViewTopDistance;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *calendarHeaderTopDistance;
 
+#pragma mark Data Source & Ever-changing Content
 @property (weak, nonatomic) IBOutlet UILabel *monthLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView *headerCollectionView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerCollectionViewHeight;
 @property (weak, nonatomic) IBOutlet UICollectionView *calendarCollectionView;
 
+#pragma mark Warnings
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *warningViewHeight;
 @property (weak, nonatomic) IBOutlet UILabel *warningMessage;
 
+#pragma mark Show/Init Control
 @property (nonatomic) BOOL shouldRemove;
 
 @end
 
+#pragma mark -
+#pragma mark -
 @implementation SSMaterialCalendarPicker {
+#pragma mark - Control Variables
     NSMutableArray *dates;
     NSDate *selectedMonth;
     BOOL runningScrollAnimation;
@@ -107,6 +115,11 @@
         self.calendarContainer.layer.mask = nil;
 }
 
+- (void)setCalendarTitle:(NSString *)newCalendarTitle {
+    _calendarTitle = newCalendarTitle;
+    self.calendarTitleLabel.text = _calendarTitle;
+}
+
 #pragma mark - Open/Close Calendar
 - (void)showAnimated {
     self.hidden = NO;
@@ -172,6 +185,9 @@
     [collectionView dequeueReusableCellWithReuseIdentifier:kCalendarCellIdentifier forIndexPath:indexPath];
     if (collectionView == self.headerCollectionView) [calendarCell setHeaderMode:YES];
     [calendarCell setCellDate:[dates objectAtIndex:indexPath.row]];
+    [calendarCell setPrimaryColor:self.primaryColor];
+    [calendarCell setSecondaryColor:self.secondaryColor];
+    [calendarCell setForceLocale:self.forceLocale];
     [calendarCell setDelegate:self];
     [calendarCell calendarCellSetup];
     [calendarCell selectCalendarCell:[self shouldSelect:calendarCell]];
@@ -223,7 +239,7 @@
 - (void)setMonthFromDate:(NSDate *)date {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"MMMM, YYYY"];
-    [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"pt_BR"]];
+    if (self.forceLocale != nil) [formatter setLocale:self.forceLocale];
     [self.monthLabel setText:[formatter stringFromDate:date].capitalizedString];
     selectedMonth = date;
 }
@@ -338,7 +354,7 @@
 - (void)checkDisabledRangeWithBackupStartDate:(NSDate *)startBackup andEndDate:(NSDate *)endBackup {
     for (int i = 1; i < [NSDate daysBetween:self.startDate and:self.endDate]; i++) {
         if ([self isDateDisabled:[self.startDate addDays:i]]) {
-            [self showWarning:@"Anfitrião indisponível neste período!"];
+            [self showWarning:self.disabledIntervalWarning == nil? @"WARNING: Interval unavailable!":self.disabledIntervalWarning];
             self.startDate = startBackup;
             self.endDate = endBackup;
             break;
