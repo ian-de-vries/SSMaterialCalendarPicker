@@ -12,8 +12,8 @@
 #import "NSDate+SSDateAdditions.h"
 
 #define kDefaultRippleColor [UIColor colorWithWhite:1.0f alpha:0.45f]
-//#define kDefaultSelectedColor [UIColor colorWithRed:255/255.0f green:87/255.0f blue:34/255.0f alpha:1.0f]
-#define kDefaultSelectedColor [UIColor colorWithRed:255/255.0f green:152/255.0f blue:0/255.0f alpha:1.0f]
+#define kDefaultSelectedColor [UIColor colorWithRed:255/255.0f green:87/255.0f blue:34/255.0f alpha:1.0f]
+//#define kDefaultSelectedColor [UIColor colorWithRed:255/255.0f green:152/255.0f blue:0/255.0f alpha:1.0f]
 
 
 @implementation SSCalendarCollectionViewCell
@@ -107,6 +107,16 @@
             [self setAlpha:disabled?0.2f:1.0f];
         }];
     }
+}
+
+- (void)blink {
+    [UIView animateWithDuration:0.6f animations:^{
+        self.innerButton.transform = CGAffineTransformMakeScale(1.5f, 1.5f);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.3f animations:^{
+            self.innerButton.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
+        }];
+    }];
 }
 
 @end

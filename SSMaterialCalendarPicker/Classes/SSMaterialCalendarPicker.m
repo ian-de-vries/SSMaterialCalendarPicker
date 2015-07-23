@@ -41,6 +41,7 @@
     NSMutableArray *dates;
     NSDate *selectedMonth;
     BOOL runningScrollAnimation;
+    NSIndexPath *blinkIndexPath;
 }
 
 #pragma mark - Show Calendar
@@ -175,6 +176,12 @@
     [calendarCell calendarCellSetup];
     [calendarCell selectCalendarCell:[self shouldSelect:calendarCell]];
     [calendarCell disableCalendarCell:[self shouldDisable:calendarCell]];
+    
+    if (blinkIndexPath != nil && indexPath.row == blinkIndexPath.row) {
+        [calendarCell blink];
+        blinkIndexPath = nil;
+    }
+    
     return calendarCell;
 }
 
@@ -240,7 +247,7 @@
             if (cell == nil) return;
             NSInteger day = [[NSCalendar currentCalendar] component:NSCalendarUnitDay fromDate:cell.cellDate];
             if (day == 1) {
-              [self setMonthFromDate:cell.cellDate];
+                [self setMonthFromDate:cell.cellDate];
                 monthChanged = YES;
             } if (cell.cellDate == [NSDate date].firstDayOfTheMonth.defaultTime) {
                 [self setMonthFromDate:cell.cellDate];
@@ -275,6 +282,12 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
     UICollectionViewLayoutAttributes *attributes = [self.calendarCollectionView layoutAttributesForItemAtIndexPath:indexPath];
     [self.calendarCollectionView setContentOffset:CGPointMake(0, CGRectGetMinY(attributes.frame)-8) animated:YES];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        SSCalendarCollectionViewCell *cell = [self cellAtIndexPath:indexPath];
+        if (cell == nil)
+            blinkIndexPath = indexPath;
+        else [cell blink];
+    });
 }
 
 #pragma mark - Calendar Cells Control
