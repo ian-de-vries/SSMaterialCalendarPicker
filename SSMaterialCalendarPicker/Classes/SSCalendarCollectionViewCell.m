@@ -12,8 +12,7 @@
 #import "NSDate+SSDateAdditions.h"
 
 #define kDefaultRippleColor [UIColor colorWithWhite:1.0f alpha:0.45f]
-#define kDefaultSelectedColor [UIColor colorWithRed:255/255.0f green:87/255.0f blue:34/255.0f alpha:1.0f]
-//#define kDefaultSelectedColor [UIColor colorWithRed:255/255.0f green:152/255.0f blue:0/255.0f alpha:1.0f]
+#define kDefaultSelectedColor [UIColor orangeColor]
 
 #pragma mark -
 #pragma mark -

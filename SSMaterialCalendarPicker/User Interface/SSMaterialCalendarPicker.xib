@@ -31,7 +31,7 @@
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                     <state key="normal" title="↑">
-                                        <color key="titleColor" red="1" green="0.18387624621391296" blue="0.055542107671499252" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleColor" red="1" green="0.52434456348419189" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
                                     <connections>
                                         <action selector="previousMonthButtonTapped:" destination="pJU-z3-znu" eventType="touchUpInside" id="JoT-1N-ZDz"/>
@@ -62,7 +62,7 @@
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                     <state key="normal" title="↓">
-                                        <color key="titleColor" red="1" green="0.18387624621391296" blue="0.055542107671499252" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleColor" red="1" green="0.52434456348419189" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
                                     <connections>
                                         <action selector="nextMonthButtonTapped:" destination="pJU-z3-znu" eventType="touchUpInside" id="JnZ-jy-qKg"/>
@@ -104,7 +104,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ne5-PN-Y6Y" userLabel="Header Separator">
                             <rect key="frame" x="16" y="106" width="568" height="2"/>
                             <animations/>
-                            <color key="backgroundColor" red="1" green="0.18387624621391296" blue="0.055542107671499252" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="1" green="0.39996033906936646" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="2" id="0ha-Ky-8Ie"/>
                             </constraints>
@@ -209,7 +209,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="suf-Nq-L2F" userLabel="Status Bar Header">
                             <rect key="frame" x="0.0" y="0.0" width="600" height="20"/>
                             <animations/>
-                            <color key="backgroundColor" red="1" green="0.18387624621391296" blue="0.055542107671499252" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="1" green="0.39996033906936646" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="vbe-mu-5yA"/>
                             </constraints>
@@ -241,7 +241,7 @@
                         </button>
                     </subviews>
                     <animations/>
-                    <color key="backgroundColor" red="1" green="0.23088812828063965" blue="0.08073146641254425" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="1" green="0.52434456348419189" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="MZs-fU-9vy" secondAttribute="bottom" constant="16" id="81r-1A-Yzn"/>
                         <constraint firstAttribute="trailing" secondItem="MZs-fU-9vy" secondAttribute="trailing" constant="16" id="DdO-G6-knb"/>
@@ -296,12 +296,17 @@
                 <outlet property="backgroundView" destination="pNc-Tv-x8A" id="X7g-Hx-aXv"/>
                 <outlet property="calendarCollectionView" destination="7I6-d8-2Kj" id="7xx-10-vH7"/>
                 <outlet property="calendarContainer" destination="77g-zN-96n" id="6Zc-dr-g7j"/>
+                <outlet property="calendarHeader" destination="lsM-Pc-xQm" id="2fB-cc-xiD"/>
                 <outlet property="calendarHeaderTopDistance" destination="L67-Ye-PCF" id="8uj-5q-NHd"/>
                 <outlet property="calendarTitleLabel" destination="MZs-fU-9vy" id="285-09-Fya"/>
+                <outlet property="downArrow" destination="LGZ-Sa-reH" id="06l-eG-1JG"/>
                 <outlet property="headerCollectionView" destination="PIm-Mg-AAY" id="id3-Zo-isf"/>
                 <outlet property="headerCollectionViewHeight" destination="3iK-bD-Fup" id="IdF-ux-qjn"/>
+                <outlet property="headerSeparator" destination="Ne5-PN-Y6Y" id="GEt-oh-kwk"/>
                 <outlet property="monthLabel" destination="tow-iu-fzX" id="Mgg-nr-Rcc"/>
                 <outlet property="pickerViewTopDistance" destination="pgY-LW-ctT" id="zTP-J9-Z4X"/>
+                <outlet property="statusBarHeader" destination="suf-Nq-L2F" id="mPa-OB-iwk"/>
+                <outlet property="upArrow" destination="0sN-6l-WJp" id="Ky7-65-Ibq"/>
                 <outlet property="warningMessage" destination="eFD-Wi-Nu8" id="qG5-Zr-E23"/>
                 <outlet property="warningViewHeight" destination="gyF-g2-neQ" id="ijf-4p-KOH"/>
             </connections>

@@ -18,8 +18,9 @@
 @property (strong, nonatomic) NSLocale *forceLocale;
 @property (strong, nonatomic) UIColor *primaryColor;
 @property (strong, nonatomic) UIColor *secondaryColor;
+// Default value is "Select an Interval"
 @property (strong, nonatomic) NSString *calendarTitle;
-@property (weak, nonatomic) IBOutlet UILabel *calendarTitleLabel;
+// Default value is "WARNING: Interval unavailable!"
 @property (strong, nonatomic) NSString *disabledIntervalWarning;
 
 #pragma mark Interaction Properties:

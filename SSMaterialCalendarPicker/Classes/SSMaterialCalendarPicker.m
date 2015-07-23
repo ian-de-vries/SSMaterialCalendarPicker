@@ -21,6 +21,14 @@
 @interface SSMaterialCalendarPicker ()
 
 #pragma mark - Private Outlets
+#pragma mark Customizable
+@property (weak, nonatomic) IBOutlet UILabel *calendarTitleLabel;
+@property (weak, nonatomic) IBOutlet UIView *statusBarHeader;
+@property (weak, nonatomic) IBOutlet UIView *calendarHeader;
+@property (weak, nonatomic) IBOutlet UIView *headerSeparator;
+@property (weak, nonatomic) IBOutlet UIButton *upArrow;
+@property (weak, nonatomic) IBOutlet UIButton *downArrow;
+
 #pragma mark Needed for Animations
 @property (weak, nonatomic) IBOutlet UIControl *backgroundView;
 @property (weak, nonatomic) IBOutlet UIView *calendarContainer;
@@ -90,6 +98,7 @@
 }
 
 - (void)initializeDates {
+    [self setMonthFromDate:[NSDate date].firstDayOfTheMonth.defaultTime];
     if (self.disabledDates == nil) self.disabledDates = [[NSArray alloc] init];
     int lastSunday = [NSDate daysFromLastSunday];
     dates = [[NSMutableArray alloc] init];
@@ -97,7 +106,6 @@
         [dates addObject:[NSDate daysFromNow:i].defaultTime];
     } self.startDate = self.startDate.defaultTime;
     self.endDate = self.endDate.defaultTime;
-    [self setMonthFromDate:[NSDate date].firstDayOfTheMonth.defaultTime];
 }
 
 - (void)addCalendarMask {
@@ -115,9 +123,27 @@
         self.calendarContainer.layer.mask = nil;
 }
 
+- (void)setForceLocale:(NSLocale *)newForceLocale {
+    _forceLocale = newForceLocale;
+    [self setMonthFromDate:[NSDate date].firstDayOfTheMonth.defaultTime];
+}
+
 - (void)setCalendarTitle:(NSString *)newCalendarTitle {
     _calendarTitle = newCalendarTitle;
     self.calendarTitleLabel.text = _calendarTitle;
+}
+
+- (void)setPrimaryColor:(UIColor *)newPrimaryColor {
+    _primaryColor = newPrimaryColor;
+    [self.calendarHeader setBackgroundColor:_primaryColor];
+    [self.upArrow setTitleColor:_primaryColor forState:UIControlStateNormal];
+    [self.downArrow setTitleColor:_primaryColor forState:UIControlStateNormal];
+}
+
+- (void)setSecondaryColor:(UIColor *)newSecondaryColor {
+    _secondaryColor = newSecondaryColor;
+    [self.statusBarHeader setBackgroundColor:_secondaryColor];
+    [self.headerSeparator setBackgroundColor:_secondaryColor];
 }
 
 #pragma mark - Open/Close Calendar
