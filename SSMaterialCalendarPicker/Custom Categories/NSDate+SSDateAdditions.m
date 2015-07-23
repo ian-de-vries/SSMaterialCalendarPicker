@@ -65,4 +65,12 @@
     return --weekday;
 }
 
+- (NSDate *)addMonths:(NSInteger)months {
+    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+    [dateComponents setMonth:months];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *newDate = [calendar dateByAddingComponents:dateComponents toDate:self options:0];
+    return newDate;
+}
+
 @end

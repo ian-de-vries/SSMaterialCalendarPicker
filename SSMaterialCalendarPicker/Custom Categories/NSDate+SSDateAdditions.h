@@ -17,5 +17,6 @@
 - (BOOL)isDateBetween:(NSDate *)date1 and:(NSDate *)date2;
 + (int)daysBetween:(NSDate *)date1 and:(NSDate *)date2;
 + (int)daysFromLastSunday;
+- (NSDate *)addMonths:(NSInteger)months;
 
 @end

@@ -39,6 +39,7 @@
 
 @implementation SSMaterialCalendarPicker {
     NSMutableArray *dates;
+    NSDate *selectedMonth;
 }
 
 #pragma mark - Show Calendar
@@ -86,7 +87,7 @@
         [dates addObject:[NSDate daysFromNow:i].defaultTime];
     } self.startDate = self.startDate.defaultTime;
     self.endDate = self.endDate.defaultTime;
-    [self setMonthFromDate:[NSDate date]];
+    [self setMonthFromDate:[NSDate date].defaultTime];
 }
 
 - (void)addCalendarMask {
@@ -210,6 +211,7 @@
     [formatter setDateFormat:@"MMMM, YYYY"];
     [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"pt_BR"]];
     [self.monthLabel setText:[formatter stringFromDate:date].capitalizedString];
+    selectedMonth = date;
 }
 
 - (void)checkVisibleMonth {
@@ -236,11 +238,13 @@
 }
 
 - (IBAction)previousMonthButtonTapped:(id)sender {
-    
+    NSDate *newDate = [selectedMonth addMonths:-1];
+    [self setMonthFromDate:newDate];
 }
 
 - (IBAction)nextMonthButtonTapped:(id)sender {
-    
+    NSDate *newDate = [selectedMonth addMonths:1];
+    [self setMonthFromDate:newDate];
 }
 
 #pragma mark - Calendar Cells Control
