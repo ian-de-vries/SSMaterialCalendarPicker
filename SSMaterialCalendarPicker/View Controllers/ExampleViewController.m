@@ -9,6 +9,8 @@
 #import "ExampleViewController.h"
 #import "SSMaterialCalendarPicker.h"
 
+#import "NSDate+SSDateAdditions.h"
+
 @implementation ExampleViewController {
     SSMaterialCalendarPicker *datePicker;
 }
@@ -20,6 +22,7 @@
 
 - (void)initDatePicker {
     datePicker = [SSMaterialCalendarPicker initCalendarOn:self.view withDelegate:self];
+    datePicker.disabledDates = @[[NSDate daysFromNow:arc4random_uniform(300)], [NSDate daysFromNow:arc4random_uniform(300)], [NSDate daysFromNow:arc4random_uniform(300)], [NSDate daysFromNow:arc4random_uniform(300)], [NSDate daysFromNow:arc4random_uniform(300)], [NSDate daysFromNow:arc4random_uniform(300)], [NSDate daysFromNow:arc4random_uniform(300)], [NSDate daysFromNow:arc4random_uniform(300)], [NSDate daysFromNow:arc4random_uniform(300)]];
 }
 
 - (IBAction)showCalendar:(id)sender {

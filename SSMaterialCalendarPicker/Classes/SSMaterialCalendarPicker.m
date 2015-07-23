@@ -239,7 +239,7 @@
 - (void)checkDisabledRangeWithBackupStartDate:(NSDate *)startBackup andEndDate:(NSDate *)endBackup {
     for (int i = 1; i < [NSDate daysBetween:self.startDate and:self.endDate]; i++) {
         if ([self isDateDisabled:[self.startDate addDays:i]]) {
-            [self showWarning:@"Existem datas bloqueadas nesse intervalo!"];
+            [self showWarning:@"Anfitrião indisponível neste período!"];
             self.startDate = startBackup;
             self.endDate = endBackup;
             break;
