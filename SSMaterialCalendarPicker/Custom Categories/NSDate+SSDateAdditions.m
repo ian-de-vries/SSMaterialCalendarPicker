@@ -22,6 +22,16 @@
     return [[NSCalendar currentCalendar] dateFromComponents:comps];
 }
 
+- (NSDate *)firstDayOfTheMonth {
+    if (self == nil) return nil;
+    NSDateComponents* comps = [[NSCalendar currentCalendar] components:NSCalendarUnitYear|
+                               NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour|
+                               NSCalendarUnitMinute|NSCalendarUnitSecond|NSCalendarUnitWeekday fromDate:self];
+    [comps setDay:1];
+    [comps setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    return [[NSCalendar currentCalendar] dateFromComponents:comps];
+}
+
 + (NSDate *)tomorrow {
     return [self daysFromNow:1];
 }

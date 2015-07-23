@@ -13,7 +13,7 @@
 #define kCalendarPickerIdentifier @"SSMaterialCalendarPicker"
 
 #define kCalendarHeaderHeight 96.0f
-#define kPickerViewHeight 300.0f
+#define kPickerViewHeight 343.0f
 
 #define kAlphaShow 1.0f
 #define kAlphaHide 0.0f
@@ -40,6 +40,7 @@
 @implementation SSMaterialCalendarPicker {
     NSMutableArray *dates;
     NSDate *selectedMonth;
+    BOOL runningScrollAnimation;
 }
 
 #pragma mark - Show Calendar
@@ -87,7 +88,7 @@
         [dates addObject:[NSDate daysFromNow:i].defaultTime];
     } self.startDate = self.startDate.defaultTime;
     self.endDate = self.endDate.defaultTime;
-    [self setMonthFromDate:[NSDate date].defaultTime];
+    [self setMonthFromDate:[NSDate date].firstDayOfTheMonth.defaultTime];
 }
 
 - (void)addCalendarMask {
@@ -152,7 +153,13 @@
         [self removeCalendarMask];
     } else [self addCalendarMask];
     
+    if (!runningScrollAnimation)
+        [self checkVisibleMonth];
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(nonnull UIScrollView *)scrollView {
     [self checkVisibleMonth];
+    runningScrollAnimation = NO;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -172,7 +179,7 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    SSCalendarCollectionViewCell *calendarCell = (SSCalendarCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    SSCalendarCollectionViewCell *calendarCell = [self cellAtIndexPath:indexPath];
     if (!calendarCell.isDisabled) {
         NSDate *startBackup = self.startDate;
         NSDate *endBackup = self.endDate;
@@ -188,7 +195,7 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
-    SSCalendarCollectionViewCell *calendarCell = (SSCalendarCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    SSCalendarCollectionViewCell *calendarCell = [self cellAtIndexPath:indexPath];
     if (!calendarCell.isDisabled) {
         if (self.startDate != nil && [calendarCell.cellDate compare:self.startDate] == NSOrderedSame) self.startDate = nil;
         else if (self.endDate != nil && [calendarCell.cellDate compare:self.endDate] == NSOrderedSame) self.endDate = nil;
@@ -215,39 +222,68 @@
 }
 
 - (void)checkVisibleMonth {
-    NSArray *indexPaths = [self.calendarCollectionView.indexPathsForVisibleItems
-                           sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-                               NSInteger r1 = [obj1 row];
-                               NSInteger r2 = [obj2 row];
-                               if (r1 > r2) return (NSComparisonResult) NSOrderedDescending;
-                               if (r1 < r2) return (NSComparisonResult) NSOrderedAscending;
-                               return (NSComparisonResult) NSOrderedSame;
-                           }];
-    BOOL monthChanged = NO;
-    for (NSIndexPath *indexPath in [indexPaths subarrayWithRange:NSMakeRange(0, 7)]) {
-        SSCalendarCollectionViewCell *cell = (SSCalendarCollectionViewCell *)[self.calendarCollectionView cellForItemAtIndexPath:indexPath];
-        NSInteger day = [[NSCalendar currentCalendar] component:NSCalendarUnitDay fromDate:cell.cellDate];
-        if (day == 1) {
-            [self setMonthFromDate:cell.cellDate];
-            monthChanged = YES; break;
-        }
-    } if (!monthChanged) {
-        SSCalendarCollectionViewCell *cell = (SSCalendarCollectionViewCell *)[self.calendarCollectionView cellForItemAtIndexPath:indexPaths.firstObject];
-        [self setMonthFromDate:cell.cellDate];
+    NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+    for (int i = 0; i < 7; i++) {
+        CGFloat cellSize = CGRectGetWidth(self.calendarCollectionView.frame)/7;
+        NSIndexPath *indexPath = [self.calendarCollectionView
+                                  indexPathForItemAtPoint:[[self.calendarCollectionView superview]
+                                                           convertPoint:CGPointMake(cellSize/2 + i*cellSize, cellSize/2)
+                                                           toView:self.calendarCollectionView]];
+        if (indexPath != nil)
+            [indexPaths addObject:indexPath];
+    };
+    
+    if (indexPaths.count > 0) {
+        BOOL monthChanged = NO;
+        for (NSIndexPath *indexPath in [indexPaths subarrayWithRange:NSMakeRange(0, MIN(indexPaths.count, 7))]) {
+            SSCalendarCollectionViewCell *cell = [self cellAtIndexPath:indexPath];
+            if (cell == nil) return;
+            NSInteger day = [[NSCalendar currentCalendar] component:NSCalendarUnitDay fromDate:cell.cellDate];
+            if (day == 1) {
+                [self setMonthFromDate:cell.cellDate];
+                monthChanged = YES; break;
+            }
+        } if (!monthChanged)
+            [self setMonthFromDate:[self cellAtIndexPath:indexPaths.firstObject].cellDate.firstDayOfTheMonth];
     }
 }
 
 - (IBAction)previousMonthButtonTapped:(id)sender {
-    NSDate *newDate = [selectedMonth addMonths:-1];
-    [self setMonthFromDate:newDate];
+    if (!runningScrollAnimation) {
+        NSDate *newDate = [selectedMonth addMonths:-1].defaultTime;
+        if ([dates containsObject:newDate])
+            [self scrollToMonthWithDate:newDate];
+        else if ([dates indexOfObject:dates] > 0)
+            [self.calendarCollectionView setContentOffset:CGPointMake(0, 0) animated:YES];
+    }
 }
 
 - (IBAction)nextMonthButtonTapped:(id)sender {
-    NSDate *newDate = [selectedMonth addMonths:1];
-    [self setMonthFromDate:newDate];
+    if (!runningScrollAnimation) {
+        NSDate *newDate = [selectedMonth addMonths:1].defaultTime;
+        if ([dates containsObject:newDate])
+            [self scrollToMonthWithDate:newDate];
+    }
+}
+
+- (void)scrollToMonthWithDate:(NSDate *)date {
+    runningScrollAnimation = YES;
+    NSInteger row = [self findRowWithDate:date];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+    UICollectionViewLayoutAttributes *attributes = [self.calendarCollectionView layoutAttributesForItemAtIndexPath:indexPath];
+    [self.calendarCollectionView setContentOffset:CGPointMake(0, CGRectGetMinY(attributes.frame)-8) animated:YES];
 }
 
 #pragma mark - Calendar Cells Control
+- (SSCalendarCollectionViewCell *)cellAtIndexPath:(NSIndexPath *)indexPath {
+    return (SSCalendarCollectionViewCell *)[self.calendarCollectionView cellForItemAtIndexPath:indexPath];
+}
+
+- (NSInteger)findRowWithDate:(NSDate *)targetDate {
+    NSDate *firstDate = dates.firstObject;
+    return [NSDate daysBetween:firstDate and:targetDate];
+}
+
 - (NSDate *)shouldReplace:(NSDate *)date {
     NSTimeInterval start = fabs([date timeIntervalSinceDate:self.startDate]);
     NSTimeInterval end = fabs([date timeIntervalSinceDate:self.endDate]);

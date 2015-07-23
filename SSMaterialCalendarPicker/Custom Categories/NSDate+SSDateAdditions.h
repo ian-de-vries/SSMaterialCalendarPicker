@@ -11,6 +11,7 @@
 @interface NSDate (SSDateAdditions)
 
 - (NSDate *)defaultTime;
+- (NSDate *)firstDayOfTheMonth;
 + (NSDate *)tomorrow;
 + (NSDate *)daysFromNow:(NSInteger)days;
 - (NSDate *)addDays:(NSInteger)days;

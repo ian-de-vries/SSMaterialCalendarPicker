@@ -16,7 +16,7 @@
                     <animations/>
                     <color key="backgroundColor" red="0.025554032996296883" green="0.015394211746752262" blue="0.0013704809825867414" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gJy-VB-qxI" userLabel="Picker View" customClass="SSMaterialStepView">
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gJy-VB-qxI" userLabel="Picker View" customClass="SSMaterialStepView">
                     <rect key="frame" x="0.0" y="-359" width="600" height="343"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pXW-mN-F2g" userLabel="Month Control">
@@ -109,7 +109,7 @@
                                 <constraint firstAttribute="height" constant="2" id="0ha-Ky-8Ie"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="77g-zN-96n" userLabel="Calendar Container">
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="77g-zN-96n" userLabel="Calendar Container">
                             <rect key="frame" x="16" y="108" width="568" height="235"/>
                             <subviews>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="7I6-d8-2Kj">
@@ -145,6 +145,11 @@
                                 <constraint firstAttribute="height" constant="235" id="EU6-4u-B71"/>
                                 <constraint firstItem="7I6-d8-2Kj" firstAttribute="leading" secondItem="77g-zN-96n" secondAttribute="leading" id="tIO-gI-l6f"/>
                             </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="EU6-4u-B71"/>
+                                </mask>
+                            </variation>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zXt-9Z-pYt" userLabel="Warning View">
                             <rect key="frame" x="16" y="108" width="568" height="0.0"/>
@@ -182,6 +187,7 @@
                         <constraint firstAttribute="trailing" secondItem="pXW-mN-F2g" secondAttribute="trailing" constant="16" id="bJI-5v-jm6"/>
                         <constraint firstItem="PIm-Mg-AAY" firstAttribute="leading" secondItem="gJy-VB-qxI" secondAttribute="leading" constant="16" id="d7E-dK-LzO"/>
                         <constraint firstAttribute="height" constant="343" id="f0u-sU-h8r"/>
+                        <constraint firstAttribute="bottom" secondItem="77g-zN-96n" secondAttribute="bottom" id="fOs-UY-kAF"/>
                         <constraint firstItem="Ne5-PN-Y6Y" firstAttribute="top" secondItem="PIm-Mg-AAY" secondAttribute="bottom" id="izL-ll-gps"/>
                         <constraint firstItem="PIm-Mg-AAY" firstAttribute="top" secondItem="pXW-mN-F2g" secondAttribute="bottom" id="ohx-XK-Mkw"/>
                         <constraint firstAttribute="trailing" secondItem="PIm-Mg-AAY" secondAttribute="trailing" constant="16" id="p5p-sV-qni"/>
