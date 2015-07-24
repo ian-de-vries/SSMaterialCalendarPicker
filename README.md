@@ -8,15 +8,14 @@ A lightly-customizable calendar pop-up view for range selection inspired by Goog
 Tested on iOS8 and iOS9. Supports **ONLY** portrait orientation, atm.
 
 ##Demo##
-![Demo](http://i.imgur.com/30Eivbn.gif)
+![Demo](http://i.imgur.com/30Eivbn.gif)  
+(in Portuguese, but the default language is English)
 
 ##Installation##
 I'm preparing this component to be listed as a pod for CocoaPods.  
 Installation should be as follows, adding this line to your Podfile:
 
-```
-#!Ruby
-
+```ruby
 pod 'SSMaterialCalendarPicker'
 ```
 
@@ -25,8 +24,7 @@ Usage is really simple!
 
 * Instantiate a SSMaterialCalendarPicker object on your View Controller:
 
-```
-#!Objective-C
+```objective-c
 // Add it on the keyWindow if you're using an UINavigationBar
 datePicker = [SSMaterialCalendarPicker initCalendarOn:[UIApplication sharedApplication].keyWindow withDelegate:self];
 
@@ -36,8 +34,7 @@ datePicker = [SSMaterialCalendarPicker initCalendarOn:self.view withDelegate:sel
 
 * Customize it as you wish:
 
-```
-#!Objective-C
+```objective-c
 // Set a Locale if you want to force the localization - otherwise, it uses the device's default locale
 datePicker.forceLocale = [NSLocale localeWithLocaleIdentifier:@"pt_BR"];
 
@@ -57,15 +54,13 @@ datePicker.disabledDates = @[[NSDate daysFromNow:arc4random_uniform(300)], [NSDa
 
 * Show the calendar:
 
-```
-#!Objective-C
+```objective-c
 [datePicker showAnimated];
 ```
 
 * Oh, and remember to implement the SSMaterialCalendarPickerDelegate **protocol**:
 
-```
-#!Objective-C
+```objective-c
 // .h code:
 #import "SSMaterialCalendarPicker.h"
 @interface ExampleViewController : UIViewController <SSMaterialCalendarPickerDelegate>
