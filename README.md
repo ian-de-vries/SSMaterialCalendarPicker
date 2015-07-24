@@ -84,3 +84,5 @@ datePicker.disabledDates = @[[NSDate daysFromNow:arc4random_uniform(300)], [NSDa
 ##Contact & Feedback##
 **********************
 If you have any feedbacks, doubts or you just want to yell at me for some reason, please send me an e-mail to [iurichiba@gmail.com](mailto:iurichiba@gmail.com). Any help on this project is more than welcome!
+
+And if you end up using this component, I'd love to hear about your app and check it out! 🐶
