@@ -77,7 +77,7 @@ Pod::Spec.new do |s|
   #  non-essential files like tests, examples and documentation.
   #
 
-  s.resources = "Classes/*.xib"
+  s.resources = "SSMaterialCalendarPicker/Classes/**/*.{xib}"
 
 
   # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
