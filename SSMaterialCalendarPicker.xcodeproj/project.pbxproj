@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		EE20ABFD1B62A4B6009B50D6 /* NSDate+SSDateAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = EE20ABF91B62A4B6009B50D6 /* NSDate+SSDateAdditions.m */; };
 		EE20ABFE1B62A4B6009B50D6 /* SSMaterialStepView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE20ABFC1B62A4B6009B50D6 /* SSMaterialStepView.m */; };
+		EE20AC231B62AAE9009B50D6 /* SSMaterialCalendarPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE20AC221B62AAE9009B50D6 /* SSMaterialCalendarPicker.xib */; };
 		EE4B8B691B5ED299005ACB3C /* SSMaterialCalendarPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = EE4B8B681B5ED299005ACB3C /* SSMaterialCalendarPicker.m */; };
 		EE4B8B6F1B5ED50B005ACB3C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE4B8B6D1B5ED50B005ACB3C /* Main.storyboard */; };
-		EE4B8B711B5ED575005ACB3C /* SSMaterialCalendarPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE4B8B701B5ED575005ACB3C /* SSMaterialCalendarPicker.xib */; };
 		EE4B8B731B5EDF41005ACB3C /* SSCalendarCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE4B8B721B5EDF41005ACB3C /* SSCalendarCollectionViewCell.xib */; };
 		EEE8163F1B585EE5005ACEA6 /* SSCalendarCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE8162E1B585EE5005ACEA6 /* SSCalendarCollectionViewCell.m */; };
 		EEE816401B585EE5005ACEA6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEE816311B585EE5005ACEA6 /* Images.xcassets */; };
@@ -26,10 +26,10 @@
 		EE20ABF91B62A4B6009B50D6 /* NSDate+SSDateAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+SSDateAdditions.m"; sourceTree = "<group>"; };
 		EE20ABFB1B62A4B6009B50D6 /* SSMaterialStepView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSMaterialStepView.h; sourceTree = "<group>"; };
 		EE20ABFC1B62A4B6009B50D6 /* SSMaterialStepView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSMaterialStepView.m; sourceTree = "<group>"; };
+		EE20AC221B62AAE9009B50D6 /* SSMaterialCalendarPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSMaterialCalendarPicker.xib; sourceTree = "<group>"; };
 		EE4B8B671B5ED299005ACB3C /* SSMaterialCalendarPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSMaterialCalendarPicker.h; sourceTree = "<group>"; };
 		EE4B8B681B5ED299005ACB3C /* SSMaterialCalendarPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSMaterialCalendarPicker.m; sourceTree = "<group>"; };
 		EE4B8B6E1B5ED50B005ACB3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		EE4B8B701B5ED575005ACB3C /* SSMaterialCalendarPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SSMaterialCalendarPicker.xib; path = "../User Interface/SSMaterialCalendarPicker.xib"; sourceTree = "<group>"; };
 		EE4B8B721B5EDF41005ACB3C /* SSCalendarCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSCalendarCollectionViewCell.xib; sourceTree = "<group>"; };
 		EEE8162D1B585EE5005ACEA6 /* SSCalendarCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCalendarCollectionViewCell.h; sourceTree = "<group>"; };
 		EEE8162E1B585EE5005ACEA6 /* SSCalendarCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCalendarCollectionViewCell.m; sourceTree = "<group>"; };
@@ -103,7 +103,7 @@
 				EE4B8B721B5EDF41005ACB3C /* SSCalendarCollectionViewCell.xib */,
 				EE4B8B671B5ED299005ACB3C /* SSMaterialCalendarPicker.h */,
 				EE4B8B681B5ED299005ACB3C /* SSMaterialCalendarPicker.m */,
-				EE4B8B701B5ED575005ACB3C /* SSMaterialCalendarPicker.xib */,
+				EE20AC221B62AAE9009B50D6 /* SSMaterialCalendarPicker.xib */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -219,8 +219,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE4B8B6F1B5ED50B005ACB3C /* Main.storyboard in Resources */,
-				EE4B8B711B5ED575005ACB3C /* SSMaterialCalendarPicker.xib in Resources */,
 				EEE816441B585EE5005ACEA6 /* LaunchScreen.xib in Resources */,
+				EE20AC231B62AAE9009B50D6 /* SSMaterialCalendarPicker.xib in Resources */,
 				EE4B8B731B5EDF41005ACB3C /* SSCalendarCollectionViewCell.xib in Resources */,
 				EEE816401B585EE5005ACEA6 /* Images.xcassets in Resources */,
 			);
