@@ -1,4 +1,4 @@
-![Shoryuken Solutions Logo](http://i.imgur.com/h2kNho0.png)
+![Shoryuken Solutions Logo](http://i.imgur.com/IQDqUZE.png)
 
 
 
