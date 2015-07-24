@@ -8,6 +8,9 @@ A lightly-customizable calendar pop-up view for range selection inspired by Goog
 
 Tested on iOS8 and iOS9. Supports **ONLY** portrait orientation, atm.
 
+##Demo##
+********
+![Demo](http://i.imgur.com/30Eivbn.gif)
 
 ##Installation##
 ****************
