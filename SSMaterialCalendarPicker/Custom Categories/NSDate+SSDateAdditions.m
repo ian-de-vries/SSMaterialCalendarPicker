@@ -28,8 +28,7 @@
                                NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour|
                                NSCalendarUnitMinute|NSCalendarUnitSecond|NSCalendarUnitWeekday fromDate:self];
     [comps setDay:1];
-    [comps setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
-    return [[NSCalendar currentCalendar] dateFromComponents:comps];
+    return [[NSCalendar currentCalendar] dateFromComponents:comps].defaultTime;
 }
 
 + (NSDate *)tomorrow {
