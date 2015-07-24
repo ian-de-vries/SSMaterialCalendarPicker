@@ -80,3 +80,7 @@ datePicker.disabledDates = @[[NSDate daysFromNow:arc4random_uniform(300)], [NSDa
     [self.endDateLabel setText:[NSString stringWithFormat:@"Saída: %@", [formatter stringFromDate:endDate]]];
 }
 ```
+
+##Contact & Feedback##
+**********************
+If you have any feedbacks, doubts or you just want to yell at me for some reason, please send me an e-mail to [iurichiba@gmail.com](mailto:iurichiba@gmail.com). Any help on this project is more than welcome!
