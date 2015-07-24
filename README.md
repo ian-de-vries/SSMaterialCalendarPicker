@@ -1,36 +1,30 @@
-![Shoryuken Solutions Logo](http://i.imgur.com/hBbIN4k.png "Shoryuken Solutions")
+![Shoryuken Solutions Logo](http://i.imgur.com/h2kNho0.png)
 
 
 
 ##**SSMaterialCalendarPicker**##
-****************************
 A lightly-customizable calendar pop-up view for range selection inspired by Google's Material Design Guidelines and apps.
 
 Tested on iOS8 and iOS9. Supports **ONLY** portrait orientation, atm.
 
 ##Demo##
-********
-![Demo](http://i.imgur.com/30Eivbn.gif)
+![Demo](http://i.imgur.com/30Eivbn.gif)  
+(in Portuguese, but the default language is English)
 
 ##Installation##
-****************
 I'm preparing this component to be listed as a pod for CocoaPods.  
 Installation should be as follows, adding this line to your Podfile:
 
-```
-#!Ruby
-
+```ruby
 pod 'SSMaterialCalendarPicker'
 ```
 
 ##Usage##
-*********
 Usage is really simple!
 
 * Instantiate a SSMaterialCalendarPicker object on your View Controller:
 
-```
-#!Objective-C
+```objective-c
 // Add it on the keyWindow if you're using an UINavigationBar
 datePicker = [SSMaterialCalendarPicker initCalendarOn:[UIApplication sharedApplication].keyWindow withDelegate:self];
 
@@ -38,10 +32,9 @@ datePicker = [SSMaterialCalendarPicker initCalendarOn:[UIApplication sharedAppli
 datePicker = [SSMaterialCalendarPicker initCalendarOn:self.view withDelegate:self];
 ```
 
-* Customize it as you wish:
+* **OPTIONAL** - Customize it as you wish:
 
-```
-#!Objective-C
+```objective-c
 // Set a Locale if you want to force the localization - otherwise, it uses the device's default locale
 datePicker.forceLocale = [NSLocale localeWithLocaleIdentifier:@"pt_BR"];
 
@@ -61,15 +54,13 @@ datePicker.disabledDates = @[[NSDate daysFromNow:arc4random_uniform(300)], [NSDa
 
 * Show the calendar:
 
-```
-#!Objective-C
+```objective-c
 [datePicker showAnimated];
 ```
 
 * Oh, and remember to implement the SSMaterialCalendarPickerDelegate **protocol**:
 
-```
-#!Objective-C
+```objective-c
 // .h code:
 #import "SSMaterialCalendarPicker.h"
 @interface ExampleViewController : UIViewController <SSMaterialCalendarPickerDelegate>
@@ -85,7 +76,6 @@ datePicker.disabledDates = @[[NSDate daysFromNow:arc4random_uniform(300)], [NSDa
 ```
 
 ##Contact & Feedback##
-**********************
 If you have any feedbacks, doubts or you just want to yell at me for some reason, please send me an e-mail to [iurichiba@gmail.com](mailto:iurichiba@gmail.com). Any help on this project is more than welcome!
 
 And if you end up using this component, I'd love to hear about your app and check it out! 🐶
