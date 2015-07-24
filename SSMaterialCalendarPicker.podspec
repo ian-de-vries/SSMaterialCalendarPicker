@@ -66,7 +66,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "SSMaterialCalendarPicker/Classes", "SSMaterialCalendarPicker/Classes/**/*.{h,m,xib}"
+  s.source_files  = "SSMaterialCalendarPicker/Classes", "SSMaterialCalendarPicker/Classes/**/*.{h,m}"
   s.exclude_files = "SSMaterialCalendarPicker/Classes/Exclude"
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -77,10 +77,7 @@ Pod::Spec.new do |s|
   #  non-essential files like tests, examples and documentation.
   #
 
-  # s.resource  = "icon.png"
-  # s.resources = "Resources/*.png"
-
-  # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
+  s.resources = "Classes/**/*.xib"
 
 
   # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
