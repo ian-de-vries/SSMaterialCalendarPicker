@@ -32,7 +32,7 @@ datePicker = [SSMaterialCalendarPicker initCalendarOn:[UIApplication sharedAppli
 datePicker = [SSMaterialCalendarPicker initCalendarOn:self.view withDelegate:self];
 ```
 
-* Customize it as you wish:
+* **OPTIONAL** - Customize it as you wish:
 
 ```objective-c
 // Set a Locale if you want to force the localization - otherwise, it uses the device's default locale
