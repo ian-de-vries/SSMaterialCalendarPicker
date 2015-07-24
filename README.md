@@ -2,7 +2,7 @@
 
 
 
-##**SSMaterialCalendarPicker**##
+##**SSMaterialCalendarPicker v1.0.3**##
 A lightly-customizable calendar pop-up view for range selection inspired by Google's Material Design Guidelines and apps.
 
 Tested on iOS8 and iOS9. Supports **ONLY** portrait orientation, atm.
@@ -12,8 +12,7 @@ Tested on iOS8 and iOS9. Supports **ONLY** portrait orientation, atm.
 (in Portuguese, but the default language is English)
 
 ##Installation##
-I'm preparing this component to be listed as a pod for CocoaPods.  
-Installation should be as follows, adding this line to your Podfile:
+I recommend using [CocoaPods](https://cocoapods.org/)! Just add this line to your Podfile:  
 
 ```ruby
 pod 'SSMaterialCalendarPicker'
