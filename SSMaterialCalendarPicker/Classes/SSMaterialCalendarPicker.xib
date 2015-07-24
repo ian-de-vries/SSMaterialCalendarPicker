@@ -204,7 +204,7 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lsM-Pc-xQm" userLabel="Calendar Header" customClass="SSMaterialStepView">
-                    <rect key="frame" x="0.0" y="-112" width="600" height="96"/>
+                    <rect key="frame" x="0.0" y="-96" width="600" height="80"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="suf-Nq-L2F" userLabel="Status Bar Header">
                             <rect key="frame" x="0.0" y="0.0" width="600" height="20"/>
@@ -215,14 +215,14 @@
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select an Interval" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="MZs-fU-9vy">
-                            <rect key="frame" x="16" y="36" width="476" height="44"/>
+                            <rect key="frame" x="16" y="36" width="476" height="28"/>
                             <animations/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XUS-e3-7G8" customClass="SSRippleButton">
-                            <rect key="frame" x="540" y="36" width="44" height="44"/>
+                            <rect key="frame" x="540" y="28" width="44" height="44"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="44" id="P2F-wO-hJ4"/>
@@ -257,7 +257,7 @@
                         <constraint firstItem="XUS-e3-7G8" firstAttribute="leading" secondItem="MZs-fU-9vy" secondAttribute="trailing" constant="16" id="q9w-q2-WKu"/>
                         <constraint firstItem="MZs-fU-9vy" firstAttribute="leading" secondItem="lsM-Pc-xQm" secondAttribute="leading" constant="16" id="rff-gK-wVF"/>
                         <constraint firstAttribute="trailing" secondItem="suf-Nq-L2F" secondAttribute="trailing" id="u20-fZ-Ee8"/>
-                        <constraint firstAttribute="height" constant="96" id="zRV-sS-ZiZ"/>
+                        <constraint firstAttribute="height" constant="80" id="zRV-sS-ZiZ"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
@@ -276,7 +276,7 @@
                 <constraint firstItem="pNc-Tv-x8A" firstAttribute="leading" secondItem="pJU-z3-znu" secondAttribute="leading" id="D15-8R-r5G"/>
                 <constraint firstItem="gJy-VB-qxI" firstAttribute="leading" secondItem="pJU-z3-znu" secondAttribute="leading" id="HNS-Cb-SVf"/>
                 <constraint firstAttribute="trailing" secondItem="lsM-Pc-xQm" secondAttribute="trailing" id="HTr-F5-A7D"/>
-                <constraint firstItem="lsM-Pc-xQm" firstAttribute="top" secondItem="pJU-z3-znu" secondAttribute="top" constant="-112" id="L67-Ye-PCF"/>
+                <constraint firstItem="lsM-Pc-xQm" firstAttribute="top" secondItem="pJU-z3-znu" secondAttribute="top" constant="-96" id="L67-Ye-PCF"/>
                 <constraint firstItem="lsM-Pc-xQm" firstAttribute="top" secondItem="pJU-z3-znu" secondAttribute="top" constant="-800" id="MmH-be-f04"/>
                 <constraint firstItem="gJy-VB-qxI" firstAttribute="top" secondItem="lsM-Pc-xQm" secondAttribute="bottom" id="VIA-PP-ue0"/>
                 <constraint firstItem="pNc-Tv-x8A" firstAttribute="top" secondItem="pJU-z3-znu" secondAttribute="top" id="XAb-Wp-nrH"/>
