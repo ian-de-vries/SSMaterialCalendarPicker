@@ -109,7 +109,7 @@
 
 - (void)blink {
     [UIView animateWithDuration:0.6f animations:^{
-        self.innerButton.transform = CGAffineTransformMakeScale(1.5f, 1.5f);
+        self.innerButton.transform = CGAffineTransformMakeScale(1.3f, 1.3f);
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.3f animations:^{
             self.innerButton.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
