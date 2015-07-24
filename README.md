@@ -22,8 +22,9 @@ pod 'SSMaterialCalendarPicker'
 
 ##Usage##
 *********
-Usage is really simple.  
-1. Instantiate a SSMaterialCalendarPicker object on your View Controller:
+Usage is really simple!
+
+* Instantiate a SSMaterialCalendarPicker object on your View Controller:
 
 ```
 #!Objective-C
@@ -33,7 +34,8 @@ datePicker = [SSMaterialCalendarPicker initCalendarOn:[UIApplication sharedAppli
 // If there's a fullscreen view, add it there
 datePicker = [SSMaterialCalendarPicker initCalendarOn:self.view withDelegate:self];
 ```
-2. Customize it as you wish:
+
+* Customize it as you wish:
 
 ```
 #!Objective-C
@@ -52,4 +54,29 @@ datePicker.secondaryColor = [UIColor colorWithRed:244/255.0f green:81/255.0f blu
 
 // Set disabled dates. Dates previous to the current date are disabled by default.
 datePicker.disabledDates = @[[NSDate daysFromNow:arc4random_uniform(300)], [NSDate daysFromNow:arc4random_uniform(300)]];
+```
+
+* Show the calendar:
+
+```
+#!Objective-C
+[datePicker showAnimated];
+```
+
+* Oh, and remember to implement the SSMaterialCalendarPickerDelegate **protocol**:
+
+```
+#!Objective-C
+// .h code:
+#import "SSMaterialCalendarPicker.h"
+@interface ExampleViewController : UIViewController <SSMaterialCalendarPickerDelegate>
+
+// .m code:
+- (void)rangeSelectedWithStartDate:(NSDate *)startDate andEndDate:(NSDate *)endDate {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"pt_BR"]];
+    [formatter setDateFormat:@"EEEE, dd 'de' MMMM 'de' YYYY"];
+    [self.startDateLabel setText:[NSString stringWithFormat:@"Entrada: %@", [formatter stringFromDate:startDate]]];
+    [self.endDateLabel setText:[NSString stringWithFormat:@"Saída: %@", [formatter stringFromDate:endDate]]];
+}
 ```
