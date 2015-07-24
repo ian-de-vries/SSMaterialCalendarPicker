@@ -1,19 +1,16 @@
-![Shoryuken Solutions Logo](http://i.imgur.com/hBbIN4k.png "Shoryuken Solutions")
+![Shoryuken Solutions Logo](http://i.imgur.com/h2kNho0.png)
 
 
 
 ##**SSMaterialCalendarPicker**##
-****************************
 A lightly-customizable calendar pop-up view for range selection inspired by Google's Material Design Guidelines and apps.
 
 Tested on iOS8 and iOS9. Supports **ONLY** portrait orientation, atm.
 
 ##Demo##
-********
 ![Demo](http://i.imgur.com/30Eivbn.gif)
 
 ##Installation##
-****************
 I'm preparing this component to be listed as a pod for CocoaPods.  
 Installation should be as follows, adding this line to your Podfile:
 
@@ -24,7 +21,6 @@ pod 'SSMaterialCalendarPicker'
 ```
 
 ##Usage##
-*********
 Usage is really simple!
 
 * Instantiate a SSMaterialCalendarPicker object on your View Controller:
@@ -85,7 +81,6 @@ datePicker.disabledDates = @[[NSDate daysFromNow:arc4random_uniform(300)], [NSDa
 ```
 
 ##Contact & Feedback##
-**********************
 If you have any feedbacks, doubts or you just want to yell at me for some reason, please send me an e-mail to [iurichiba@gmail.com](mailto:iurichiba@gmail.com). Any help on this project is more than welcome!
 
 And if you end up using this component, I'd love to hear about your app and check it out! 🐶
