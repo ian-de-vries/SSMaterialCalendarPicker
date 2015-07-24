@@ -2,12 +2,16 @@
 
 
 
-##**SSMaterialCalendarPicker v1.0.3**##
+##**SSMaterialCalendarPicker**##
 A lightly-customizable calendar pop-up view for range selection inspired by Google's Material Design Guidelines and apps.
 
 Tested on iOS8 and iOS9. Supports **ONLY** portrait orientation, atm.
 
-##Demo##
+[![Version](https://img.shields.io/cocoapods/v/SSMaterialCalendarPicker.svg?style=flat-square)](http://cocoadocs.org/docsets/SSMaterialCalendarPicker)
+[![License](https://img.shields.io/cocoapods/l/SSMaterialCalendarPicker.svg?style=flat-square)](http://cocoadocs.org/docsets/SSMaterialCalendarPicker)
+[![Platform](https://img.shields.io/cocoapods/p/SSMaterialCalendarPicker.svg?style=flat-square)](http://cocoadocs.org/docsets/SSMaterialCalendarPicker)
+
+##Demo GIF##
 ![Demo](http://i.imgur.com/30Eivbn.gif)  
 (in Portuguese, but the default language is English)
 
