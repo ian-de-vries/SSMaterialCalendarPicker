@@ -10,4 +10,6 @@
 
 @interface SSMaterialStepView : UIView
 
+@property (nonatomic) IBInspectable CGFloat shadowDistance;
+
 @end

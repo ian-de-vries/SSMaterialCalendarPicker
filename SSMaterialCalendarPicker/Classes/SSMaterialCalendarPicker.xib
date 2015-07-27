@@ -196,6 +196,11 @@
                         <constraint firstItem="pXW-mN-F2g" firstAttribute="leading" secondItem="gJy-VB-qxI" secondAttribute="leading" constant="16" id="t9a-q1-IN9"/>
                         <constraint firstItem="zXt-9Z-pYt" firstAttribute="top" secondItem="Ne5-PN-Y6Y" secondAttribute="bottom" id="vHX-HL-nuy"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="shadowDistance">
+                            <real key="value" value="-1"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="OzX-ai-TQv"/>
@@ -259,6 +264,11 @@
                         <constraint firstAttribute="trailing" secondItem="suf-Nq-L2F" secondAttribute="trailing" id="u20-fZ-Ee8"/>
                         <constraint firstAttribute="height" constant="72" id="zRV-sS-ZiZ"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="shadowDistance">
+                            <real key="value" value="-1"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="DdO-G6-knb"/>
