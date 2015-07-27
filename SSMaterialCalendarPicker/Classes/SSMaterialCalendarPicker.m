@@ -12,7 +12,7 @@
 #define kCalendarCellIdentifier @"SSCalendarCollectionViewCell"
 #define kCalendarPickerIdentifier @"SSMaterialCalendarPicker"
 
-#define kCalendarHeaderHeight 80.0f
+#define kCalendarHeaderHeight 72.0f
 #define kPickerViewHeight 343.0f
 
 #define kAlphaShow 1.0f
