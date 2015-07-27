@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import "NSDate+SSDateAdditions.h"
+#import "UIImage+THColorInverter.h"
 
 #define kDefaultRippleColor [UIColor colorWithWhite:1.0f alpha:0.45f]
 #define kDefaultSelectedColor [UIColor orangeColor]
@@ -121,6 +122,7 @@
 
 @implementation SSRippleButton {
     BOOL alternative;
+    UIImage *image;
 }
 
 #pragma mark - Initialization
@@ -146,6 +148,7 @@
 
 - (void)setupRipple {
     alternative = YES;
+    image = self.imageView.image;
     [self setupRippleView];
     [self setupRippleBackgroundView];
 }
@@ -183,9 +186,10 @@
 #pragma mark - Animation/Action Tracking
 - (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
     self.rippleView.center = [touch locationInView:self];
-    if (self.shouldChangeColorOnClick)
+    if (self.shouldChangeColorOnClick) {
         [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [UIView animateWithDuration:0.1f animations:^{
+        if (image != nil) [self.imageView setImage:image.negativeImage];
+    } [UIView animateWithDuration:0.1f animations:^{
         self.rippleBackgroundView.alpha = 1.0f;
     }]; self.rippleView.transform = CGAffineTransformMakeScale(alternative?0.1f:0.5f, alternative?0.1f:0.5f);
     [UIView animateWithDuration:alternative?1.0f:0.7f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
@@ -209,9 +213,10 @@
 }
 
 - (void)animateToNormal {
-    if (self.shouldChangeColorOnClick)
+    if (self.shouldChangeColorOnClick) {
         [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [UIView animateWithDuration:0.1f animations:^{
+        if (image != nil) self.imageView.image = image;
+    } [UIView animateWithDuration:0.1f animations:^{
         self.rippleBackgroundView.alpha = 1.0f;
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.6f animations:^{
