@@ -21,7 +21,7 @@
 
 #pragma mark - Initialization
 - (void)calendarCellSetup {
-    [self clearSubviews];
+    //    [self clearSubviews];
     [self setupRippleButton];
     [self setupSelectionIndicator];
 }
@@ -45,34 +45,42 @@
                                     fromDate:self.cellDate];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     if (self.forceLocale != nil) [formatter setLocale:self.forceLocale];
-    [formatter setDateFormat:@"EEEE"]; NSString *weekday = [formatter stringFromDate:self.cellDate].capitalizedString;
-    [formatter setDateFormat:@"MMMM"]; NSString *month = [formatter stringFromDate:self.cellDate].capitalizedString;
     
-    self.innerButton = [[SSRippleButton alloc] initWithFrame:buttonFrame];
-    [self.innerButton.titleLabel setNumberOfLines:2];
-    [self.innerButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
-    [self.innerButton setTitle:[NSString stringWithFormat:@"%02d", (int) components.day] forState:UIControlStateNormal];
+    if (self.innerButton == nil) {
+        self.innerButton = [[SSRippleButton alloc] initWithFrame:buttonFrame];
+        [self addSubview:self.innerButton];
+        [self.innerButton.titleLabel setNumberOfLines:2];
+        [self.innerButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
+        [self.innerButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+        [self.innerButton.titleLabel setFont:[UIFont systemFontOfSize:13.0f]];
+        [self.innerButton setDelegate:self];
+    } [self.innerButton setTitle:[NSString stringWithFormat:@"%02d", (int) components.day] forState:UIControlStateNormal];
+    
     if (components.day == 1) {
+        [formatter setDateFormat:@"MMMM"]; NSString *month = [formatter stringFromDate:self.cellDate].capitalizedString;
         NSString *title = [NSString stringWithFormat:@"%02d\n%@", (int) components.day, [month substringToIndex:3]];
         [self.innerButton setTitle:title forState:UIControlStateNormal];
     }
-    if (self.headerMode) [self.innerButton setTitle:[weekday substringToIndex:3] forState:UIControlStateNormal];
-    [self.innerButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
-    [self.innerButton.titleLabel setFont:[UIFont systemFontOfSize:13.0f]];
+    
+    if (self.headerMode) {
+        [formatter setDateFormat:@"EEEE"]; NSString *weekday = [formatter stringFromDate:self.cellDate].capitalizedString;
+        [self.innerButton setTitle:[weekday substringToIndex:3] forState:UIControlStateNormal];
+    }
+    
     if (self.headerMode || [self.cellDate.defaultTime compare:[NSDate date].defaultTime] == NSOrderedSame)
         [self.innerButton.titleLabel setFont:[UIFont boldSystemFontOfSize:13.0f]];
-    [self.innerButton setDelegate:self];
-    [self addSubview:self.innerButton];
 }
 
 - (void)setupSelectionIndicator {
-    self.selectionIndicator = [[UIView alloc] initWithFrame:self.innerButton.frame];
-    self.selectionIndicator.backgroundColor = self.primaryColor == nil? kDefaultSelectedColor:self.primaryColor;
-    self.selectionIndicator.layer.cornerRadius = CGRectGetWidth(self.selectionIndicator.frame)/2;
-    self.selectionIndicator.alpha = 0.0f;
-    
-    [self addSubview:self.selectionIndicator];
-    [self sendSubviewToBack:self.selectionIndicator];
+    if (self.selectionIndicator == nil) {
+        self.selectionIndicator = [[UIView alloc] initWithFrame:self.innerButton.frame];
+        self.selectionIndicator.backgroundColor = self.primaryColor == nil? kDefaultSelectedColor:self.primaryColor;
+        self.selectionIndicator.layer.cornerRadius = CGRectGetWidth(self.selectionIndicator.frame)/2;
+        self.selectionIndicator.alpha = 0.0f;
+        
+        [self addSubview:self.selectionIndicator];
+        [self sendSubviewToBack:self.selectionIndicator];
+    }
 }
 
 #pragma mark - SSRippleButton Delegate
@@ -97,6 +105,13 @@
     }];
 }
 
+- (void)fastSelectCalendarCell:(BOOL)selected {
+    [self setSelected:selected];
+    [self.selectionIndicator setAlpha:selected?1.0f:0.0f];
+    [self.innerButton setTitleColor:selected?[UIColor whiteColor]:[UIColor blackColor]
+                           forState:UIControlStateNormal];
+}
+
 - (void)disableCalendarCell:(BOOL)disabled {
     if (!self.headerMode) {
         [self setIsDisabled:disabled];
@@ -105,6 +120,14 @@
         [UIView animateWithDuration:0.2f animations:^{
             [self setAlpha:disabled?0.2f:1.0f];
         }];
+    }
+}
+
+- (void)fastDisableCalendarCell:(BOOL)disabled {
+    if (!self.headerMode) {
+        [self setIsDisabled:disabled];
+        if (disabled) [self selectCalendarCell:NO];
+        [self setUserInteractionEnabled:NO];
     }
 }
 
@@ -172,7 +195,7 @@
 - (void)setupRippleBackgroundView {
     if (self.rippleBackgroundView == nil) {
         CGFloat size = CGRectGetWidth(self.frame);
-
+        
         self.rippleBackgroundView = [[UIView alloc] init];
         self.rippleBackgroundView.backgroundColor = kDefaultRippleColor;
         self.rippleBackgroundView.frame = CGRectMake(0.0f, 0.0f, size, size);

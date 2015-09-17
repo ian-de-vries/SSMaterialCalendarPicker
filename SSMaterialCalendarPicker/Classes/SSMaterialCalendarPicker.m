@@ -156,6 +156,8 @@
         [self layoutIfNeeded];
     } completion:^(BOOL finished) {
         [self refreshVisible];
+        if (self.startDate != nil)
+            [self scrollToDate:self.startDate];
     }];
 }
 
@@ -216,7 +218,7 @@
     [calendarCell setForceLocale:self.forceLocale];
     [calendarCell setDelegate:self];
     [calendarCell calendarCellSetup];
-    [calendarCell selectCalendarCell:[self shouldSelect:calendarCell]];
+    [calendarCell fastSelectCalendarCell:[self shouldSelect:calendarCell]];
     [calendarCell disableCalendarCell:[self shouldDisable:calendarCell]];
     
     if (blinkIndexPath != nil && indexPath.row == blinkIndexPath.row) {
@@ -330,6 +332,14 @@
             blinkIndexPath = indexPath;
         else [cell blink];
     });
+}
+
+- (void)scrollToDate:(NSDate *)date {
+    runningScrollAnimation = YES;
+    NSInteger row = [self findRowWithDate:date];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+    UICollectionViewLayoutAttributes *attributes = [self.calendarCollectionView layoutAttributesForItemAtIndexPath:indexPath];
+    [self.calendarCollectionView setContentOffset:CGPointMake(0, CGRectGetMinY(attributes.frame)-8) animated:YES];
 }
 
 #pragma mark - Calendar Cells Control

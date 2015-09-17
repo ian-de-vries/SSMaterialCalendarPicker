@@ -1,6 +1,6 @@
 //
 //  SSCalendarCollectionViewCell.h
-//  
+//
 //
 //  Created by Iuri Chiba on 7/16/15.
 //
@@ -47,7 +47,9 @@
 
 #pragma mark Interaction & Effects
 - (void)selectCalendarCell:(BOOL)selected;
+- (void)fastSelectCalendarCell:(BOOL)selected;
 - (void)disableCalendarCell:(BOOL)disabled;
+- (void)fastDisableCalendarCell:(BOOL)disabled;
 - (void)calendarCellSetup;
 - (void)blink;
 
