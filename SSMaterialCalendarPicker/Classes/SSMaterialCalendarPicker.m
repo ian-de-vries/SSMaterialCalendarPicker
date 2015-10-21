@@ -149,6 +149,7 @@
 - (void)setSingleDateMode:(BOOL)singleDateMode {
     _singleDateMode = singleDateMode;
     if (singleDateMode) self.okButton.hidden = YES;
+    else self.okButton.hidden = NO;
 }
 
 #pragma mark - Open/Close Calendar
