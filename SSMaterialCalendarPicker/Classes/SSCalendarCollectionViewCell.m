@@ -68,7 +68,8 @@
     }
     
     if (self.headerMode || [self.cellDate.defaultTime compare:[NSDate date].defaultTime] == NSOrderedSame)
-        [self.innerButton.titleLabel setFont:[UIFont boldSystemFontOfSize:13.0f]];
+        [self.innerButton.titleLabel setFont:[UIFont boldSystemFontOfSize:14.0f]];
+    else [self.innerButton.titleLabel setFont:[UIFont systemFontOfSize:13.0f]];
 }
 
 - (void)setupSelectionIndicator {

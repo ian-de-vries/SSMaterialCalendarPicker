@@ -146,6 +146,11 @@
     [self.headerSeparator setBackgroundColor:_secondaryColor];
 }
 
+- (void)setSingleDateMode:(BOOL)singleDateMode {
+    _singleDateMode = singleDateMode;
+    if (singleDateMode) self.okButton.hidden = YES;
+}
+
 #pragma mark - Open/Close Calendar
 - (void)showAnimated {
     self.hidden = NO;
@@ -156,8 +161,6 @@
         [self layoutIfNeeded];
     } completion:^(BOOL finished) {
         [self refreshVisible];
-        if (self.startDate != nil)
-            [self scrollToDate:self.startDate];
     }];
 }
 
@@ -172,6 +175,12 @@
         if (self.shouldRemove)
             [self removeFromSuperview];
     }];
+}
+
+- (void)resetDates {
+    self.startDate = nil;
+    self.endDate = nil;
+    [self.calendarCollectionView reloadData];
 }
 
 #pragma mark - Date Selected
@@ -231,7 +240,11 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     SSCalendarCollectionViewCell *calendarCell = [self cellAtIndexPath:indexPath];
-    if (!calendarCell.isDisabled) {
+    if (self.singleDateMode) {
+        [self.delegate rangeSelectedWithStartDate:calendarCell.cellDate
+                                       andEndDate:calendarCell.cellDate];
+        [self closeAnimated];
+    } if (!calendarCell.isDisabled) {
         NSDate *startBackup = self.startDate;
         NSDate *endBackup = self.endDate;
         
@@ -247,7 +260,11 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
     SSCalendarCollectionViewCell *calendarCell = [self cellAtIndexPath:indexPath];
-    if (!calendarCell.isDisabled) {
+    if (self.singleDateMode) {
+        [self.delegate rangeSelectedWithStartDate:calendarCell.cellDate
+                                       andEndDate:calendarCell.cellDate];
+        [self closeAnimated];
+    } if (!calendarCell.isDisabled) {
         if (self.startDate != nil && [calendarCell.cellDate compare:self.startDate] == NSOrderedSame) self.startDate = nil;
         else if (self.endDate != nil && [calendarCell.cellDate compare:self.endDate] == NSOrderedSame) self.endDate = nil;
         else {
@@ -332,14 +349,6 @@
             blinkIndexPath = indexPath;
         else [cell blink];
     });
-}
-
-- (void)scrollToDate:(NSDate *)date {
-    runningScrollAnimation = YES;
-    NSInteger row = [self findRowWithDate:date];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
-    UICollectionViewLayoutAttributes *attributes = [self.calendarCollectionView layoutAttributesForItemAtIndexPath:indexPath];
-    [self.calendarCollectionView setContentOffset:CGPointMake(0, CGRectGetMinY(attributes.frame)-8) animated:YES];
 }
 
 #pragma mark - Calendar Cells Control

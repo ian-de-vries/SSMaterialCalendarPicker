@@ -22,18 +22,21 @@
 @property (strong, nonatomic) NSString *calendarTitle;
 // Default value is "WARNING: Interval unavailable!"
 @property (strong, nonatomic) NSString *disabledIntervalWarning;
+@property (weak, nonatomic) IBOutlet UIButton *okButton;
 
 #pragma mark Interaction Properties:
 @property (strong, nonatomic) id<SSMaterialCalendarPickerDelegate> delegate;
 @property (strong, nonatomic) NSArray *disabledDates;
 @property (strong, nonatomic) NSDate *startDate;
 @property (strong, nonatomic) NSDate *endDate;
+@property (nonatomic) BOOL singleDateMode;
 
 #pragma mark Show/Hide:
 + (void)showCalendarOn:(UIView *)view withDelegate:(id<SSMaterialCalendarPickerDelegate>)delegate;
 + (SSMaterialCalendarPicker *)initCalendarOn:(UIView *)view withDelegate:(id<SSMaterialCalendarPickerDelegate>)delegate;
 - (void)showAnimated;
 - (void)closeAnimated;
+- (void)resetDates;
 
 #pragma mark Show warning from outside (for some reason):
 - (void)showWarning:(NSString *)message;
