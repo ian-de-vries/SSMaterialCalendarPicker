@@ -13,6 +13,7 @@
 		EE4B8B691B5ED299005ACB3C /* SSMaterialCalendarPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = EE4B8B681B5ED299005ACB3C /* SSMaterialCalendarPicker.m */; };
 		EE4B8B6F1B5ED50B005ACB3C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE4B8B6D1B5ED50B005ACB3C /* Main.storyboard */; };
 		EE4B8B731B5EDF41005ACB3C /* SSCalendarCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE4B8B721B5EDF41005ACB3C /* SSCalendarCollectionViewCell.xib */; };
+		EE96C73D1BD9AB43003059EA /* SSNoSpacingCollectionLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = EE96C73C1BD9AB43003059EA /* SSNoSpacingCollectionLayout.m */; settings = {ASSET_TAGS = (); }; };
 		EEB0CD261B66E1C8000133BC /* UIImage+THColorInverter.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB0CD251B66E1C8000133BC /* UIImage+THColorInverter.m */; };
 		EEE8163F1B585EE5005ACEA6 /* SSCalendarCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE8162E1B585EE5005ACEA6 /* SSCalendarCollectionViewCell.m */; };
 		EEE816401B585EE5005ACEA6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEE816311B585EE5005ACEA6 /* Images.xcassets */; };
@@ -32,6 +33,8 @@
 		EE4B8B681B5ED299005ACB3C /* SSMaterialCalendarPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSMaterialCalendarPicker.m; sourceTree = "<group>"; };
 		EE4B8B6E1B5ED50B005ACB3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EE4B8B721B5EDF41005ACB3C /* SSCalendarCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSCalendarCollectionViewCell.xib; sourceTree = "<group>"; };
+		EE96C73B1BD9AB43003059EA /* SSNoSpacingCollectionLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSNoSpacingCollectionLayout.h; sourceTree = "<group>"; };
+		EE96C73C1BD9AB43003059EA /* SSNoSpacingCollectionLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSNoSpacingCollectionLayout.m; sourceTree = "<group>"; };
 		EEB0CD241B66E1C8000133BC /* UIImage+THColorInverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+THColorInverter.h"; sourceTree = "<group>"; };
 		EEB0CD251B66E1C8000133BC /* UIImage+THColorInverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+THColorInverter.m"; sourceTree = "<group>"; };
 		EEE8162D1B585EE5005ACEA6 /* SSCalendarCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCalendarCollectionViewCell.h; sourceTree = "<group>"; };
@@ -109,6 +112,8 @@
 				EE4B8B671B5ED299005ACB3C /* SSMaterialCalendarPicker.h */,
 				EE4B8B681B5ED299005ACB3C /* SSMaterialCalendarPicker.m */,
 				EE20AC221B62AAE9009B50D6 /* SSMaterialCalendarPicker.xib */,
+				EE96C73B1BD9AB43003059EA /* SSNoSpacingCollectionLayout.h */,
+				EE96C73C1BD9AB43003059EA /* SSNoSpacingCollectionLayout.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -245,6 +250,7 @@
 				EEE816461B585EE5005ACEA6 /* ExampleViewController.m in Sources */,
 				EE4B8B691B5ED299005ACB3C /* SSMaterialCalendarPicker.m in Sources */,
 				EEE8163F1B585EE5005ACEA6 /* SSCalendarCollectionViewCell.m in Sources */,
+				EE96C73D1BD9AB43003059EA /* SSNoSpacingCollectionLayout.m in Sources */,
 				EE20ABFE1B62A4B6009B50D6 /* SSMaterialStepView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

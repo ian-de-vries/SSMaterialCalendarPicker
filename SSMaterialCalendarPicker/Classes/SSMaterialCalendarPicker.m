@@ -63,7 +63,7 @@
 #pragma mark - Show Calendar
 + (void)showCalendarOn:(UIView *)view withDelegate:(id<SSMaterialCalendarPickerDelegate>)delegate {
     SSMaterialCalendarPicker *picker = [[self alloc] initWithFrame:view.frame];
-    [picker.headerCollectionViewHeight setConstant:CGRectGetWidth(view.frame)/7];
+    [picker.headerCollectionViewHeight setConstant:CGRectGetWidth(view.frame)/7.0001f];
     [picker setDelegate:delegate];
     [view addSubview:picker];
     [picker setShouldRemove:YES];
@@ -92,6 +92,10 @@
         [self.calendarCollectionView setMultipleTouchEnabled:NO];
         [self.calendarCollectionView registerNib:cellNib forCellWithReuseIdentifier:kCalendarCellIdentifier];
         [self.headerCollectionView registerNib:cellNib forCellWithReuseIdentifier:kCalendarCellIdentifier];
+        [(UICollectionViewFlowLayout *)self.headerCollectionView.collectionViewLayout setMinimumInteritemSpacing:0];
+        [(UICollectionViewFlowLayout *)self.headerCollectionView.collectionViewLayout setMinimumLineSpacing:0];
+        [(UICollectionViewFlowLayout *)self.calendarCollectionView.collectionViewLayout setMinimumInteritemSpacing:0];
+        [(UICollectionViewFlowLayout *)self.calendarCollectionView.collectionViewLayout setMinimumLineSpacing:0];
         [self setMultipleTouchEnabled:NO];
         [self.backgroundView addTarget:self action:@selector(closeAnimated) forControlEvents:UIControlEventTouchUpInside];
     } return self;
@@ -277,7 +281,7 @@
 }
 
 - (CGSize)collectionView:(nonnull UICollectionView *)collectionView layout:(nonnull UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    CGFloat size = CGRectGetWidth(collectionView.frame)/7;
+    CGFloat size = CGRectGetWidth(collectionView.frame)/7.001f;
     return CGSizeMake(size, size);
 }
 
@@ -293,7 +297,7 @@
 - (void)checkVisibleMonth {
     NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
     for (int i = 0; i < 7; i++) {
-        CGFloat cellSize = CGRectGetWidth(self.calendarCollectionView.frame)/7;
+        CGFloat cellSize = CGRectGetWidth(self.calendarCollectionView.frame)/7.001f;
         NSIndexPath *indexPath = [self.calendarCollectionView
                                   indexPathForItemAtPoint:[[self.calendarCollectionView superview]
                                                            convertPoint:CGPointMake(cellSize/2 + i*cellSize, cellSize/2)
@@ -370,6 +374,7 @@
 }
 
 - (BOOL)shouldSelect:(SSCalendarCollectionViewCell *)calendarCell {
+    if (self.singleDateMode) return NO;
     if (self.startDate != nil && self.endDate != nil)
         return [calendarCell.cellDate isDateBetween:self.startDate and:self.endDate];
     else return ([calendarCell.cellDate isEqualToDate:self.startDate] || [calendarCell.cellDate isEqualToDate:self.endDate]);

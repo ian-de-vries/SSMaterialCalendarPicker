@@ -90,12 +90,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="3iK-bD-Fup"/>
                             </constraints>
-                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="iWc-eJ-MET">
-                                <size key="itemSize" width="80" height="80"/>
-                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            </collectionViewFlowLayout>
+                            <collectionViewLayout key="collectionViewLayout" id="iyN-1j-XO8" customClass="SSNoSpacingCollectionLayout"/>
                             <connections>
                                 <outlet property="dataSource" destination="pJU-z3-znu" id="fXK-qY-eAD"/>
                                 <outlet property="delegate" destination="pJU-z3-znu" id="t3E-Z0-TF3"/>
@@ -119,12 +114,7 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="245" id="q4f-vJ-Zr7"/>
                                     </constraints>
-                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="NkG-9r-6lf">
-                                        <size key="itemSize" width="80" height="80"/>
-                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                        <inset key="sectionInset" minX="0.0" minY="6" maxX="0.0" maxY="0.0"/>
-                                    </collectionViewFlowLayout>
+                                    <collectionViewLayout key="collectionViewLayout" id="jzU-Qi-7uY" customClass="SSNoSpacingCollectionLayout"/>
                                     <variation key="default">
                                         <mask key="constraints">
                                             <exclude reference="q4f-vJ-Zr7"/>
