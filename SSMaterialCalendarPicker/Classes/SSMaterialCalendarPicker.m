@@ -246,6 +246,8 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     SSCalendarCollectionViewCell *calendarCell = [self cellAtIndexPath:indexPath];
     if (self.singleDateMode) {
+        self.startDate = calendarCell.cellDate;
+        self.endDate = calendarCell.cellDate;
         [self.delegate rangeSelectedWithStartDate:calendarCell.cellDate
                                        andEndDate:calendarCell.cellDate];
         [self closeAnimated];
@@ -266,6 +268,8 @@
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
     SSCalendarCollectionViewCell *calendarCell = [self cellAtIndexPath:indexPath];
     if (self.singleDateMode) {
+        self.startDate = calendarCell.cellDate;
+        self.endDate = calendarCell.cellDate;
         [self.delegate rangeSelectedWithStartDate:calendarCell.cellDate
                                        andEndDate:calendarCell.cellDate];
         [self closeAnimated];
@@ -374,8 +378,9 @@
 }
 
 - (BOOL)shouldSelect:(SSCalendarCollectionViewCell *)calendarCell {
-    if (self.singleDateMode) return NO;
-    if (self.startDate != nil && self.endDate != nil)
+    if (self.singleDateMode) {
+        return ([calendarCell.cellDate isEqualToDate:self.startDate] || [calendarCell.cellDate isEqualToDate:self.endDate]);
+    } if (self.startDate != nil && self.endDate != nil)
         return [calendarCell.cellDate isDateBetween:self.startDate and:self.endDate];
     else return ([calendarCell.cellDate isEqualToDate:self.startDate] || [calendarCell.cellDate isEqualToDate:self.endDate]);
 }
