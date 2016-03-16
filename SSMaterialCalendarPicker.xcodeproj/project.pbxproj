@@ -13,7 +13,7 @@
 		EE4B8B691B5ED299005ACB3C /* SSMaterialCalendarPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = EE4B8B681B5ED299005ACB3C /* SSMaterialCalendarPicker.m */; };
 		EE4B8B6F1B5ED50B005ACB3C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE4B8B6D1B5ED50B005ACB3C /* Main.storyboard */; };
 		EE4B8B731B5EDF41005ACB3C /* SSCalendarCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE4B8B721B5EDF41005ACB3C /* SSCalendarCollectionViewCell.xib */; };
-		EE96C73D1BD9AB43003059EA /* SSNoSpacingCollectionLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = EE96C73C1BD9AB43003059EA /* SSNoSpacingCollectionLayout.m */; settings = {ASSET_TAGS = (); }; };
+		EE96C73D1BD9AB43003059EA /* SSNoSpacingCollectionLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = EE96C73C1BD9AB43003059EA /* SSNoSpacingCollectionLayout.m */; };
 		EEB0CD261B66E1C8000133BC /* UIImage+THColorInverter.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB0CD251B66E1C8000133BC /* UIImage+THColorInverter.m */; };
 		EEE8163F1B585EE5005ACEA6 /* SSCalendarCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE8162E1B585EE5005ACEA6 /* SSCalendarCollectionViewCell.m */; };
 		EEE816401B585EE5005ACEA6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEE816311B585EE5005ACEA6 /* Images.xcassets */; };

@@ -32,12 +32,14 @@
 @property (strong, nonatomic) NSLocale *forceLocale;
 @property (strong, nonatomic) UIColor *primaryColor;
 @property (strong, nonatomic) UIColor *secondaryColor;
+@property (nonatomic) BOOL lighterRadius;
 
 #pragma mark Interaction Properties:
 @property (strong, nonatomic) id<SSCalendarCollectionViewCellDelegate> delegate;
 @property (strong, nonatomic) NSDate *cellDate;
 
 #pragma mark Visual Cues:
+@property (strong, nonatomic) UILabel *dayLabel;
 @property (strong, nonatomic) SSRippleButton *innerButton;
 @property (strong, nonatomic) UIView *selectionIndicator;
 

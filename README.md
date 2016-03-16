@@ -5,7 +5,7 @@
 ##**SSMaterialCalendarPicker**##
 A lightly-customizable calendar pop-up view for range selection inspired by Google's Material Design Guidelines and apps.
 
-Tested on iOS8 and iOS9. Supports **ONLY** portrait orientation, atm.
+Tested on iOS 7, iOS8 and iOS9. Supports **ONLY** portrait orientation, atm.
 
 [![Version](https://img.shields.io/cocoapods/v/SSMaterialCalendarPicker.svg?style=flat-square)](http://cocoadocs.org/docsets/SSMaterialCalendarPicker)
 [![License](https://img.shields.io/cocoapods/l/SSMaterialCalendarPicker.svg?style=flat-square)](http://cocoadocs.org/docsets/SSMaterialCalendarPicker)
@@ -47,12 +47,19 @@ datePicker.disabledIntervalWarning = @"Anfitrião indisponível neste período!"
 // Set a calendar title. Default is "Select an Interval"
 datePicker.calendarTitle = @"Selecione um Período";
 
+// Set apply button title. Default is "Apply"
+// OBS: this is hidden on single date mode
+datePicker.okButtonText = @"Aplicar";
+
 // Set a primary and a secondary color
 datePicker.primaryColor = [UIColor colorWithRed:255/255.0f green:87/255.0f blue:34/255.0f alpha:1.0f];
 datePicker.secondaryColor = [UIColor colorWithRed:244/255.0f green:81/255.0f blue:30/255.0f alpha:1.0f];
 
 // Set disabled dates. Dates previous to the current date are disabled by default.
 datePicker.disabledDates = @[[NSDate daysFromNow:arc4random_uniform(300)], [NSDate daysFromNow:arc4random_uniform(300)]];
+
+// Set single date mode as YES, if needed
+datePicker.singleDateMode = YES;
 ```
 
 * Show the calendar:

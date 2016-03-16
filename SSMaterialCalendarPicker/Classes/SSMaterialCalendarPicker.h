@@ -22,7 +22,9 @@
 @property (strong, nonatomic) NSString *calendarTitle;
 // Default value is "WARNING: Interval unavailable!"
 @property (strong, nonatomic) NSString *disabledIntervalWarning;
-@property (weak, nonatomic) IBOutlet UIButton *okButton;
+// Default value is "Apply"
+@property (strong, nonatomic) NSString *okButtonText;
+@property (strong, nonatomic) IBOutlet UIButton *okButton;
 
 #pragma mark Interaction Properties:
 @property (strong, nonatomic) id<SSMaterialCalendarPickerDelegate> delegate;

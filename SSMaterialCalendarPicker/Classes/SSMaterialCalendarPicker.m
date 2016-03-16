@@ -58,6 +58,8 @@
     NSDate *selectedMonth;
     BOOL runningScrollAnimation;
     NSIndexPath *blinkIndexPath;
+    CGFloat lastOffset;
+    BOOL init;
 }
 
 #pragma mark - Show Calendar
@@ -117,7 +119,7 @@
         CAGradientLayer *gradient = [CAGradientLayer layer];
         gradient.frame = self.calendarContainer.bounds;
         gradient.colors = @[(id)[UIColor blackColor].CGColor, (id)[UIColor clearColor].CGColor];
-        gradient.locations = @[@0.9f, @1.0f];
+        gradient.locations = @[@0.86f, @0.96f];
         self.calendarContainer.layer.mask = gradient;
     }
 }
@@ -154,6 +156,11 @@
     _singleDateMode = singleDateMode;
     if (singleDateMode) self.okButton.hidden = YES;
     else self.okButton.hidden = NO;
+}
+
+- (void)setOkButtonText:(NSString *)okButtonText {
+    _okButtonText = okButtonText;
+    [self.okButton setTitle:okButtonText forState:UIControlStateNormal];
 }
 
 #pragma mark - Open/Close Calendar
@@ -200,17 +207,13 @@
 }
 
 #pragma mark - UICollectionView Delegate & DataSource
-- (void)scrollViewDidScroll:(nonnull UIScrollView *)scrollView {
-    float scrollViewHeight = scrollView.frame.size.height;
-    float scrollContentSizeHeight = scrollView.contentSize.height;
-    float scrollOffset = scrollView.contentOffset.y;
-    
-    if (scrollOffset + scrollViewHeight == scrollContentSizeHeight) {
-        [self removeCalendarMask];
-    } else [self addCalendarMask];
-    
-    if (!runningScrollAnimation)
-        [self checkVisibleMonth];
+- (void)scrollViewDidScroll:(nonnull UIScrollView *)scrollView {    
+    if (scrollView.contentOffset.y < lastOffset - 100 ||
+        scrollView.contentOffset.y > lastOffset + 100) {
+        lastOffset = scrollView.contentOffset.y;
+        if (!runningScrollAnimation)
+            [self checkVisibleMonth];
+    }
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(nonnull UIScrollView *)scrollView {
@@ -248,13 +251,11 @@
     if (self.singleDateMode) {
         self.startDate = calendarCell.cellDate;
         self.endDate = calendarCell.cellDate;
-        [self.delegate rangeSelectedWithStartDate:calendarCell.cellDate
-                                       andEndDate:calendarCell.cellDate];
+        [self.delegate rangeSelectedWithStartDate:calendarCell.cellDate andEndDate:calendarCell.cellDate];
         [self closeAnimated];
     } if (!calendarCell.isDisabled) {
         NSDate *startBackup = self.startDate;
         NSDate *endBackup = self.endDate;
-        
         if (self.startDate == nil) self.startDate = calendarCell.cellDate;
         else if (self.endDate == nil) self.endDate = calendarCell.cellDate;
         else if ([calendarCell.cellDate compare:self.startDate] == NSOrderedAscending) self.startDate = calendarCell.cellDate;
@@ -270,8 +271,7 @@
     if (self.singleDateMode) {
         self.startDate = calendarCell.cellDate;
         self.endDate = calendarCell.cellDate;
-        [self.delegate rangeSelectedWithStartDate:calendarCell.cellDate
-                                       andEndDate:calendarCell.cellDate];
+        [self.delegate rangeSelectedWithStartDate:calendarCell.cellDate andEndDate:calendarCell.cellDate];
         [self closeAnimated];
     } if (!calendarCell.isDisabled) {
         if (self.startDate != nil && [calendarCell.cellDate compare:self.startDate] == NSOrderedSame) self.startDate = nil;
@@ -302,8 +302,7 @@
     NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
     for (int i = 0; i < 7; i++) {
         CGFloat cellSize = CGRectGetWidth(self.calendarCollectionView.frame)/7.001f;
-        NSIndexPath *indexPath = [self.calendarCollectionView
-                                  indexPathForItemAtPoint:[[self.calendarCollectionView superview]
+        NSIndexPath *indexPath = [self.calendarCollectionView indexPathForItemAtPoint:[[self.calendarCollectionView superview]
                                                            convertPoint:CGPointMake(cellSize/2 + i*cellSize, cellSize/2)
                                                            toView:self.calendarCollectionView]];
         if (indexPath != nil)
@@ -420,9 +419,16 @@
 
 - (void)refreshVisible {
     NSArray *visibleCells = [self.calendarCollectionView visibleCells];
-    for (SSCalendarCollectionViewCell *calendarCell in visibleCells) {
-        [calendarCell selectCalendarCell:[self shouldSelect:calendarCell]];
-        [calendarCell disableCalendarCell:[self shouldDisable:calendarCell]];
+    if (!init) {
+        for (SSCalendarCollectionViewCell *calendarCell in visibleCells) {
+            [calendarCell fastSelectCalendarCell:[self shouldSelect:calendarCell]];
+            [calendarCell fastDisableCalendarCell:[self shouldDisable:calendarCell]];
+        } init = YES;
+    } else {
+        for (SSCalendarCollectionViewCell *calendarCell in visibleCells) {
+            [calendarCell selectCalendarCell:[self shouldSelect:calendarCell]];
+            [calendarCell disableCalendarCell:[self shouldDisable:calendarCell]];
+        }
     }
 }
 

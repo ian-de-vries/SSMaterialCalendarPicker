@@ -21,7 +21,6 @@
 
 #pragma mark - Initialization
 - (void)calendarCellSetup {
-    //    [self clearSubviews];
     [self setupRippleButton];
     [self setupSelectionIndicator];
 }
@@ -33,11 +32,6 @@
 
 #pragma mark Visual Elements Initialization
 - (void)setupRippleButton {
-    CGFloat size = CGRectGetWidth(self.frame) * 0.8f;
-    CGFloat x = (CGRectGetWidth(self.frame) * 0.2f)/2;
-    CGFloat y = (CGRectGetWidth(self.frame) * 0.2f)/2;
-    CGRect buttonFrame = CGRectMake(x, y, size, size);
-    
     if (self.cellDate == nil) self.cellDate = [NSDate date];
     NSDateComponents *components = [[NSCalendar currentCalendar]
                                     components:NSCalendarUnitDay | NSCalendarUnitMonth |
@@ -46,30 +40,42 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     if (self.forceLocale != nil) [formatter setLocale:self.forceLocale];
     
+    if (self.dayLabel == nil) {
+        self.dayLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+        [self addSubview:self.dayLabel];
+        [self.dayLabel setNumberOfLines:2];
+        [self.dayLabel setTextAlignment:NSTextAlignmentCenter];
+        [self.dayLabel setFont:[UIFont systemFontOfSize:13.0f]];
+    } [self.dayLabel setText:[NSString stringWithFormat:@"%02d", (int) components.day]];
+    
     if (self.innerButton == nil) {
+        CGFloat width = CGRectGetWidth(self.frame);
+        CGFloat size =  width * 0.8f;
+        CGFloat x = (width * 0.2f)/2;
+        CGFloat y = (width * 0.2f)/2;
+        CGRect buttonFrame = CGRectMake(x, y, size, size);
         self.innerButton = [[SSRippleButton alloc] initWithFrame:buttonFrame];
         [self addSubview:self.innerButton];
-        [self.innerButton.titleLabel setNumberOfLines:2];
-        [self.innerButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
-        [self.innerButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
-        [self.innerButton.titleLabel setFont:[UIFont systemFontOfSize:13.0f]];
         [self.innerButton setDelegate:self];
-    } [self.innerButton setTitle:[NSString stringWithFormat:@"%02d", (int) components.day] forState:UIControlStateNormal];
-    
-    if (components.day == 1) {
-        [formatter setDateFormat:@"MMMM"]; NSString *month = [formatter stringFromDate:self.cellDate].capitalizedString;
-        NSString *title = [NSString stringWithFormat:@"%02d\n%@", (int) components.day, [month substringToIndex:3]];
-        [self.innerButton setTitle:title forState:UIControlStateNormal];
-    }
-    
-    if (self.headerMode) {
-        [formatter setDateFormat:@"EEEE"]; NSString *weekday = [formatter stringFromDate:self.cellDate].capitalizedString;
-        [self.innerButton setTitle:[weekday substringToIndex:3] forState:UIControlStateNormal];
     }
     
     if (self.headerMode || [self.cellDate.defaultTime compare:[NSDate date].defaultTime] == NSOrderedSame)
-        [self.innerButton.titleLabel setFont:[UIFont boldSystemFontOfSize:14.0f]];
-    else [self.innerButton.titleLabel setFont:[UIFont systemFontOfSize:13.0f]];
+        [self.dayLabel setFont:[UIFont boldSystemFontOfSize:14.0f]];
+    else [self.dayLabel setFont:[UIFont systemFontOfSize:13.0f]];
+    
+    if (components.day == 1 && !self.headerMode) {
+        [formatter setDateFormat:@"MMM"]; NSString *month = [formatter stringFromDate:self.cellDate].capitalizedString;
+        NSString *title = [NSString stringWithFormat:@"%02d\n%@", (int) components.day, month];
+        NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:title];
+        [attrString addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:12] range:NSMakeRange(0, 2)];
+        [attrString addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:8] range:NSMakeRange(3, 3)];
+        [self.dayLabel setAttributedText:attrString];
+    }
+    
+    if (self.headerMode) {
+        [formatter setDateFormat:@"EEE"]; NSString *weekday = [formatter stringFromDate:self.cellDate].capitalizedString;
+        [self.dayLabel setText:weekday];
+    }
 }
 
 - (void)setupSelectionIndicator {
@@ -77,6 +83,7 @@
         self.selectionIndicator = [[UIView alloc] initWithFrame:self.innerButton.frame];
         self.selectionIndicator.backgroundColor = self.primaryColor == nil? kDefaultSelectedColor:self.primaryColor;
         self.selectionIndicator.layer.cornerRadius = CGRectGetWidth(self.selectionIndicator.frame)/2;
+        if (self.lighterRadius) self.selectionIndicator.layer.cornerRadius = 4.0f;
         self.selectionIndicator.alpha = 0.0f;
         
         [self addSubview:self.selectionIndicator];
@@ -101,16 +108,27 @@
     [self setSelected:selected];
     [UIView animateWithDuration:0.3f animations:^{
         [self.selectionIndicator setAlpha:selected?1.0f:0.0f];
-        [self.innerButton setTitleColor:selected?[UIColor whiteColor]:[UIColor blackColor]
-                               forState:UIControlStateNormal];
+        [self changeTitleColor:selected];
     }];
+}
+
+- (void)changeTitleColor:(BOOL)selected {
+    [self.selectionIndicator setAlpha:selected?1.0f:0.0f];
+    if ([self.dayLabel attributedText] == nil)
+        [self.dayLabel setTextColor:selected?[UIColor whiteColor]:[UIColor blackColor]];
+    else {
+        NSMutableAttributedString *attrString = [[self.dayLabel attributedText] mutableCopy];
+        [attrString addAttribute:NSForegroundColorAttributeName
+                           value:selected?[UIColor whiteColor]:[UIColor blackColor]
+                           range:NSMakeRange(0, attrString.length)];
+        [self.dayLabel setAttributedText:attrString];
+    }
 }
 
 - (void)fastSelectCalendarCell:(BOOL)selected {
     [self setSelected:selected];
     [self.selectionIndicator setAlpha:selected?1.0f:0.0f];
-    [self.innerButton setTitleColor:selected?[UIColor whiteColor]:[UIColor blackColor]
-                           forState:UIControlStateNormal];
+    [self changeTitleColor:selected];
 }
 
 - (void)disableCalendarCell:(BOOL)disabled {
@@ -134,10 +152,10 @@
 
 - (void)blink {
     [UIView animateWithDuration:0.6f animations:^{
-        self.innerButton.transform = CGAffineTransformMakeScale(1.3f, 1.3f);
+        self.dayLabel.transform = CGAffineTransformMakeScale(1.3f, 1.3f);
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.3f animations:^{
-            self.innerButton.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
+            self.dayLabel.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
         }];
     }];
 }
