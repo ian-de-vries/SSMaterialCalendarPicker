@@ -84,8 +84,8 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        UINib *cellNib = [UINib nibWithNibName:kCalendarCellIdentifier bundle:nil];
-        self = [[[NSBundle mainBundle] loadNibNamed:kCalendarPickerIdentifier
+        UINib *cellNib = [UINib nibWithNibName:kCalendarCellIdentifier bundle:[NSBundle bundleForClass:[SSCalendarCollectionViewCell class]]];
+        self = [[[NSBundle bundleForClass:[self class]] loadNibNamed:kCalendarPickerIdentifier
                                               owner:self options:nil] objectAtIndex:0];
         [self setFrame:frame];
         [self initializeDates];
@@ -115,13 +115,13 @@
 }
 
 - (void)addCalendarMask {
-    if (self.calendarContainer.layer.mask == nil) {
-        CAGradientLayer *gradient = [CAGradientLayer layer];
-        gradient.frame = self.calendarContainer.bounds;
-        gradient.colors = @[(id)[UIColor blackColor].CGColor, (id)[UIColor clearColor].CGColor];
-        gradient.locations = @[@0.86f, @0.96f];
-        self.calendarContainer.layer.mask = gradient;
-    }
+//    if (self.calendarContainer.layer.mask == nil) {
+//        CAGradientLayer *gradient = [CAGradientLayer layer];
+//        gradient.frame = self.calendarContainer.bounds;
+//        gradient.colors = @[(id)[UIColor blackColor].CGColor, (id)[UIColor clearColor].CGColor];
+//        gradient.locations = @[@0.86f, @0.96f];
+//        self.calendarContainer.layer.mask = gradient;
+//    }
 }
 
 - (void)removeCalendarMask {
@@ -168,9 +168,9 @@
     self.hidden = NO;
     [UIView animateWithDuration:0.6f animations:^{
         self.backgroundView.alpha = kAlphaShow;
-        self.pickerViewTopDistance.constant = kCalendarHeaderHeight;
-        self.calendarHeaderTopDistance.constant = 0.0f;
-        [self layoutIfNeeded];
+//        self.pickerViewTopDistance.constant = kCalendarHeaderHeight;
+//        self.calendarHeaderTopDistance.constant = 0.0f;
+//        [self layoutIfNeeded];
     } completion:^(BOOL finished) {
         [self refreshVisible];
     }];
