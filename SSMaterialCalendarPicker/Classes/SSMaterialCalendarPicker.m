@@ -86,7 +86,7 @@
     if (self) {
         UINib *cellNib = [UINib nibWithNibName:kCalendarCellIdentifier bundle:[NSBundle bundleForClass:[SSCalendarCollectionViewCell class]]];
         self = [[[NSBundle bundleForClass:[self class]] loadNibNamed:kCalendarPickerIdentifier
-                                              owner:self options:nil] objectAtIndex:0];
+                                                               owner:self options:nil] objectAtIndex:0];
         [self setFrame:frame];
         [self initializeDates];
         [self addCalendarMask];
@@ -106,11 +106,20 @@
 - (void)initializeDates {
     [self setMonthFromDate:[NSDate date].firstDayOfTheMonth.defaultTime];
     if (self.disabledDates == nil) self.disabledDates = [[NSArray alloc] init];
-    int lastSunday = [NSDate daysFromLastSunday];
+
     dates = [[NSMutableArray alloc] init];
-    for (int i = -lastSunday; i < 364-lastSunday; i++) {
-        [dates addObject:[NSDate daysFromNow:i].defaultTime];
-    } self.startDate = self.startDate.defaultTime;
+    
+    NSDateComponents* comps = [[NSCalendar currentCalendar] components:NSCalendarUnitYear|
+                               NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour|
+                               NSCalendarUnitMinute|NSCalendarUnitSecond|NSCalendarUnitWeekday fromDate:[NSDate date]];
+    comps.year--;
+    NSDate *oneYearAgo = [[NSCalendar currentCalendar] dateFromComponents:comps];
+    
+    for (int i = 0; i < 372; i++) {
+        [dates addObject:[NSDate days:i fromDate:oneYearAgo].defaultTime];
+    }
+    
+    self.startDate = self.startDate.defaultTime;
     self.endDate = self.endDate.defaultTime;
 }
 
@@ -166,13 +175,16 @@
 #pragma mark - Open/Close Calendar
 - (void)showAnimated {
     self.hidden = NO;
-    [UIView animateWithDuration:0.6f animations:^{
+    [UIView animateWithDuration:0.1f animations:^{
         self.backgroundView.alpha = kAlphaShow;
 //        self.pickerViewTopDistance.constant = kCalendarHeaderHeight;
 //        self.calendarHeaderTopDistance.constant = 0.0f;
 //        [self layoutIfNeeded];
     } completion:^(BOOL finished) {
         [self refreshVisible];
+        CGPoint bottomOffset = CGPointMake(0, self.calendarCollectionView.contentSize.height - self.calendarCollectionView.bounds.size.height);
+        [self.calendarCollectionView setContentOffset:bottomOffset animated:YES];
+        
     }];
 }
 
@@ -207,7 +219,7 @@
 }
 
 #pragma mark - UICollectionView Delegate & DataSource
-- (void)scrollViewDidScroll:(nonnull UIScrollView *)scrollView {    
+- (void)scrollViewDidScroll:(nonnull UIScrollView *)scrollView {
     if (scrollView.contentOffset.y < lastOffset - 100 ||
         scrollView.contentOffset.y > lastOffset + 100) {
         lastOffset = scrollView.contentOffset.y;
@@ -303,8 +315,8 @@
     for (int i = 0; i < 7; i++) {
         CGFloat cellSize = CGRectGetWidth(self.calendarCollectionView.frame)/7.001f;
         NSIndexPath *indexPath = [self.calendarCollectionView indexPathForItemAtPoint:[[self.calendarCollectionView superview]
-                                                           convertPoint:CGPointMake(cellSize/2 + i*cellSize, cellSize/2)
-                                                           toView:self.calendarCollectionView]];
+                                                                                       convertPoint:CGPointMake(cellSize/2 + i*cellSize, cellSize/2)
+                                                                                       toView:self.calendarCollectionView]];
         if (indexPath != nil)
             [indexPaths addObject:indexPath];
     };
@@ -385,7 +397,7 @@
 }
 
 - (BOOL)shouldDisable:(SSCalendarCollectionViewCell *)calendarCell {
-    if ([[NSDate date].defaultTime compare:calendarCell.cellDate] == NSOrderedDescending) return YES;
+    if ([[NSDate date].defaultTime compare:calendarCell.cellDate] == NSOrderedAscending) return YES;
     if ([self isDateDisabled:calendarCell.cellDate]) return YES;
     return NO;
 }

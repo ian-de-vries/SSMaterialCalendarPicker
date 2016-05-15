@@ -28,7 +28,7 @@
     datePicker.okButtonText = @"Aplicar";
     datePicker.primaryColor = [UIColor colorWithRed:255/255.0f green:87/255.0f blue:34/255.0f alpha:1.0f];
     datePicker.secondaryColor = [UIColor colorWithRed:244/255.0f green:81/255.0f blue:30/255.0f alpha:1.0f];
-    datePicker.disabledDates = @[[NSDate daysFromNow:arc4random_uniform(300)], [NSDate daysFromNow:arc4random_uniform(300)], [NSDate daysFromNow:arc4random_uniform(300)], [NSDate daysFromNow:arc4random_uniform(300)], [NSDate daysFromNow:arc4random_uniform(300)], [NSDate daysFromNow:arc4random_uniform(300)], [NSDate daysFromNow:arc4random_uniform(300)], [NSDate daysFromNow:arc4random_uniform(300)], [NSDate daysFromNow:arc4random_uniform(300)]];
+    datePicker.disabledDates = @[[NSDate days:arc4random_uniform(300) fromDate:[NSDate date]], [NSDate days:arc4random_uniform(300) fromDate:[NSDate date]], [NSDate days:arc4random_uniform(300) fromDate:[NSDate date]], [NSDate days:arc4random_uniform(300) fromDate:[NSDate date]], [NSDate days:arc4random_uniform(300) fromDate:[NSDate date]], [NSDate days:arc4random_uniform(300) fromDate:[NSDate date]], [NSDate days:arc4random_uniform(300) fromDate:[NSDate date]], [NSDate days:arc4random_uniform(300) fromDate:[NSDate date]], [NSDate days:arc4random_uniform(300) fromDate:[NSDate date]]];
 //    datePicker.singleDateMode = YES;
 }
 

@@ -32,13 +32,13 @@
 }
 
 + (NSDate *)tomorrow {
-    return [self daysFromNow:1];
+    NSDate *now = [NSDate date];
+    return [self days:1 fromDate:now];
 }
 
-+ (NSDate *)daysFromNow:(NSInteger)days {
-    NSDate *now = [NSDate date];
++ (NSDate *)days:(NSInteger)days fromDate:(NSDate *)date {
     int daysToAdd = (int)days;
-    NSDate *newDate1 = [now dateByAddingTimeInterval:60*60*24*daysToAdd];
+    NSDate *newDate1 = [date dateByAddingTimeInterval:60*60*24*daysToAdd];
     return newDate1;
 }
 

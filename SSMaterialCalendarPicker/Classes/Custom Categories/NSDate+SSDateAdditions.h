@@ -13,7 +13,7 @@
 - (NSDate *)defaultTime;
 - (NSDate *)firstDayOfTheMonth;
 + (NSDate *)tomorrow;
-+ (NSDate *)daysFromNow:(NSInteger)days;
++ (NSDate *)days:(NSInteger)days fromDate:(NSDate *)date;
 - (NSDate *)addDays:(NSInteger)days;
 - (BOOL)isDateBetween:(NSDate *)date1 and:(NSDate *)date2;
 + (int)daysBetween:(NSDate *)date1 and:(NSDate *)date2;
