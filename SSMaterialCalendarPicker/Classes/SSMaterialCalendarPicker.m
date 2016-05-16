@@ -189,16 +189,16 @@
 }
 
 - (void)closeAnimated {
-    [UIView animateWithDuration:0.6f animations:^{
-        self.backgroundView.alpha = kAlphaHide;
-        self.pickerViewTopDistance.constant = -kPickerViewHeight-16;
-        self.calendarHeaderTopDistance.constant = -kCalendarHeaderHeight-16;
-        [self layoutIfNeeded];
-    } completion:^(BOOL finished) {
-        self.hidden = YES;
-        if (self.shouldRemove)
-            [self removeFromSuperview];
-    }];
+//    [UIView animateWithDuration:0.6f animations:^{
+//        self.backgroundView.alpha = kAlphaHide;
+//        self.pickerViewTopDistance.constant = -kPickerViewHeight-16;
+//        self.calendarHeaderTopDistance.constant = -kCalendarHeaderHeight-16;
+//        [self layoutIfNeeded];
+//    } completion:^(BOOL finished) {
+//        self.hidden = YES;
+//        if (self.shouldRemove)
+//            [self removeFromSuperview];
+//    }];
 }
 
 - (void)resetDates {
